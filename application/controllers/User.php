@@ -215,6 +215,8 @@ class User extends MY_Controller {
 	}
 	public function listing($num = NULL, $username = NULL)
     {
+		log_message('error', print_r($num, true));
+		log_message('error', print_r($username, true));
 		if(permission_validation(PERMISSION_USER_VIEW) == TRUE)
 		{
 			$limit = trim($this->input->post('length', TRUE));
@@ -266,9 +268,9 @@ class User extends MY_Controller {
 				'select' => implode(',', $columns),
 				'search_values' => array($upline),
 				'search_types' => array('equal'),
-				'search_columns' => array('upline'),
+				'search_columns' => array('created_by'),
 				'table' => 'users',
-				'limit' => $limit,
+				// 'limit' => $limit,
 				'start' => $start,
 				'order' => $order,
 				'dir' => $dir,
@@ -291,8 +293,8 @@ class User extends MY_Controller {
 						}
 					}
 					$row = array();
-					$row[] = $post->user_id;
-					$row[] = '<a href="javascript:void(0);" onclick="getDownline(\'' . $post->username . '\', ' . $num . ')">' . $post->username . '</a>';
+					$row[] = $post->username;
+					//$row[] = '<a href="javascript:void(0);" onclick="getDownline(\'' . $post->username . '\', ' . $num . ')">' . $post->username . '</a>';
 					$row[] = '<span id="uc1_' . $post->user_id . '">' . $post->nickname . '</span>';
 					$row[] = $this->lang->line(get_user_type($post->user_type));
 					$row[] = ( ! empty($post->upline) ? $post->upline : '-');

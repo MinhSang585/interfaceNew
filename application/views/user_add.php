@@ -446,7 +446,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							},
 							success: function (data) {
 								var json = JSON.parse(JSON.stringify(data));
-								console.log(json);
 								var message = '';
 								var msg_icon = 2;
 								parent.$('meta[name=csrf_token]').attr('content', json.csrfHash);
@@ -454,6 +453,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								if(json.status == '<?php echo EXIT_SUCCESS;?>') {
 									message = json.msg;
 									msg_icon = 1;
+									parent.$('#user-table-1').DataTable().ajax.reload();
+
 									parent.layer.close(index);
 								}
 								else {
