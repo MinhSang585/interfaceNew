@@ -115,7 +115,7 @@ class Role extends MY_Controller {
 				$order = $columns[$col];
 			}
 			
-			$arr = $this->session->userdata('search_user_role');	
+			$arr = $this->session->userdata('search_user_role');
 			$where = '';		
 				
 			if($arr['status'] == STATUS_ACTIVE OR $arr['status'] == STATUS_INACTIVE)
@@ -135,10 +135,28 @@ class Role extends MY_Controller {
 					$where .= " AND role_name = '" . $arr['name']."'";
 				}
 			}
-			
-			
 			$select = implode(',', $columns);
 			$dbprefix = $this->db->dbprefix;
+
+			//$userRoleID = $this->session->userdata('user_role_id');
+			$dataUserLogin = $this->session->userdata('dataUserLogin');
+			$userRoleID = $dataUserLogin['user_role'];
+			if(isset($userRoleID)){
+				$query_string_3 = "SELECT * FROM {$dbprefix}user_role WHERE user_role_id =".$userRoleID;
+				$query = $this->db->query($query_string_3);
+				if($query->num_rows() > 0)
+				{
+					$dataUserRole = $query->row_array();
+
+					//if($dataUserRole['role_name'] != "Master")					{
+						if($where == ""){
+							$where .= "WHERE role_name = '" . $dataUserRole['role_name']."'";
+						}else{
+							$where .= " AND role_name = '" . $dataUserRole['role_name']."'";
+						}
+					//}
+				}
+			}
 
 			$posts = NULL;
 			$query_string = "SELECT {$select} FROM {$dbprefix}user_role $where";
@@ -151,7 +169,7 @@ class Role extends MY_Controller {
 			$query = $this->db->query($query_string . $query_string_2);
 			if($query->num_rows() > 0)
 			{
-				$posts = $query->result();  
+				$posts = $query->result();
 			}
 			
 			$query->free_result();
@@ -163,6 +181,22 @@ class Role extends MY_Controller {
 			
 			//Prepare data
 			$data = array();
+
+			//get list role added
+			if(isset($dataUserLogin['username'])){
+				$query_string_4 = "SELECT * FROM {$dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
+				$query_4 = $this->db->query($query_string_4);
+				if($query_4->num_rows() > 0)
+				{
+					$listRole = $query_4->result();
+				}
+				if(!empty($listRole))
+					foreach($listRole as $role)
+						array_push($posts, $role);
+
+			}
+
+
 			if(!empty($posts))
 			{
 				foreach ($posts as $post)
@@ -176,7 +210,7 @@ class Role extends MY_Controller {
 						case STATUS_ACTIVE: $row[] = '<span class="badge bg-success" id="uc2_' . $post->user_role_id . '">' . $this->lang->line('status_active') . '</span>'; break;
 						default: $row[] = '<span class="badge bg-secondary" id="uc2_' . $post->user_role_id . '">' . $this->lang->line('status_inactive') . '</span>'; break;
 					}
-					$row[] = '<span id="uc6_' . $post->user_role_id . '">' . (( ! empty($post->level)) ? $post->level : '-') . '</span>';
+					//$row[] = '<span id="uc6_' . $post->user_role_id . '">' . (( ! empty($post->level)) ? $post->level : '-') . '</span>';
 					$row[] = '<span id="uc3_' . $post->user_role_id . '">' . (( ! empty($post->updated_by)) ? $post->updated_by : '-') . '</span>';
 					$row[] = '<span id="uc4_' . $post->user_role_id . '">' . (($post->updated_date > 0) ? date('Y-m-d H:i:s', $post->updated_date) : '-') . '</span>';
 					
@@ -188,7 +222,7 @@ class Role extends MY_Controller {
 					
 					if(permission_validation(PERMISSION_USER_ROLE_DELETE) == TRUE)
 					{
-						#$button .= '<i onclick="deleteData(' . $post->user_role_id . ')" class="fas fa-trash nav-icon text-danger" title="' . $this->lang->line('button_delete')  . '"></i>';
+						$button .= '<i onclick="deleteData(' . $post->user_role_id . ')" class="fas fa-trash nav-icon text-danger" title="' . $this->lang->line('button_delete')  . '"></i>';
 					}
 					
 					if( ! empty($button))
@@ -214,16 +248,74 @@ class Role extends MY_Controller {
 	}
 
 	public function add(){
+		//$userRoleID = $this->session->userdata('user_role_id');
 		if(permission_validation(PERMISSION_USER_ROLE_ADD) == TRUE)
 		{
+			//$userRoleID = $this->session->userdata('user_role_id');
+			$userRoleID = $this->session->userdata('dataUserLogin')['user_role'];
+
+			$data 				= $this->role_model->get_role_data($userRoleID);
+			$permissions 		= explode(',', $data['permissions']);
+			$old_permissions 	= array_values(array_filter($permissions));
+			
 			$data['permissions'] = array();
 			$arr = get_platform_full_permission();
-			for($i=0;$i<sizeof($arr);$i++)
-			{
+			
+			for($i=0;$i<sizeof($arr);$i++) {
 				$data['permissions'][$arr[$i]]['upline'] = TRUE;
+				#ad($data['permissions']);
+				if(in_array($arr[$i], $old_permissions))
+				{
+					$data['permissions'][$arr[$i]]['upline'] = TRUE;
+					$data['permissions'][$arr[$i]]['selected'] = TRUE;
+				}
+				else{
+					$data['permissions'][$arr[$i]]['upline'] = FALSE;
+					$data['permissions'][$arr[$i]]['selected'] = FALSE;
+				}
 			}
+
 			$data["level_list"] = $this->role_model->get_level_list();
 			$this->load->view('user_role_add', $data);
+		}
+		else
+		{
+			redirect('home');
+		}
+	}
+
+	public function delete($id){
+		if(permission_validation(PERMISSION_USER_ROLE_DELETE) == TRUE)
+		{
+			$this->role_model->delete_role($id);
+
+			if ($this->db->trans_status() === TRUE)
+
+			{
+
+				$json['status'] = EXIT_SUCCESS;
+
+				$json['msg'] = $this->lang->line('success_deleted');
+
+			}
+
+			else
+
+			{
+
+				$json['msg'] = $this->lang->line('error_failed_to_delete');
+
+			}
+
+
+			//Output
+
+			$this->output
+				->set_status_header(200)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($json))
+				->_display();
+			exit();
 		}
 		else
 		{
@@ -253,19 +345,19 @@ class Role extends MY_Controller {
 								'required' => $this->lang->line('error_enter_match_name')
 						)
 				),
-				array(
-						'field' => 'level',
-						'label' => strtolower($this->lang->line('label_level')),
-						'rules' => 'trim|required|integer',
+				// array(
+				// 		'field' => 'level',
+				// 		'label' => strtolower($this->lang->line('label_level')),
+				// 		'rules' => 'trim|required|integer',
 
-						'errors' => array(
+				// 		'errors' => array(
 
-								'required' => $this->lang->line('error_select_level'),
+				// 				'required' => $this->lang->line('error_select_level'),
 
-								'integer' => $this->lang->line('error_only_digits_allowed')
+				// 				'integer' => $this->lang->line('error_only_digits_allowed')
 
-						)
-				),
+				// 		)
+				// ),
 			);	
 			$this->form_validation->set_rules($config);
 			$this->form_validation->set_error_delimiters('', '');
@@ -325,7 +417,8 @@ class Role extends MY_Controller {
 	}
 
 
-	public function edit($id){
+	public function edit($id){		
+		//die();
 		if(permission_validation(PERMISSION_USER_ROLE_UPDATE) == TRUE) {
 			$data 				= $this->role_model->get_role_data($id);
 			$permissions 		= explode(',', $data['permissions']);
@@ -341,9 +434,11 @@ class Role extends MY_Controller {
 				#ad($data['permissions']);
 				if(in_array($arr[$i], $old_permissions))
 				{
+					$data['permissions'][$arr[$i]]['upline'] = TRUE;
 					$data['permissions'][$arr[$i]]['selected'] = TRUE;
 				}
 				else{
+					$data['permissions'][$arr[$i]]['upline'] = FALSE;
 					$data['permissions'][$arr[$i]]['selected'] = FALSE;
 				}
 			}
@@ -378,19 +473,19 @@ class Role extends MY_Controller {
 								'required' => $this->lang->line('error_enter_match_name')
 						)
 				),
-				array(
-						'field' => 'level',
-						'label' => strtolower($this->lang->line('label_level')),
-						'rules' => 'trim|required|integer',
+				// array(
+				// 		'field' => 'level',
+				// 		'label' => strtolower($this->lang->line('label_level')),
+				// 		'rules' => 'trim|required|integer',
 
-						'errors' => array(
+				// 		'errors' => array(
 
-								'required' => $this->lang->line('error_select_level'),
+				// 				'required' => $this->lang->line('error_select_level'),
 
-								'integer' => $this->lang->line('error_only_digits_allowed')
+				// 				'integer' => $this->lang->line('error_only_digits_allowed')
 
-						)
-				),
+				// 		)
+				// ),
 			);	
 			$this->form_validation->set_rules($config);
 			$this->form_validation->set_error_delimiters('', '');
@@ -437,6 +532,17 @@ class Role extends MY_Controller {
 						if(TELEGRAM_STATUS == STATUS_ACTIVE){
 							$newData['old_role_data'] = $oldData;
 							send_logs_telegram(TELEGRAM_LOGS,TELEGRAM_LOGS_TYPE_UPDATE_CHARACTER_PERMISSION,$newData);
+						}
+
+						//logout User after update permission
+						if(isset($newData['user_role_id']) && isset($newData['updated_by'])){
+							//user
+							$query_string = "UPDATE {$this->db->dbprefix}users SET login_token = NULL WHERE user_role ='". $newData['user_role_id']."' AND created_by ='".$newData['updated_by']."'";
+							$this->db->query($query_string);
+							
+							//sub_account
+							$query_string_1 = "UPDATE {$this->db->dbprefix}sub_accounts SET login_token = NULL WHERE user_role ='". $newData['user_role_id']."' AND created_by ='".$newData['updated_by']."'";
+							$this->db->query($query_string_1);
 						}
 
 						$json['response'] = array(

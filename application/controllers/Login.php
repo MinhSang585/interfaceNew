@@ -67,6 +67,9 @@ class Login extends MY_Controller {
 				$response = $this->account_model->verify_login();
 			}
 			
+			//$this->session->set_userdata('user_role_id', $response['user_role']);
+			$this->session->set_userdata('dataUserLogin', $response);
+
 			if(isset($response['is_logged_in'])) 
 			{
 				$response['permissions'] = "";
@@ -123,7 +126,7 @@ class Login extends MY_Controller {
 						}
 						$login_status = STATUS_SUCCESS;
 						$json['status'] = EXIT_SUCCESS;
-						$json['msg'] = site_url('player');
+						$json['msg'] = site_url('home');
 					}else{
 						$json['msg']['general_error'] = $this->lang->line('error_ip_address_not_allow');
 					}

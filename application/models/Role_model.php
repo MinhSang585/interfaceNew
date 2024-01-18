@@ -96,5 +96,26 @@ class Role_model extends CI_Model {
 		
 		$query->free_result();
 		return $result;
-	}	/**	* get level list from default const LEVEL_LIST	*/	public function get_level_list(){		return self::LEVEL_LIST;	}	/**	*  Get role list by level	* if the user account login, his role is level 2, then he only able select level 3 role character when create sub account/user	* @param integer $user_role_id	* @return array $result role list	*/	public function get_role_list_by_level($user_role_id){		$result = NULL;		$user_role = $this->get_role_data($user_role_id);		if ($user_role && isset($user_role["level"])) {			$query = $this                ->db                ->select('user_role_id,role_name')                ->where('active', STATUS_ACTIVE)                ->where('level >', $user_role["level"])                ->get($this->table_user_role);        			if($query->num_rows() > 0)			{				$result = $query->result_array();  			}						$query->free_result();		} elseif ($user_role && $user_role["level"] === NULL) {			$result = $this->get_role_list();		}                return $result;	}
+	}	
+	/**	* get level list from default const LEVEL_LIST	*/
+	public function get_level_list()
+	{
+		return self::LEVEL_LIST;
+	} 
+	public function get_role_list_by_level($user_role_id)
+	{
+		$result = NULL;
+		$user_role = $this->get_role_data($user_role_id);
+		if ($user_role && isset($user_role["level"])) {
+			$query = $this->db->select('user_role_id,role_name')->where('active', STATUS_ACTIVE)->where('level =', $user_role["level"])->get($this->table_user_role);
+			if ($query->num_rows() > 0) {
+				$result = $query->result_array();
+			}
+			$query->free_result();
+		} elseif ($user_role && $user_role["level"] === NULL) {
+			$result = $this->get_role_list();
+		}
+		log_message('error', print_r($this->db->last_query(), true));
+		return $result;
+	}
 }

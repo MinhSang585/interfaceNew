@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										<div class="col-7">
 											<input type="checkbox" id="active" name="active" value="1" <?php echo ((isset($active) && $active == STATUS_ACTIVE) ? 'checked' : '');?> data-bootstrap-switch data-off-color="secondary" data-on-color="success">
 										</div>
-									</div>																		<div class="form-group row">										<label for="level" class="col-5 col-form-label"><?php echo $this->lang->line('label_level');?></label>										<div class="col-7">											<select class="form-control select2bs4" id="level" name="level">												<option value=""><?php echo $this->lang->line('label_select');?></option>												<?php													if(!empty($level_list)){														foreach ($level_list as $role_level){															echo '<option value="' . $role_level . '"' . ($level == $role_level ? ' selected' : '') . '>' . $role_level . '</option>';														}													}												?>											</select>										</div>									</div>
+									</div>
 									<div class="form-group row">
 										<label for="created_by" class="col-5 col-form-label"><?php echo $this->lang->line('label_created_by');?></label>
 										<div class="col-7">

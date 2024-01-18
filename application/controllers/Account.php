@@ -144,7 +144,31 @@ class Account extends MY_Controller {
 		if(permission_validation(PERMISSION_SUB_ACCOUNT_ADD) == TRUE)
 		{
 			$data['username'] = $username;
-			$data['role_list'] = $this->role_model->get_role_list_by_level($this->session->userdata('user_role'));
+			//$data['role_list'] = $this->role_model->get_role_list_by_level($this->session->userdata('user_role'));
+
+			$dataUserLogin = $this->session->userdata('dataUserLogin');
+			$userRoleID = $dataUserLogin['user_role'];
+			if(isset($userRoleID)){
+				$query_string_3 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE user_role_id =".$userRoleID;
+				$query = $this->db->query($query_string_3);
+				if($query->num_rows() > 0)
+					$dataUserRole = $query->result_array();
+				$data['role_list'] = $dataUserRole;
+			}
+
+			//get list role added
+			if(isset($dataUserLogin['username'])){
+				$query_string_4 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
+				$query_4 = $this->db->query($query_string_4);
+				if($query_4->num_rows() > 0)
+				{
+					$listRole = $query_4->result_array();
+				}
+				if(!empty($listRole))
+					foreach($listRole as $role)
+						array_push($data['role_list'], $role);
+			}
+
 			$this->load->view('account_add', $data);
 		}
 		else

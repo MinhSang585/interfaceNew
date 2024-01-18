@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<input type="checkbox" id="active" name="active" value="1" checked data-bootstrap-switch data-off-color="secondary" data-on-color="success">
 										</div>
 									</div>
-									<div class="form-group row">										<label for="level" class="col-5 col-form-label"><?php echo $this->lang->line('label_level');?></label>										<div class="col-7">											<select class="form-control select2bs4" id="level" name="level">												<option value=""><?php echo $this->lang->line('label_select');?></option>												<?php													if(!empty($level_list)){														foreach ($level_list as $role_level){															echo '<option value="' . $role_level . '">' . $role_level . '</option>';														}													}												?>											</select>										</div>									</div>
+									
 									<div class="form-group row">
 										<?php if($permissions[PERMISSION_HOME]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">

@@ -17,7 +17,26 @@ class User extends MY_Controller {
 		{
 			$this->save_current_url('user');
 			$data['page_title'] = $this->lang->line('title_user');
-			$data['upline'] = $this->user_model->get_user_data($this->session->userdata('root_user_id'));
+			//$data['upline'] = $this->user_model->get_user_data($this->session->userdata('root_user_id'));
+			$data['upline'] = [];
+			
+			$dataUserLogin = $this->session->userdata('dataUserLogin');
+
+			//get list user added
+			if(isset($dataUserLogin['username'])){
+				$query_string = "SELECT * FROM {$this->db->dbprefix}users WHERE created_by ='".$dataUserLogin['username']."'";
+				$query = $this->db->query($query_string);
+
+				if($query->num_rows() > 0)
+				{
+					$listUser = $query->result_array();
+				}
+
+				if(!empty($listUser))
+					foreach($listUser as $user)
+						array_push($data['upline'], $user);
+			}
+			
 			$this->load->view('user_view', $data);
 		}
 		else
@@ -353,7 +372,31 @@ class User extends MY_Controller {
 				$response['player_group_list'] 	= $this->group_model->get_group_list(GROUP_PLAYER);
 				$response['bank_group_list'] 	= $this->group_model->get_group_list(GROUP_BANK);
 				$response['avatar_list'] 		= $this->avatar_model->get_avatar_list();
-				$response['role_list'] 			= $this->role_model->get_role_list_by_level($this->session->userdata('user_role'));
+				//$response['role_list'] 			= $this->role_model->get_role_list_by_level($this->session->userdata('user_role'));
+				
+				$dataUserLogin = $this->session->userdata('dataUserLogin');
+				$userRoleID = $dataUserLogin['user_role'];
+				if(isset($userRoleID)){
+					$query_string_3 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE user_role_id =".$userRoleID;
+					$query = $this->db->query($query_string_3);
+					if($query->num_rows() > 0)
+						$dataUserRole = $query->result_array();
+					$response['role_list'] = $dataUserRole;
+				}
+
+				//get list role added
+				if(isset($dataUserLogin['username'])){
+					$query_string_4 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
+					$query_4 = $this->db->query($query_string_4);
+					if($query_4->num_rows() > 0)
+					{
+						$listRole = $query_4->result_array();
+					}
+					if(!empty($listRole))
+						foreach($listRole as $role)
+							array_push($response['role_list'], $role);
+				}
+				
 				$response['miscellaneous'] 		= $this->miscellaneous_model->get_miscellaneous();
 				$game_list 						= $this->game_model->get_game_list();
 				if(!empty($game_list)){
