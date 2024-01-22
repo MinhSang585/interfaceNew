@@ -36,7 +36,6 @@ class User extends MY_Controller {
 					foreach($listUser as $user)
 						array_push($data['upline'], $user);
 			}
-			
 			$this->load->view('user_view', $data);
 		}
 		else
@@ -215,8 +214,6 @@ class User extends MY_Controller {
 	}
 	public function listing($num = NULL, $username = NULL)
     {
-		log_message('error', print_r($num, true));
-		log_message('error', print_r($username, true));
 		if(permission_validation(PERMISSION_USER_VIEW) == TRUE)
 		{
 			$limit = trim($this->input->post('length', TRUE));
@@ -259,6 +256,7 @@ class User extends MY_Controller {
 				$order = $columns[$col];
 			}
 			$upline = $username;
+			$dataUserLogin = $this->session->userdata('dataUserLogin');
 			$response = $this->user_model->get_downline_data($upline);
 			if(empty($response))
 			{
@@ -268,7 +266,7 @@ class User extends MY_Controller {
 				'select' => implode(',', $columns),
 				'search_values' => array($upline),
 				'search_types' => array('equal'),
-				'search_columns' => array('created_by'),
+				'search_columns' => array('upline'),
 				'table' => 'users',
 				// 'limit' => $limit,
 				'start' => $start,
@@ -276,6 +274,20 @@ class User extends MY_Controller {
 				'dir' => $dir,
 			);
 			$posts =  $this->general_model->all_posts($query);
+
+			if(isset($dataUserLogin['user_id'])){
+				if(!isset($posts)) $posts = [];
+
+				$query_string_2 = "SELECT user_id, username, nickname, user_type, upline, points, domain_sub, active, created_date, last_login_date, domain_name  FROM {$this->db->dbprefix}users WHERE user_id ='".$dataUserLogin['user_id']."'";
+				$query_2 = $this->db->query($query_string_2);
+				if($query_2->num_rows() > 0)
+				{
+					$userLogin = $query_2->row();
+				}
+				if(!empty($userLogin))
+					array_push($posts, $userLogin);
+			}
+
 			$totalFiltered = $this->general_model->all_posts_count($query);
 			//Prepare data
 			$data = array();
@@ -294,11 +306,11 @@ class User extends MY_Controller {
 					}
 					$row = array();
 					$row[] = $post->username;
-					//$row[] = '<a href="javascript:void(0);" onclick="getDownline(\'' . $post->username . '\', ' . $num . ')">' . $post->username . '</a>';
+					// $row[] = '<a href="javascript:void(0);" onclick="getDownline(\'' . $post->username . '\', ' . $num . ')">' . $post->username . '</a>';
 					$row[] = '<span id="uc1_' . $post->user_id . '">' . $post->nickname . '</span>';
-					$row[] = $this->lang->line(get_user_type($post->user_type));
+					// $row[] = $this->lang->line(get_user_type($post->user_type));
 					$row[] = ( ! empty($post->upline) ? $post->upline : '-');
-					$row[] = '<span id="uc2_' . $post->user_id . '">' . $post->points . '</span>';
+					$row[] = '<span id="uc2_' . $post->user_id . '">' . number_format($post->points, 2,'.',',') . '</span>';
 					$row[] = $domain;
 					switch($post->active)
 					{
@@ -375,30 +387,37 @@ class User extends MY_Controller {
 				$response['bank_group_list'] 	= $this->group_model->get_group_list(GROUP_BANK);
 				$response['avatar_list'] 		= $this->avatar_model->get_avatar_list();
 				//$response['role_list'] 			= $this->role_model->get_role_list_by_level($this->session->userdata('user_role'));
-				
 				$dataUserLogin = $this->session->userdata('dataUserLogin');
 				$userRoleID = $dataUserLogin['user_role'];
-				if(isset($userRoleID)){
-					$query_string_3 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE user_role_id =".$userRoleID;
+				if((isset($dataUserLogin['username']) && $username != $dataUserLogin['username']) || $dataUserLogin['user_role']!= 1){
+					$query_string_3 = "SELECT {$this->db->dbprefix}user_role.role_name FROM {$this->db->dbprefix}user_role JOIN
+						(SELECT * FROM {$this->db->dbprefix}users WHERE username ='".$username."'){$this->db->dbprefix}users ON {$this->db->dbprefix}user_role.user_role_id = {$this->db->dbprefix}users.user_role"; 
 					$query = $this->db->query($query_string_3);
 					if($query->num_rows() > 0)
 						$dataUserRole = $query->result_array();
 					$response['role_list'] = $dataUserRole;
-				}
-
-				//get list role added
-				if(isset($dataUserLogin['username'])){
-					$query_string_4 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
-					$query_4 = $this->db->query($query_string_4);
-					if($query_4->num_rows() > 0)
-					{
-						$listRole = $query_4->result_array();
+				}else{
+					if(isset($userRoleID)){
+						$query_string_3 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE user_role_id =".$userRoleID;
+						$query = $this->db->query($query_string_3);
+						if($query->num_rows() > 0)
+							$dataUserRole = $query->result_array();
+						$response['role_list'] = $dataUserRole;
 					}
-					if(!empty($listRole))
-						foreach($listRole as $role)
-							array_push($response['role_list'], $role);
+
+					//get list role added
+					if(isset($dataUserLogin['username'])){
+						$query_string_4 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
+						$query_4 = $this->db->query($query_string_4);
+						if($query_4->num_rows() > 0)
+						{
+							$listRole = $query_4->result_array();
+						}
+						if(!empty($listRole))
+							foreach($listRole as $role)
+								array_push($response['role_list'], $role);
+					}
 				}
-				
 				$response['miscellaneous'] 		= $this->miscellaneous_model->get_miscellaneous();
 				$game_list 						= $this->game_model->get_game_list();
 				if(!empty($game_list)){

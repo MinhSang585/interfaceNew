@@ -115,7 +115,7 @@ class Role extends MY_Controller {
 				$order = $columns[$col];
 			}
 			
-			$arr = $this->session->userdata('search_user_role');
+			$arr = $this->session->userdata('search_user_role');	
 			$where = '';		
 				
 			if($arr['status'] == STATUS_ACTIVE OR $arr['status'] == STATUS_INACTIVE)
@@ -150,9 +150,9 @@ class Role extends MY_Controller {
 
 					//if($dataUserRole['role_name'] != "Master")					{
 						if($where == ""){
-							$where .= "WHERE role_name = '" . $dataUserRole['role_name']."'";
+							$where .= "WHERE user_role_id = '" . $userRoleID."'";
 						}else{
-							$where .= " AND role_name = '" . $dataUserRole['role_name']."'";
+							$where .= " AND user_role_id = '" . $userRoleID."'";
 						}
 					//}
 				}
@@ -169,7 +169,7 @@ class Role extends MY_Controller {
 			$query = $this->db->query($query_string . $query_string_2);
 			if($query->num_rows() > 0)
 			{
-				$posts = $query->result();
+				$posts = $query->result();  
 			}
 			
 			$query->free_result();
@@ -193,9 +193,7 @@ class Role extends MY_Controller {
 				if(!empty($listRole))
 					foreach($listRole as $role)
 						array_push($posts, $role);
-
 			}
-
 
 			if(!empty($posts))
 			{
@@ -210,7 +208,7 @@ class Role extends MY_Controller {
 						case STATUS_ACTIVE: $row[] = '<span class="badge bg-success" id="uc2_' . $post->user_role_id . '">' . $this->lang->line('status_active') . '</span>'; break;
 						default: $row[] = '<span class="badge bg-secondary" id="uc2_' . $post->user_role_id . '">' . $this->lang->line('status_inactive') . '</span>'; break;
 					}
-					//$row[] = '<span id="uc6_' . $post->user_role_id . '">' . (( ! empty($post->level)) ? $post->level : '-') . '</span>';
+					// $row[] = '<span id="uc6_' . $post->user_role_id . '">' . (( ! empty($post->level)) ? $post->level : '-') . '</span>';
 					$row[] = '<span id="uc3_' . $post->user_role_id . '">' . (( ! empty($post->updated_by)) ? $post->updated_by : '-') . '</span>';
 					$row[] = '<span id="uc4_' . $post->user_role_id . '">' . (($post->updated_date > 0) ? date('Y-m-d H:i:s', $post->updated_date) : '-') . '</span>';
 					
@@ -248,16 +246,15 @@ class Role extends MY_Controller {
 	}
 
 	public function add(){
-		//$userRoleID = $this->session->userdata('user_role_id');
 		if(permission_validation(PERMISSION_USER_ROLE_ADD) == TRUE)
 		{
-			//$userRoleID = $this->session->userdata('user_role_id');
 			$userRoleID = $this->session->userdata('dataUserLogin')['user_role'];
+			//$userRoleID = $this->session->userdata('user_role_id');
 
 			$data 				= $this->role_model->get_role_data($userRoleID);
 			$permissions 		= explode(',', $data['permissions']);
 			$old_permissions 	= array_values(array_filter($permissions));
-			
+
 			$data['permissions'] = array();
 			$arr = get_platform_full_permission();
 			
@@ -277,45 +274,6 @@ class Role extends MY_Controller {
 
 			$data["level_list"] = $this->role_model->get_level_list();
 			$this->load->view('user_role_add', $data);
-		}
-		else
-		{
-			redirect('home');
-		}
-	}
-
-	public function delete($id){
-		if(permission_validation(PERMISSION_USER_ROLE_DELETE) == TRUE)
-		{
-			$this->role_model->delete_role($id);
-
-			if ($this->db->trans_status() === TRUE)
-
-			{
-
-				$json['status'] = EXIT_SUCCESS;
-
-				$json['msg'] = $this->lang->line('success_deleted');
-
-			}
-
-			else
-
-			{
-
-				$json['msg'] = $this->lang->line('error_failed_to_delete');
-
-			}
-
-
-			//Output
-
-			$this->output
-				->set_status_header(200)
-				->set_content_type('application/json', 'utf-8')
-				->set_output(json_encode($json))
-				->_display();
-			exit();
 		}
 		else
 		{
@@ -417,8 +375,7 @@ class Role extends MY_Controller {
 	}
 
 
-	public function edit($id){		
-		//die();
+	public function edit($id){
 		if(permission_validation(PERMISSION_USER_ROLE_UPDATE) == TRUE) {
 			$data 				= $this->role_model->get_role_data($id);
 			$permissions 		= explode(',', $data['permissions']);
@@ -444,6 +401,35 @@ class Role extends MY_Controller {
 			}
 			$data["level_list"] = $this->role_model->get_level_list();
 			$this->load->view('user_role_update', $data);
+		}
+		else
+		{
+			redirect('home');
+		}
+	}
+
+	public function delete($id){
+		if(permission_validation(PERMISSION_USER_ROLE_DELETE) == TRUE)
+		{
+			$this->role_model->delete_role($id);
+
+			if ($this->db->trans_status() === TRUE)
+			{
+				$json['status'] = EXIT_SUCCESS;
+				$json['msg'] = $this->lang->line('success_deleted');
+			}
+			else
+			{
+				$json['msg'] = $this->lang->line('error_failed_to_delete');
+			}
+
+			//Output
+			$this->output
+				->set_status_header(200)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($json))
+				->_display();
+			exit();
 		}
 		else
 		{

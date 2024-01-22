@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-							<form action="<?php echo site_url('role/search');?>" id="user_role-form" name="user_role-form" class="form-horizontal" method="post" accept-charset="utf-8" novalidate="novalidate">
+							    <form action="<?php echo site_url('role/search');?>" id="user_role-form" name="user_role-form" class="form-horizontal" method="post" accept-charset="utf-8" novalidate="novalidate">
 									<div class="form-group row">
 										<div class="col-md-3">
 											<div class="row mb-2">
@@ -72,8 +72,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<th><?php echo $this->lang->line('label_hashtag');?></th>
 											<th><?php echo $this->lang->line('label_name');?></th>
 											<th><?php echo $this->lang->line('label_remark');?></th>
-											<th><?php echo $this->lang->line('label_status');?></th>											
-											<!-- <th><?php echo $this->lang->line('label_level');?></th> -->
+											<th><?php echo $this->lang->line('label_status');?></th>
+																						<!-- <th><?php echo $this->lang->line('label_level');?></th> -->
 											<th><?php echo $this->lang->line('label_updated_by');?></th>
 											<th><?php echo $this->lang->line('label_updated_date');?></th>
 											<?php if(permission_validation(PERMISSION_USER_ROLE_UPDATE) == TRUE OR permission_validation(PERMISSION_USER_ROLE_DELETE) == TRUE):?>

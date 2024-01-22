@@ -108,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 											<th><?php echo $this->lang->line('label_nickname');?></th>
 
-											<th><?php echo $this->lang->line('title_user_role');?></th>
+											<!-- <th><?php echo $this->lang->line('title_user_role');?></th> -->
 
 											<th><?php echo $this->lang->line('label_upline');?></th>
 
@@ -132,7 +132,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 									</thead>
 
-									<tbody>										
+									<tbody>
 									</tbody>
 
 								</table>
@@ -181,13 +181,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				"lengthChange": false,
 
-			"scrollX": ((browser_width < 600) ? true: false),
+				"scrollX": ((browser_width < 600) ? true: false),
 
-			"responsive": false,
+				"responsive": false,
 
-			"filter": false,
+				"filter": false,
 
-			"pageLength" : 10,
+				"pageLength" : 10,
 
 			"order": [[0, "desc"]],
 

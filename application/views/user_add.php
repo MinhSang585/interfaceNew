@@ -102,10 +102,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<div class="col-7">
 												<select class="form-control select2bs4 col-7" id="avatar" name="avatar">
 													<?php
-														for($i=0;$i<sizeof($avatar_list);$i++)
-														{
-															echo '<option value="' . $avatar_list[$i]['avatar_id'] . '">' . $avatar_list[$i]['avatar_name'] . '</option>';
-														}
+														// for($i=0;$i<sizeof($avatar_list);$i++)
+														// {
+														// 	echo '<option value="' . $avatar_list[$i]['avatar_id'] . '">' . $avatar_list[$i]['avatar_name'] . '</option>';
+														// }
 													?>
 												</select>
 											</div>
@@ -266,26 +266,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													<?php
 														if(!empty($role_list)){
 															foreach ($role_list as $role_list_row){
-																if($this->session->userdata('user_type') != 1) { #AGENT
-																	if($this->session->userdata('user_type') == 2) { #Shareholder
-																		if($role_list_row['user_role_id'] == 9 || $role_list_row['user_role_id'] == 7) { #SHAREHOLDER ROLE	
-																			echo '<option value="' . $role_list_row['user_role_id'] . '">' . $role_list_row['role_name'] . '</option>';
-																		}
-																	}
-																	else if($this->session->userdata('user_type') == 3) { #Agent Head
-																		if($role_list_row['user_role_id'] == 7) { #AGENT HEAD ROLE	
-																			echo '<option value="' . $role_list_row['user_role_id'] . '">' . $role_list_row['role_name'] . '</option>';
-																		}
-																	}
-																	else {
-																		if($role_list_row['user_role_id'] == 7) { #AGENT ROLE	
-																			echo '<option value="' . $role_list_row['user_role_id'] . '">' . $role_list_row['role_name'] . '</option>';
-																		}	
-																	}																	
-																}
-																else { #ADMIN	
-																	echo '<option value="' . $role_list_row['user_role_id'] . '">' . $role_list_row['role_name'] . '</option>';
-																}
+																echo '<option value="' . $role_list_row['user_role_id'] . '">' . $role_list_row['role_name'] . '</option>';
 															}	
 														}
 													?>

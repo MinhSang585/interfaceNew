@@ -67,9 +67,8 @@ class Login extends MY_Controller {
 				$response = $this->account_model->verify_login();
 			}
 			
-			//$this->session->set_userdata('user_role_id', $response['user_role']);
+			// $this->session->set_userdata('user_role_id', $response['user_role']);
 			$this->session->set_userdata('dataUserLogin', $response);
-
 			if(isset($response['is_logged_in'])) 
 			{
 				$response['permissions'] = "";

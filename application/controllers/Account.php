@@ -67,6 +67,7 @@ class Account extends MY_Controller {
 				$order = $columns[$col];
 			}
 			$upline = $username;
+			$dataUserLogin = $this->session->userdata('dataUserLogin');
 			$response = $this->user_model->get_downline_data($upline);
 			if(empty($response))
 			{
@@ -74,9 +75,9 @@ class Account extends MY_Controller {
 			}
 			$query = array(
 				'select' => implode(',', $columns),
-				'search_values' => array($upline),
+				'search_values' => array($dataUserLogin['username']),
 				'search_types' => array('equal'),
-				'search_columns' => array('upline'),
+				'search_columns' => array('created_by'),
 				'table' => 'sub_accounts',
 				'limit' => $limit,
 				'start' => $start,
