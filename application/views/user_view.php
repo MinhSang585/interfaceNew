@@ -133,6 +133,81 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</thead>
 
 									<tbody>
+									<tr>
+
+										<td><a href="javascript:void(0);" onclick="getDownline('<?php echo $upline['username'];?>', 1)"><?php echo $upline['username'];?></a></td>
+
+										<td><?php echo $upline['nickname'];?></td>
+
+										<!-- <td><?php echo $this->lang->line(get_user_type($upline['user_type']));?></td> -->
+
+										<td><?php echo ( ! empty($upline['upline']) ? $upline['upline'] : '-')?></td>
+
+										<td><span id="uc2_<?php echo $upline['user_id'];?>"><?php echo number_format($upline['points'], 2, '.', '');?></span></td>
+
+										<?php 
+
+										if(!empty($upline['domain_name'])){
+
+											$domain_text_capture = $upline['domain_name'];
+
+										}else{
+
+											if(!empty($upline['domain_sub'])){
+
+												$domain_text_capture = $upline['domain_sub'].".".SYSTEM_API_MEMBER_DOMAIN_LINK;
+
+											}else{
+
+												$domain_text_capture = '-';
+
+											}
+
+										}
+
+										?>
+
+										<td><?php echo $domain_text_capture;?></td>
+
+										<td><span class="badge bg-success"><?php echo $this->lang->line('status_active');?></span></td>
+
+										<td><?php echo (($upline['created_date'] > 0) ? date('Y-m-d H:i:s', $upline['created_date']) : '-')?></td>
+
+										<td><?php echo (($upline['last_login_date'] > 0) ? date('Y-m-d H:i:s', $upline['last_login_date']) : '-')?></td>
+
+										<td>
+
+											<?php
+
+												$button = '';
+
+												if(permission_validation(PERMISSION_CHANGE_PASSWORD) == TRUE)
+
+												{
+
+													$button .= '<i onclick="changePassword(' . $upline['user_id'] . ')" class="fas fa-key nav-icon text-secondary" title="' . $this->lang->line('button_change_password')  . '"></i> &nbsp;&nbsp; ';
+
+												}
+
+												
+
+												if(permission_validation(PERMISSION_USER_ADD) == TRUE)
+
+												{
+
+													$button .= '<i onclick="addDownline(\'' . $upline['username'] . '\')" class="fas fa-user-friends nav-icon text-info" title="' . $this->lang->line('button_downline')  . '"></i>';
+
+												}
+
+												
+
+												echo $button;
+
+											?>
+
+										</td>
+
+										</tr>
 									</tbody>
 
 								</table>
@@ -187,48 +262,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				"filter": false,
 
-				"pageLength" : 10,
-
-			"order": [[0, "desc"]],
-
-			"ajax": {
-
-				"url": "<?php echo base_url('user/listing/1/newgxwlpt');?>",
-
-				"dataType": "json",
-
-				"type": "POST",
-
-				"data": function (d) {
-
-					d.csrf_bctp_bo_token = $('meta[name=csrf_token]').attr('content');
-
-				},
-
-				"complete": function(response) {
-
-					var json = JSON.parse(JSON.stringify(response));
-					console.log(json);
-
-					if(json.status == 200) {
-
-						$('meta[name=csrf_token]').attr('content', json.responseJSON.csrfHash);
-
-					}
-
-				},
-
-			},
-
-			"columnDefs": [
-
-				//{"targets": [0], "visible": false}
-				{"targets": [5], "visible": false}
-				//{"targets": [7], "visible": false}
-
-			]
-
-			});
+				});
 
 			
 

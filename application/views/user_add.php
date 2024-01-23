@@ -434,7 +434,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								if(json.status == '<?php echo EXIT_SUCCESS;?>') {
 									message = json.msg;
 									msg_icon = 1;
-									parent.$('#user-table-1').DataTable().ajax.reload();
+									// parent.$('#user-table-1').DataTable().ajax.reload();
 
 									parent.layer.close(index);
 								}

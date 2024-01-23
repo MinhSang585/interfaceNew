@@ -17,25 +17,7 @@ class User extends MY_Controller {
 		{
 			$this->save_current_url('user');
 			$data['page_title'] = $this->lang->line('title_user');
-			//$data['upline'] = $this->user_model->get_user_data($this->session->userdata('root_user_id'));
-			$data['upline'] = [];
-			
-			$dataUserLogin = $this->session->userdata('dataUserLogin');
-
-			//get list user added
-			if(isset($dataUserLogin['username'])){
-				$query_string = "SELECT * FROM {$this->db->dbprefix}users WHERE created_by ='".$dataUserLogin['username']."'";
-				$query = $this->db->query($query_string);
-
-				if($query->num_rows() > 0)
-				{
-					$listUser = $query->result_array();
-				}
-
-				if(!empty($listUser))
-					foreach($listUser as $user)
-						array_push($data['upline'], $user);
-			}
+			$data['upline'] = $this->user_model->get_user_data($this->session->userdata('root_user_id'));
 			$this->load->view('user_view', $data);
 		}
 		else
@@ -256,7 +238,6 @@ class User extends MY_Controller {
 				$order = $columns[$col];
 			}
 			$upline = $username;
-			$dataUserLogin = $this->session->userdata('dataUserLogin');
 			$response = $this->user_model->get_downline_data($upline);
 			if(empty($response))
 			{
@@ -268,26 +249,12 @@ class User extends MY_Controller {
 				'search_types' => array('equal'),
 				'search_columns' => array('upline'),
 				'table' => 'users',
-				// 'limit' => $limit,
+				'limit' => $limit,
 				'start' => $start,
 				'order' => $order,
 				'dir' => $dir,
 			);
 			$posts =  $this->general_model->all_posts($query);
-
-			if(isset($dataUserLogin['user_id'])){
-				if(!isset($posts)) $posts = [];
-
-				$query_string_2 = "SELECT user_id, username, nickname, user_type, upline, points, domain_sub, active, created_date, last_login_date, domain_name  FROM {$this->db->dbprefix}users WHERE user_id ='".$dataUserLogin['user_id']."'";
-				$query_2 = $this->db->query($query_string_2);
-				if($query_2->num_rows() > 0)
-				{
-					$userLogin = $query_2->row();
-				}
-				if(!empty($userLogin))
-					array_push($posts, $userLogin);
-			}
-
 			$totalFiltered = $this->general_model->all_posts_count($query);
 			//Prepare data
 			$data = array();
@@ -305,8 +272,8 @@ class User extends MY_Controller {
 						}
 					}
 					$row = array();
-					$row[] = $post->username;
-					// $row[] = '<a href="javascript:void(0);" onclick="getDownline(\'' . $post->username . '\', ' . $num . ')">' . $post->username . '</a>';
+					//$row[] = $post->user_id;
+					$row[] = '<a href="javascript:void(0);" onclick="getDownline(\'' . $post->username . '\', ' . $num . ')">' . $post->username . '</a>';
 					$row[] = '<span id="uc1_' . $post->user_id . '">' . $post->nickname . '</span>';
 					// $row[] = $this->lang->line(get_user_type($post->user_type));
 					$row[] = ( ! empty($post->upline) ? $post->upline : '-');
@@ -390,7 +357,7 @@ class User extends MY_Controller {
 				$dataUserLogin = $this->session->userdata('dataUserLogin');
 				$userRoleID = $dataUserLogin['user_role'];
 				if((isset($dataUserLogin['username']) && $username != $dataUserLogin['username']) || $dataUserLogin['user_role']!= 1){
-					$query_string_3 = "SELECT {$this->db->dbprefix}user_role.role_name FROM {$this->db->dbprefix}user_role JOIN
+					$query_string_3 = "SELECT {$this->db->dbprefix}user_role.role_name, {$this->db->dbprefix}user_role.user_role_id FROM {$this->db->dbprefix}user_role JOIN
 						(SELECT * FROM {$this->db->dbprefix}users WHERE username ='".$username."'){$this->db->dbprefix}users ON {$this->db->dbprefix}user_role.user_role_id = {$this->db->dbprefix}users.user_role"; 
 					$query = $this->db->query($query_string_3);
 					if($query->num_rows() > 0)
