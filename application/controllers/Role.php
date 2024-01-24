@@ -265,6 +265,10 @@ class Role extends MY_Controller {
 				{
 					$data['permissions'][$arr[$i]]['upline'] = TRUE;
 					$data['permissions'][$arr[$i]]['selected'] = TRUE;
+
+					//add promotion (only user master) 
+					if($i +1 == PERMISSION_PROMOTION_ADD)
+						$data['permissions'][$arr[$i]]['upline'] = FALSE;
 				}
 				else{
 					$data['permissions'][$arr[$i]]['upline'] = FALSE;
@@ -298,11 +302,20 @@ class Role extends MY_Controller {
 				array(
 						'field' => 'role_name',
 						'label' => strtolower($this->lang->line('label_name')),
-						'rules' => 'trim|required',
+						'rules' => 'trim|required|is_unique[user_role.role_name]',
 						'errors' => array(
-								'required' => $this->lang->line('error_enter_match_name')
+							'required' => $this->lang->line('error_enter_match_name'),
+							'is_unique' => $this->lang->line('error_username_already_exits')
 						)
 				),
+				// array(
+				// 	'field' => 'role_name',
+				// 	'label' => strtolower($this->lang->line('role_name')),
+				// 	'rules' => 'is_unique[user_role.role_name]',
+				// 	'errors' => array(
+				// 		'is_unique' => $this->lang->line('error_username_already_exits')
+				// 	)
+				// ),
 				// array(
 				// 		'field' => 'level',
 				// 		'label' => strtolower($this->lang->line('label_level')),
