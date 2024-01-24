@@ -118,7 +118,9 @@ class Role extends MY_Controller {
 			}
 			
 			$arr = $this->session->userdata('search_user_role');	
-			$where = '';		
+			$dataUserLogin = $this->session->userdata('dataUserLogin');
+			
+			$where = "WHERE (created_by ='".$dataUserLogin['username']."' OR user_role_id = ".$dataUserLogin['user_role'].")";
 				
 			if($arr['status'] == STATUS_ACTIVE OR $arr['status'] == STATUS_INACTIVE)
 			{
@@ -140,25 +142,23 @@ class Role extends MY_Controller {
 			$select = implode(',', $columns);
 			$dbprefix = $this->db->dbprefix;
 
-			//$userRoleID = $this->session->userdata('user_role_id');
-			$dataUserLogin = $this->session->userdata('dataUserLogin');
-			$userRoleID = $dataUserLogin['user_role'];
-			if(isset($userRoleID)){
-				$query_string_3 = "SELECT * FROM {$dbprefix}user_role WHERE user_role_id =".$userRoleID;
-				$query = $this->db->query($query_string_3);
-				if($query->num_rows() > 0)
-				{
-					$dataUserRole = $query->row_array();
+			// $userRoleID = $dataUserLogin['user_role'];
+			// if(isset($userRoleID)){
+			// 	$query_string_3 = "SELECT * FROM {$dbprefix}user_role WHERE user_role_id =".$userRoleID;
+			// 	$query = $this->db->query($query_string_3);
+			// 	if($query->num_rows() > 0)
+			// 	{
+			// 		$dataUserRole = $query->row_array();
 
-					//if($dataUserRole['role_name'] != "Master")					{
-						if($where == ""){
-							$where .= "WHERE user_role_id = '" . $userRoleID."'";
-						}else{
-							$where .= " AND user_role_id = '" . $userRoleID."'";
-						}
-					//}
-				}
-			}
+			// 		//if($dataUserRole['role_name'] != "Master")					{
+			// 			if($where == ""){
+			// 				$where .= "WHERE user_role_id = '" . $userRoleID."'";
+			// 			}else{
+			// 				$where .= " AND user_role_id = '" . $userRoleID."'";
+			// 			}
+			// 		//}
+			// 	}
+			// }
 
 			$posts = NULL;
 			$query_string = "SELECT {$select} FROM {$dbprefix}user_role $where";
@@ -173,10 +173,11 @@ class Role extends MY_Controller {
 			{
 				$posts = $query->result();  
 			}
-			
+			log_message('error', print_r($this->db->last_query(), true));
 			$query->free_result();
 			
 			$query = $this->db->query($query_string);
+			//$query = $this->db->query("SELECT * FROM {$dbprefix}user_role");
 			$totalFiltered = $query->num_rows();
 			
 			$query->free_result();
@@ -184,18 +185,18 @@ class Role extends MY_Controller {
 			//Prepare data
 			$data = array();
 
-			//get list role added
-			if(isset($dataUserLogin['username'])){
-				$query_string_4 = "SELECT * FROM {$dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
-				$query_4 = $this->db->query($query_string_4);
-				if($query_4->num_rows() > 0)
-				{
-					$listRole = $query_4->result();
-				}
-				if(!empty($listRole))
-					foreach($listRole as $role)
-						array_push($posts, $role);
-			}
+			// //get list role added
+			// if(isset($dataUserLogin['username'])){
+			// 	$query_string_4 = "SELECT * FROM {$dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
+			// 	$query_4 = $this->db->query($query_string_4);
+			// 	if($query_4->num_rows() > 0)
+			// 	{
+			// 		$listRole = $query_4->result();
+			// 	}
+			// 	if(!empty($listRole))
+			// 		foreach($listRole as $role)
+			// 			array_push($posts, $role);
+			// }
 
 			if(!empty($posts))
 			{
