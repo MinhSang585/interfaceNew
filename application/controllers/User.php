@@ -363,6 +363,23 @@ class User extends MY_Controller {
 					if($query->num_rows() > 0)
 						$dataUserRole = $query->result_array();
 					$response['role_list'] = $dataUserRole;
+					log_message('error', print_r($this->db->last_query(), true));
+					log_message('error', print_r($response['role_list'], true));
+					log_message('error', print_r($username, true));
+
+					//get list role added
+					if(isset($dataUserLogin['username']) && $username == $dataUserLogin['username']){
+						$query_string_4 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
+						$query_4 = $this->db->query($query_string_4);
+						if($query_4->num_rows() > 0)
+						{
+							$listRole = $query_4->result_array();
+						}
+						if(!empty($listRole))
+							foreach($listRole as $role)
+								array_push($response['role_list'], $role);
+					}
+
 				}else{
 					if(isset($userRoleID)){
 						$query_string_3 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE user_role_id =".$userRoleID;
