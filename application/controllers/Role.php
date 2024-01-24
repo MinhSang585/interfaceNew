@@ -27,6 +27,7 @@ class Role extends MY_Controller {
 			);
 			$data['data_search'] = $data_search;
 			$this->session->set_userdata('search_user_role', $data_search);
+			//log_message('error', print_r($data, true));
 			$this->load->view('user_role_view', $data);
 		}
 		else
@@ -72,6 +73,7 @@ class Role extends MY_Controller {
 	}
 
 	public function listing(){
+		//log_message('error', print_r('listing', true));
 		if(permission_validation(PERMISSION_USER_ROLE_VIEW) == TRUE)
 		{
 			$limit = trim($this->input->post('length', TRUE));
@@ -239,6 +241,7 @@ class Role extends MY_Controller {
 							"data"            => $data,
 							"csrfHash" 		  => $this->security->get_csrf_hash()					
 						);
+			//log_message('error', print_r($data, true));
 				
 			echo json_encode($json_data); 
 			exit();
@@ -257,6 +260,7 @@ class Role extends MY_Controller {
 
 			$data['permissions'] = array();
 			$arr = get_platform_full_permission();
+			//log_message('error', print_r($arr, true));
 			
 			for($i=0;$i<sizeof($arr);$i++) {
 				$data['permissions'][$arr[$i]]['upline'] = TRUE;
@@ -266,8 +270,8 @@ class Role extends MY_Controller {
 					$data['permissions'][$arr[$i]]['upline'] = TRUE;
 					$data['permissions'][$arr[$i]]['selected'] = TRUE;
 
-					//add promotion (only user master) 
-					if($i +1 == PERMISSION_PROMOTION_ADD)
+					//add promotion, PAYMENT_GATEWAY_MAINTENANCE_ADD (only user master) 
+					if($i +1 == PERMISSION_PROMOTION_ADD || $i+5 == PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD)
 						$data['permissions'][$arr[$i]]['upline'] = FALSE;
 				}
 				else{

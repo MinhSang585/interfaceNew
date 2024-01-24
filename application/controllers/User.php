@@ -363,9 +363,6 @@ class User extends MY_Controller {
 					if($query->num_rows() > 0)
 						$dataUserRole = $query->result_array();
 					$response['role_list'] = $dataUserRole;
-					log_message('error', print_r($this->db->last_query(), true));
-					log_message('error', print_r($response['role_list'], true));
-					log_message('error', print_r($username, true));
 
 					//get list role added
 					if(isset($dataUserLogin['username']) && $username == $dataUserLogin['username']){
