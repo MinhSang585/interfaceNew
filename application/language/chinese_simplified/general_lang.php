@@ -588,6 +588,7 @@ $lang = array(
 	'title_profile' => "个人资料",
 	'title_sub_account' => "子帐户",
 	'title_user' => "帐号",
+	'title_agent' => "代理",
 	'title_player' => "玩家",
 	'title_deposit' => "存款",
 	'title_withdrawal' => "提款",

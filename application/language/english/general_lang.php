@@ -587,6 +587,7 @@ $lang = array(
 	'title_profile' => "Profile",
 	'title_sub_account' => "Sub Account",
 	'title_user' => "User",
+	'title_agent' => "Agent",
 	'title_player' => "Player",
 	'title_deposit' => "Deposit",
 	'title_withdrawal' => "Withdrawal",

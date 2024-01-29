@@ -726,7 +726,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_DEPOSIT_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_DEPOSIT_VIEW;?>" type="<?php echo (($permissions[PERMISSION_DEPOSIT_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_DEPOSIT_VIEW;?>_<?php echo PERMISSION_DEPOSIT_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_DEPOSIT_UPDATE;?>" <?php echo (($permissions[PERMISSION_DEPOSIT_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_DEPOSIT_UPDATE]['upline']) ? 'checked' : '');?>>
 														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_DEPOSIT_VIEW;?>_<?php echo PERMISSION_DEPOSIT_UPDATE;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
 														</label>
 													</div>
 												</div>
@@ -812,7 +812,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_WITHDRAWAL_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_UPDATE;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_UPDATE]['upline']) ? 'checked' : '');?>>
 														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_UPDATE;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
 														</label>
 													</div>
 												</div>

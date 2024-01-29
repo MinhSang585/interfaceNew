@@ -39,7 +39,7 @@
 				<li class="nav-item">
 					<a href="<?php echo site_url('user');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'user') ? 'active' : '');?>">
 						<i class="fas fa-user-tie nav-icon"></i>
-						<p><?php echo $this->lang->line('title_user');?></p>
+						<p><?php echo $this->lang->line('title_agent');?></p>
 					</a>
 				</li>
 				<?php endif;?>
