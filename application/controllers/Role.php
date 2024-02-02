@@ -45,21 +45,42 @@ class Role extends MY_Controller {
 					'msg' => array(
 										'from_date_error' => '',
 										'to_date_error' => '',
-										'general_error' => ''
+										'general_error' => '',
+										'rolename_error' => ''
 									),
 					'csrfTokenName' => $this->security->get_csrf_token_name(), 
 					'csrfHash' => $this->security->get_csrf_hash()
 				);
-			
-			$data = array(
-			    'name' => trim($this->input->post('name', TRUE)),
-				'status' => trim($this->input->post('status', TRUE)),
-			);
-			
-			$this->session->set_userdata('search_user_role', $data);
-			
-			$json['status'] = EXIT_SUCCESS;
+
+			//Set form rules
+			$config = array(
+				array(
+					'field' => 'role_name',
+					'label' => strtolower($this->lang->line('label_name')),
+					'rules' => 'trim|required|is_unique[user_role.role_name]',
+					'errors' => array(
+						'required' => $this->lang->line('error_enter_rolename'),
+						'is_unique' => $this->lang->line('error_username_already_exits')
+					)
+				)
+			);		
+			$this->form_validation->set_rules($config);
+			if ($this->form_validation->run() == TRUE)
+			{
+				$data = array(
+					'name' => trim($this->input->post('name', TRUE)),
+					'status' => trim($this->input->post('status', TRUE)),
+				);
 				
+				$this->session->set_userdata('search_user_role', $data);
+				
+				$json['status'] = EXIT_SUCCESS;
+			}
+			else 
+			{
+				$json['msg']['rolename_error'] = form_error('role_name');
+			}
+							
 			
 			//Output
 			$this->output
@@ -262,7 +283,10 @@ class Role extends MY_Controller {
 			$data['permissions'] = array();
 			$arr = get_platform_full_permission();
 			//log_message('error', print_r($arr, true));
-			
+			if(ENVIRONMENT == 'development') {
+				array_push($arr,41,176,177,140);
+			}
+
 			for($i=0;$i<sizeof($arr);$i++) {
 				$data['permissions'][$arr[$i]]['upline'] = TRUE;
 				#ad($data['permissions']);
@@ -309,7 +333,7 @@ class Role extends MY_Controller {
 						'label' => strtolower($this->lang->line('label_name')),
 						'rules' => 'trim|required|is_unique[user_role.role_name]',
 						'errors' => array(
-							'required' => $this->lang->line('error_enter_match_name'),
+							'required' => $this->lang->line('error_enter_rolename'),
 							'is_unique' => $this->lang->line('error_username_already_exits')
 						)
 				),

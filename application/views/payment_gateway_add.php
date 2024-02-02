@@ -212,7 +212,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 									</div>
 
-									<div class="form-group row">
+									<!-- <div class="form-group row">
 
 										<label for="is_front_end_display" class="col-5 col-form-label"><?php echo $this->lang->line('label_frontend_display');?></label>
 
@@ -222,7 +222,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
-									</div>
+									</div> -->
 
 									<div class="form-group row">
 
@@ -705,6 +705,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									message = json.msg;
 
 									msg_icon = 1;
+
+									parent.$('#payment_gateway-table').DataTable().ajax.reload();
 
 									parent.layer.close(index);
 

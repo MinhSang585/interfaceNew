@@ -79,26 +79,33 @@ class Paymentgateway extends MY_Controller {
 			$columns = array( 
 
 				0 => 'payment_gateway_id',
-				1 => 'payment_gateway.payment_gateway_name',
-				2 => 'payment_gateway.payment_gateway_sequence',
-				3 => 'payment_gateway.payment_gateway_admin_verification',
-				4 => 'payment_gateway.payment_gateway_rate_type',
-				5 => 'payment_gateway.payment_gateway_rate',
-				6 => 'payment_gateway.payment_gateway_min_amount',
-				7 => 'payment_gateway.payment_gateway_max_amount',
-				8 => 'payment_gateway.updated_by',
-				9 => 'payment_gateway.updated_date',
-				10 => 'payment_gateway.payment_gateway_type_code',
-				11 => 'payment_gateway.active',
+				1 => 'payment_gateway_name',
+				2 => 'payment_gateway_sequence',
+				3 => 'payment_gateway_admin_verification',
+				4 => 'payment_gateway_rate_type',
+				5 => 'payment_gateway_rate',
+				6 => 'payment_gateway_min_amount',
+				7 => 'payment_gateway_max_amount',
+				8 => 'updated_by',
+				9 => 'updated_date',
+				10 => 'payment_gateway_type_code',
+				11 => 'active',
 				// 
-				12 => 'payment_gateway_maintenance.is_maintenance',
-				13 => 'payment_gateway_maintenance.is_front_end_display',
-				14 => 'payment_gateway_maintenance.fixed_maintenance',
-				15 => 'payment_gateway_maintenance.fixed_day',
-				16 => 'payment_gateway_maintenance.fixed_from_time',
-				17 => 'payment_gateway_maintenance.fixed_to_time',
-				18 => 'payment_gateway_maintenance.urgent_maintenance',
-				19 => 'payment_gateway_maintenance.urgent_date',
+				12 => 'is_maintenance',
+				// 13 => 'is_front_end_display',
+				// 14 => 'fixed_maintenance',
+				// 15 => 'fixed_day',
+				// 16 => 'fixed_from_time',
+				// 17 => 'fixed_to_time',
+				// 18 => 'urgent_maintenance',
+				// 19 => 'urgent_date',
+				
+				13 => 'fixed_maintenance',
+				14 => 'fixed_day',
+				15 => 'fixed_from_time',
+				16 => 'fixed_to_time',
+				17 => 'urgent_maintenance',
+				18 => 'urgent_date',
 			);
 
 							
@@ -159,18 +166,18 @@ class Paymentgateway extends MY_Controller {
 
 				'select' => implode(',', $columns),
 
-				'search_values' => array(STATUS_ACTIVE),
+				//'search_values' => array(STATUS_ACTIVE),
 
-				'search_types' => array('equal'),
+				//'search_types' => array('equal'),
 
-				'search_columns' => array('active'),
+				//'search_columns' => array('active'),
 
 				'table' => 'payment_gateway',
 
-				'join_table' => array(
-						'payment_gateway_maintenance',
-						'payment_gateway_id'
-					),
+				// 'join_table' => array(
+				// 		'payment_gateway_maintenance',
+				// 		'payment_gateway_id'
+				// 	),
 
 				'limit' => $limit,
 
@@ -211,13 +218,11 @@ class Paymentgateway extends MY_Controller {
 
 					$row[] = $post->payment_gateway_id;
 
-					$row[] = $this->lang->line($post->payment_gateway_name)." (".$this->lang->line(get_payment_gateway_type($post->payment_gateway_type_code)).")";
+					$row[] = $post->payment_gateway_name;
 
 					$row[] = '<span id="uc1_' . $post->payment_gateway_id . '">' . $post->payment_gateway_sequence . '</span>';
 
-					
-
-					switch($post->payment_gateway_admin_verification)
+					switch($post->active)
 
 					{
 
@@ -227,7 +232,7 @@ class Paymentgateway extends MY_Controller {
 
 					}
 
-					switch($post->active)
+					switch($post->payment_gateway_admin_verification)
 
 					{
 
@@ -257,15 +262,15 @@ class Paymentgateway extends MY_Controller {
 
 
 
-					switch($post->is_front_end_display)
+					// switch($post->is_front_end_display)
 
-					{
+					// {
 
-						case STATUS_YES: $row[] = '<span class="badge bg-success" id="uc11_' . $post->payment_gateway_id . '">' . $this->lang->line('status_yes') . '</span>'; break;
+					// 	case STATUS_YES: $row[] = '<span class="badge bg-success" id="uc11_' . $post->payment_gateway_id . '">' . $this->lang->line('status_yes') . '</span>'; break;
 
-						default: $row[] = '<span class="badge bg-secondary" id="uc11_' . $post->payment_gateway_id . '">' . $this->lang->line('status_no') . '</span>'; break;
+					// 	default: $row[] = '<span class="badge bg-secondary" id="uc11_' . $post->payment_gateway_id . '">' . $this->lang->line('status_no') . '</span>'; break;
 
-					}
+					// }
 
 
 
@@ -309,15 +314,20 @@ class Paymentgateway extends MY_Controller {
 
 					
 
+					$button = '';
 					if(permission_validation(PERMISSION_PAYMENT_GATEWAY_UPDATE) == TRUE)
-
 					{
-
-						$row[] = '<i onclick="updateData(' . $post->payment_gateway_id . ')" class="fas fa-edit nav-icon text-primary" title="' . $this->lang->line('button_edit')  . '"></i>';
-
+						$button .= '<i onclick="updateData(' . $post->payment_gateway_id . ')" class="fas fa-edit nav-icon text-primary" title="' . $this->lang->line('button_edit')  . '"></i> &nbsp;&nbsp; ';
+					}
+					if(permission_validation(PERMISSION_PAYMENT_GATEWAY_DELETE) == TRUE)
+					{
+						$button .= '<i onclick="deleteData(' . $post->payment_gateway_id . ')" class="fas fa-trash nav-icon text-danger" title="' . $this->lang->line('button_delete')  . '"></i>';
 					}
 
-					
+					if(permission_validation(PERMISSION_PAYMENT_GATEWAY_UPDATE) == TRUE || permission_validation(PERMISSION_PAYMENT_GATEWAY_DELETE) == TRUE)
+					{
+						$row[] = $button;
+					}
 
 					$data[] = $row;
 
@@ -359,9 +369,7 @@ class Paymentgateway extends MY_Controller {
 
 		{
 
-			$data = $this->payment_gateway_model->get_payment_gateway_data($id);
-			log_message('error', print_r('PERMISSION_PAYMENT_GATEWAY_UPDATE', true));
-			log_message('error', print_r($data, true));
+			$data = $this->payment_gateway_model->get_all_payment_gateway_data($id);
 
 			$this->load->view('payment_gateway_update', $data);
 
@@ -788,7 +796,7 @@ class Paymentgateway extends MY_Controller {
 
 							$json['status'] = EXIT_SUCCESS;
 
-							$json['msg'] = $this->lang->line('success_updated');
+							$json['msg'] = $this->lang->line('success_added');
 
 							
 
@@ -1041,9 +1049,7 @@ class Paymentgateway extends MY_Controller {
 
 				$payment_gateway_id = trim($this->input->post('payment_gateway_id', TRUE));
 
-				$oldData = $this->payment_gateway_model->get_payment_gateway_data($payment_gateway_id);
-
-				
+				$oldData = $this->payment_gateway_model->get_payment_gateway_data($payment_gateway_id, true);
 
 				if( ! empty($oldData))
 
@@ -2446,6 +2452,58 @@ class Paymentgateway extends MY_Controller {
 
 		}
 
+	}
+
+	public function delete(){
+		$json = array(
+					'status' => EXIT_ERROR, 
+					'msg' => ''
+				);
+
+		if(permission_validation(PERMISSION_PAYMENT_GATEWAY_DELETE) == TRUE)
+		{
+			$payment_gateway_id = $this->uri->segment(3);
+			$oldData = $this->payment_gateway_model->get_payment_gateway_data($payment_gateway_id, true);
+			if( ! empty($oldData))
+			{
+				//Database update
+				$this->db->trans_start();
+				$this->payment_gateway_model->delete_payment_gateway($payment_gateway_id);
+				if($this->session->userdata('user_group') == USER_GROUP_USER) 
+				{
+					$this->user_model->insert_log(LOG_PAYMENT_GATEWAY_DELETE, $oldData);
+				}
+				else
+				{
+					$this->account_model->insert_log(LOG_PAYMENT_GATEWAY_DELETE, $oldData);
+				}
+				$this->db->trans_complete();
+				if ($this->db->trans_status() === TRUE)
+				{
+					$json['status'] = EXIT_SUCCESS;
+					$json['msg'] = $this->lang->line('success_deleted');
+				}
+				else
+				{
+					$json['msg'] = $this->lang->line('error_failed_to_delete');
+				}
+			}
+			else
+			{
+				$json['msg'] = $this->lang->line('error_failed_to_delete');
+			}	
+			//Output
+			$this->output
+					->set_status_header(200)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($json))
+					->_display();
+			exit();	
+		}
+		else
+		{
+			redirect('home');
+		}
 	}
 
 

@@ -55,7 +55,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="col-12">
 
 						<div class="card">
-
+						<?php if(permission_validation(PERMISSION_USER_ROLE_ADD) == TRUE):?>
+							<div class="card-header">
+								<h3 class="card-title"><button onclick="addData()" type="button" class="btn btn-block bg-gradient-primary btn-sm"><i class="fas fa-plus nav-icon"></i> <?php echo $this->lang->line('button_add_new');?></button></h3>
+							</div>
+							<!-- /.card-header -->
+							<?php endif;?>
 							<div class="card-body">
 
 								<table id="payment_gateway-table" class="table table-striped table-bordered table-hover">
@@ -73,6 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<?php endif;?>
 
 											<th width="80"><?php echo $this->lang->line('label_sequence');?></th>
+											<th width="50"><?php echo $this->lang->line('label_active');?></th>
 
 											<th width="50"><?php echo $this->lang->line('label_verify');?></th>
 
@@ -83,6 +89,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<th width="120"><?php echo $this->lang->line('label_min_amounts');?></th>
 
 											<th width="120"><?php echo $this->lang->line('label_max_amounts');?></th>
+											
+											<!--  -->
+											<th width="40"><?php echo $this->lang->line('label_maintenance');?></th>
+
+											<!-- <th width="60"><?php echo $this->lang->line('label_frontend_display');?></th> -->
+
+											<th width="60"><?php echo $this->lang->line('label_fixed_maintenance');?></th>
+											<th width="70"><?php echo $this->lang->line('label_day');?></th>
+											<th width="80"><?php echo $this->lang->line('label_from_time');?></th>
+											<th width="80"><?php echo $this->lang->line('label_to_time');?></th>
+											<th width="60"><?php echo $this->lang->line('label_urgent_maintenance');?></th>
+											<th width="120"><?php echo $this->lang->line('label_date');?></th>
+											<!--  -->
 
 											<th width="120"><?php echo $this->lang->line('label_updated_by');?></th>
 
@@ -154,7 +173,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				"pageLength" : 10,
 
-				"order": [[0, "asc"]],
+				"order": [[0, "desc"]],
 
 				"ajax": {
 
@@ -247,6 +266,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			});
 
 		}
+
+		function addData() {
+			layer.open({
+			type: 2,
+			area: [((browser_width < 600) ? '100%': '600px'), ((browser_width < 600) ? '100%': '700px')],
+			fixed: false,
+			maxmin: true,
+			scrollbar: false,
+			title: '<?php echo $this->lang->line('title_payment_gateway_setting');?>',
+			content: '<?php echo base_url('paymentgateway/add/');?>'
+			});
+		}
+
+		function deleteData(id) {
+			layer.confirm('<?php echo $this->lang->line('label_confirm_to_proceed');?>', {
+				title: '<?php echo $this->lang->line('label_info');?>',
+				btn: ['<?php echo $this->lang->line('status_yes');?>', '<?php echo $this->lang->line('status_no');?>']
+			}, function() {
+				$.get('<?php echo base_url('paymentgateway/delete/');?>' + id, function(data) {
+					var json = JSON.parse(JSON.stringify(data));
+					var message = json.msg;
+					var msg_icon = 2;
+					if(json.status == '<?php echo EXIT_SUCCESS;?>') {
+						msg_icon = 1;
+						$('#payment_gateway-table').DataTable().ajax.reload();
+					}
+					layer.alert(message, {icon: msg_icon, title: '<?php echo $this->lang->line('label_info');?>', btn: '<?php echo $this->lang->line('button_close');?>'});
+				});
+			});
+			}
 
 	</script>	
 

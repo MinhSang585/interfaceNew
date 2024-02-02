@@ -144,6 +144,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								else if(json.msg.general_error != '') {
 									message = json.msg.general_error;
 								}
+								else if(json.msg.rolename_error != '') {
+									message = json.msg.rolename_error;
+								}
 								
 								parent.layer.alert(message, {icon: msg_icon, title: '<?php echo $this->lang->line('label_info');?>', btn: '<?php echo $this->lang->line('button_close');?>'});
 							}
