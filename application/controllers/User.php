@@ -243,6 +243,7 @@ class User extends MY_Controller {
 			{
 				$upline = '';
 			}
+			
 			$query = array(
 				'select' => implode(',', $columns),
 				'search_values' => array($upline),
@@ -255,6 +256,7 @@ class User extends MY_Controller {
 				'dir' => $dir,
 			);
 			$posts =  $this->general_model->all_posts($query);
+
 			$totalFiltered = $this->general_model->all_posts_count($query);
 			//Prepare data
 			$data = array();
@@ -272,7 +274,7 @@ class User extends MY_Controller {
 						}
 					}
 					$row = array();
-					//$row[] = $post->user_id;
+					// $row[] = $post->username;
 					$row[] = '<a href="javascript:void(0);" onclick="getDownline(\'' . $post->username . '\', ' . $num . ')">' . $post->username . '</a>';
 					$row[] = '<span id="uc1_' . $post->user_id . '">' . $post->nickname . '</span>';
 					// $row[] = $this->lang->line(get_user_type($post->user_type));
@@ -354,6 +356,7 @@ class User extends MY_Controller {
 				$response['bank_group_list'] 	= $this->group_model->get_group_list(GROUP_BANK);
 				$response['avatar_list'] 		= $this->avatar_model->get_avatar_list();
 				//$response['role_list'] 			= $this->role_model->get_role_list_by_level($this->session->userdata('user_role'));
+
 				$dataUserLogin = $this->session->userdata('dataUserLogin');
 				$userRoleID = $dataUserLogin['user_role'];
 				if((isset($dataUserLogin['username']) && $username != $dataUserLogin['username']) || $dataUserLogin['user_role']!= 1){
@@ -376,7 +379,6 @@ class User extends MY_Controller {
 							foreach($listRole as $role)
 								array_push($response['role_list'], $role);
 					}
-
 				}else{
 					if(isset($userRoleID)){
 						$query_string_3 = "SELECT * FROM {$this->db->dbprefix}user_role WHERE user_role_id =".$userRoleID;
@@ -399,6 +401,7 @@ class User extends MY_Controller {
 								array_push($response['role_list'], $role);
 					}
 				}
+
 				$response['miscellaneous'] 		= $this->miscellaneous_model->get_miscellaneous();
 				$game_list 						= $this->game_model->get_game_list();
 				if(!empty($game_list)){

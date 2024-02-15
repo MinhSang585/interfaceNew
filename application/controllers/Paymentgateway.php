@@ -79,15 +79,25 @@ class Paymentgateway extends MY_Controller {
 			$columns = array( 
 
 				0 => 'payment_gateway_id',
+
 				1 => 'payment_gateway_name',
+
 				2 => 'payment_gateway_sequence',
+
 				3 => 'payment_gateway_admin_verification',
+
 				4 => 'payment_gateway_rate_type',
+
 				5 => 'payment_gateway_rate',
+
 				6 => 'payment_gateway_min_amount',
+
 				7 => 'payment_gateway_max_amount',
+
 				8 => 'updated_by',
+
 				9 => 'updated_date',
+
 				10 => 'payment_gateway_type_code',
 				11 => 'active',
 				// 
@@ -166,14 +176,13 @@ class Paymentgateway extends MY_Controller {
 
 				'select' => implode(',', $columns),
 
-				//'search_values' => array(STATUS_ACTIVE),
+				// 'search_values' => array(STATUS_ACTIVE),
 
-				//'search_types' => array('equal'),
+				// 'search_types' => array('equal'),
 
-				//'search_columns' => array('active'),
+				// 'search_columns' => array('active'),
 
 				'table' => 'payment_gateway',
-
 				// 'join_table' => array(
 				// 		'payment_gateway_maintenance',
 				// 		'payment_gateway_id'
@@ -190,13 +199,8 @@ class Paymentgateway extends MY_Controller {
 			);
 
 			
-			
 
 			$posts =  $this->general_model->all_posts($query);
-
-			
-			log_message('error', print_r('payment', true));
-			log_message('error', print_r($this->db->last_query(), true));
 
 			$totalFiltered = $this->general_model->all_posts_count($query);
 
@@ -219,7 +223,7 @@ class Paymentgateway extends MY_Controller {
 					$row[] = $post->payment_gateway_id;
 
 					$row[] = $post->payment_gateway_name;
-
+					
 					$row[] = '<span id="uc1_' . $post->payment_gateway_id . '">' . $post->payment_gateway_sequence . '</span>';
 
 					switch($post->active)
@@ -249,7 +253,7 @@ class Paymentgateway extends MY_Controller {
 					$row[] = '<span id="uc23_' . $post->payment_gateway_id . '">' . $post->payment_gateway_min_amount . '</span>';
 
 					$row[] = '<span id="uc24_' . $post->payment_gateway_id . '">' . $post->payment_gateway_max_amount . '</span>';
-					
+
 					switch($post->is_maintenance)
 
 					{
@@ -313,7 +317,6 @@ class Paymentgateway extends MY_Controller {
 					$row[] = '<span id="uc10_' . $post->payment_gateway_id . '">' . (($post->updated_date > 0) ? date('Y-m-d H:i:s', $post->updated_date) : '-') . '</span>';
 
 					
-
 					$button = '';
 					if(permission_validation(PERMISSION_PAYMENT_GATEWAY_UPDATE) == TRUE)
 					{
@@ -327,7 +330,7 @@ class Paymentgateway extends MY_Controller {
 					if(permission_validation(PERMISSION_PAYMENT_GATEWAY_UPDATE) == TRUE || permission_validation(PERMISSION_PAYMENT_GATEWAY_DELETE) == TRUE)
 					{
 						$row[] = $button;
-					}
+					}					
 
 					$data[] = $row;
 
@@ -369,7 +372,7 @@ class Paymentgateway extends MY_Controller {
 
 		{
 
-			$data = $this->payment_gateway_model->get_all_payment_gateway_data($id);
+			$data = $this->payment_gateway_model->get_payment_gateway_data($id, true);
 
 			$this->load->view('payment_gateway_update', $data);
 
@@ -404,7 +407,6 @@ class Paymentgateway extends MY_Controller {
 	}
 
 	public function submit(){
-		log_message('error', print_r('submit', true));
 
 		if(permission_validation(PERMISSION_PAYMENT_GATEWAY_ADD) == TRUE)
 
@@ -540,12 +542,8 @@ class Paymentgateway extends MY_Controller {
 			{
 
 				$payment_gateway_name = trim($this->input->post('payment_gateway_name', TRUE));
-				log_message('error', print_r('paymentName4', true));
-				log_message('error', print_r($payment_gateway_name, true));
 
 				//$oldData = $this->payment_gateway_model->get_payment_gateway_data($payment_gateway_id);
-
-				
 
 				if( ! empty($payment_gateway_name))
 
@@ -555,144 +553,140 @@ class Paymentgateway extends MY_Controller {
 
 				
 
-					// $config['upload_path'] = "http://localhost/dev/InterfaceNew/uploads/banks/";
+					$config['upload_path'] = BANKS_PATH;
 
-					// $config['max_size'] = BANKS_FILE_SIZE;
+					$config['max_size'] = BANKS_FILE_SIZE;
 
-					// $config['allowed_types'] = 'gif|jpg|jpeg|png';
+					$config['allowed_types'] = 'gif|jpg|jpeg|png';
 
-					// $config['overwrite'] = TRUE;
-
-					
-
-					// $this->load->library('upload', $config);
-
-					// log_message('error', print_r($config, true));
-
-					// if(isset($_FILES['web_image_on']['size']) && $_FILES['web_image_on']['size'] > 0)
-
-					// {
-
-					// 	$new_name = time().rand(1000,9999).".".pathinfo($_FILES["web_image_on"]['name'], PATHINFO_EXTENSION);
-
-					// 	$config['file_name']  = $new_name;
-
-					// 	$this->upload->initialize($config);
-
-					// 	if( ! $this->upload->do_upload('web_image_on'))  //
-
-					// 	{
-
-					// 		$json['msg']['general_error'] = $this->lang->line('error_invalid_filetype');
-
-					// 		$allow_to_update = FALSE;
-
-					// 	}else{
-
-					// 		$_FILES["web_image_on"]['name'] = $new_name;
-
-					// 	}
-
-					// }
+					$config['overwrite'] = TRUE;
 
 					
 
-					// if($allow_to_update == TRUE)
-
-					// {
-
-					// 	if(isset($_FILES['web_image_off']['size']) && $_FILES['web_image_off']['size'] > 0)
-
-					// 	{
-
-					// 		$new_name = time().rand(1000,9999).".".pathinfo($_FILES["web_image_off"]['name'], PATHINFO_EXTENSION);
-
-					// 		$config['file_name']  = $new_name;
-
-					// 		$this->upload->initialize($config);
-
-					// 		if( ! $this->upload->do_upload('web_image_off')) 
-
-					// 		{
-
-					// 			$json['msg']['general_error'] = $this->lang->line('error_invalid_filetype');
-
-					// 			$allow_to_update = FALSE;
-
-					// 		}else{
-
-					// 			$_FILES["web_image_off"]['name'] = $new_name;
-
-					// 		}
-
-					// 	}
-
-					// }
+					$this->load->library('upload', $config);
 
 
+					if(isset($_FILES['web_image_on']['size']) && $_FILES['web_image_on']['size'] > 0)
 
-					// if(isset($_FILES['mobile_image_on']['size']) && $_FILES['mobile_image_on']['size'] > 0)
+					{
 
-					// {
+						$new_name = time().rand(1000,9999).".".pathinfo($_FILES["web_image_on"]['name'], PATHINFO_EXTENSION);
 
-					// 	$new_name = time().rand(1000,9999).".".pathinfo($_FILES["mobile_image_on"]['name'], PATHINFO_EXTENSION);
+						$config['file_name']  = $new_name;
 
-					// 	$config['file_name']  = $new_name;
+						$this->upload->initialize($config);
 
-					// 	$this->upload->initialize($config);
+						if( ! $this->upload->do_upload('web_image_on'))  //
 
-					// 	if( ! $this->upload->do_upload('mobile_image_on')) 
+						{
 
-					// 	{
+							$json['msg']['general_error'] = $this->lang->line('error_invalid_filetype');
 
-					// 		$json['msg']['general_error'] = $this->lang->line('error_invalid_filetype');
+							$allow_to_update = FALSE;
 
-					// 		$allow_to_update = FALSE;
+						}else{
 
-					// 	}else{
+							$_FILES["web_image_on"]['name'] = $new_name;
 
-					// 		$_FILES["mobile_image_on"]['name'] = $new_name;
+						}
 
-					// 	}
-
-					// }
+					}
 
 					
 
-					// if($allow_to_update == TRUE)
+					if($allow_to_update == TRUE)
 
-					// {
+					{
 
-					// 	if(isset($_FILES['mobile_image_off']['size']) && $_FILES['mobile_image_off']['size'] > 0)
+						if(isset($_FILES['web_image_off']['size']) && $_FILES['web_image_off']['size'] > 0)
 
-					// 	{
+						{
 
-					// 		$new_name = time().rand(1000,9999).".".pathinfo($_FILES["mobile_image_off"]['name'], PATHINFO_EXTENSION);
+							$new_name = time().rand(1000,9999).".".pathinfo($_FILES["web_image_off"]['name'], PATHINFO_EXTENSION);
 
-					// 		$config['file_name']  = $new_name;
+							$config['file_name']  = $new_name;
 
-					// 		$this->upload->initialize($config);
+							$this->upload->initialize($config);
 
-					// 		if( ! $this->upload->do_upload('mobile_image_off')) 
+							if( ! $this->upload->do_upload('web_image_off')) 
 
-					// 		{
+							{
 
-					// 			$json['msg']['general_error'] = $this->lang->line('error_invalid_filetype');
+								$json['msg']['general_error'] = $this->lang->line('error_invalid_filetype');
 
-					// 			$allow_to_update = FALSE;
+								$allow_to_update = FALSE;
 
-					// 		}else{
+							}else{
 
-					// 			$_FILES["mobile_image_off"]['name'] = $new_name;
+								$_FILES["web_image_off"]['name'] = $new_name;
 
-					// 		}
+							}
 
-					// 	}
+						}
 
-					// }
+					}
 
-					log_message('error', print_r('addPayment', true));
-					log_message('error', print_r($json, true));
+
+
+					if(isset($_FILES['mobile_image_on']['size']) && $_FILES['mobile_image_on']['size'] > 0)
+
+					{
+
+						$new_name = time().rand(1000,9999).".".pathinfo($_FILES["mobile_image_on"]['name'], PATHINFO_EXTENSION);
+
+						$config['file_name']  = $new_name;
+
+						$this->upload->initialize($config);
+
+						if( ! $this->upload->do_upload('mobile_image_on')) 
+
+						{
+
+							$json['msg']['general_error'] = $this->lang->line('error_invalid_filetype');
+
+							$allow_to_update = FALSE;
+
+						}else{
+
+							$_FILES["mobile_image_on"]['name'] = $new_name;
+
+						}
+
+					}
+
+					
+
+					if($allow_to_update == TRUE)
+
+					{
+
+						if(isset($_FILES['mobile_image_off']['size']) && $_FILES['mobile_image_off']['size'] > 0)
+
+						{
+
+							$new_name = time().rand(1000,9999).".".pathinfo($_FILES["mobile_image_off"]['name'], PATHINFO_EXTENSION);
+
+							$config['file_name']  = $new_name;
+
+							$this->upload->initialize($config);
+
+							if( ! $this->upload->do_upload('mobile_image_off')) 
+
+							{
+
+								$json['msg']['general_error'] = $this->lang->line('error_invalid_filetype');
+
+								$allow_to_update = FALSE;
+
+							}else{
+
+								$_FILES["mobile_image_off"]['name'] = $new_name;
+
+							}
+
+						}
+
+					}
 
 					if($allow_to_update == TRUE)
 
@@ -704,9 +698,7 @@ class Paymentgateway extends MY_Controller {
 
 						$newData = $this->payment_gateway_model->insert_payment_gateway();
 						
-						//$newData['payment_gateway_sequence'] = 9919;
-						log_message('error', print_r('payment_gateway_current_usage', true));
-						log_message('error', print_r($newData, true));
+						//$newData = $this->payment_gateway_model->update_payment_gateway($payment_gateway_id);
 
 						//$newData['payment_gateway_current_usage'] = $oldData['payment_gateway_current_usage'];
 
@@ -908,7 +900,6 @@ class Paymentgateway extends MY_Controller {
 
 	}
 
-
 	public function update(){
 
 		if(permission_validation(PERMISSION_PAYMENT_GATEWAY_UPDATE) == TRUE)
@@ -1051,6 +1042,8 @@ class Paymentgateway extends MY_Controller {
 
 				$oldData = $this->payment_gateway_model->get_payment_gateway_data($payment_gateway_id, true);
 
+				
+
 				if( ! empty($oldData))
 
 				{
@@ -1058,7 +1051,6 @@ class Paymentgateway extends MY_Controller {
 					$allow_to_update = TRUE;
 
 				
-					$config['upload_path'] = "http://localhost/dev/InterfaceNew/uploads/banks/";
 
 					$config['upload_path'] = BANKS_PATH;
 
@@ -1406,7 +1398,57 @@ class Paymentgateway extends MY_Controller {
 
 	}
 
+	public function delete(){
+		$json = array(
+					'status' => EXIT_ERROR, 
+					'msg' => ''
+				);
 
+		if(permission_validation(PERMISSION_PAYMENT_GATEWAY_DELETE) == TRUE)
+		{
+			$payment_gateway_id = $this->uri->segment(3);
+			$oldData = $this->payment_gateway_model->get_payment_gateway_data($payment_gateway_id, true);
+			if( ! empty($oldData))
+			{
+				//Database update
+				$this->db->trans_start();
+				$this->payment_gateway_model->delete_payment_gateway($payment_gateway_id);
+				if($this->session->userdata('user_group') == USER_GROUP_USER) 
+				{
+					$this->user_model->insert_log(LOG_PAYMENT_GATEWAY_DELETE, $oldData);
+				}
+				else
+				{
+					$this->account_model->insert_log(LOG_PAYMENT_GATEWAY_DELETE, $oldData);
+				}
+				$this->db->trans_complete();
+				if ($this->db->trans_status() === TRUE)
+				{
+					$json['status'] = EXIT_SUCCESS;
+					$json['msg'] = $this->lang->line('success_deleted');
+				}
+				else
+				{
+					$json['msg'] = $this->lang->line('error_failed_to_delete');
+				}
+			}
+			else
+			{
+				$json['msg'] = $this->lang->line('error_failed_to_delete');
+			}	
+			//Output
+			$this->output
+					->set_status_header(200)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($json))
+					->_display();
+			exit();	
+		}
+		else
+		{
+			redirect('home');
+		}
+	}
 
 	public function maintenance(){
 
@@ -1561,8 +1603,6 @@ class Paymentgateway extends MY_Controller {
 			
 
 			$posts =  $this->general_model->all_posts($query);
-			log_message('error', print_r('maintrr', true));
-			log_message('error', print_r($this->db->last_query(), true));
 
 			$totalFiltered = $this->general_model->all_posts_count($query);
 
@@ -2452,58 +2492,6 @@ class Paymentgateway extends MY_Controller {
 
 		}
 
-	}
-
-	public function delete(){
-		$json = array(
-					'status' => EXIT_ERROR, 
-					'msg' => ''
-				);
-
-		if(permission_validation(PERMISSION_PAYMENT_GATEWAY_DELETE) == TRUE)
-		{
-			$payment_gateway_id = $this->uri->segment(3);
-			$oldData = $this->payment_gateway_model->get_payment_gateway_data($payment_gateway_id, true);
-			if( ! empty($oldData))
-			{
-				//Database update
-				$this->db->trans_start();
-				$this->payment_gateway_model->delete_payment_gateway($payment_gateway_id);
-				if($this->session->userdata('user_group') == USER_GROUP_USER) 
-				{
-					$this->user_model->insert_log(LOG_PAYMENT_GATEWAY_DELETE, $oldData);
-				}
-				else
-				{
-					$this->account_model->insert_log(LOG_PAYMENT_GATEWAY_DELETE, $oldData);
-				}
-				$this->db->trans_complete();
-				if ($this->db->trans_status() === TRUE)
-				{
-					$json['status'] = EXIT_SUCCESS;
-					$json['msg'] = $this->lang->line('success_deleted');
-				}
-				else
-				{
-					$json['msg'] = $this->lang->line('error_failed_to_delete');
-				}
-			}
-			else
-			{
-				$json['msg'] = $this->lang->line('error_failed_to_delete');
-			}	
-			//Output
-			$this->output
-					->set_status_header(200)
-					->set_content_type('application/json', 'utf-8')
-					->set_output(json_encode($json))
-					->_display();
-			exit();	
-		}
-		else
-		{
-			redirect('home');
-		}
 	}
 
 

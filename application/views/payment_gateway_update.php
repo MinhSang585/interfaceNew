@@ -44,7 +44,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										<div class="col-7">
 
-											<!-- <label class="col-form-label font-weight-normal"><?php echo (isset($payment_gateway_name) ? $this->lang->line($payment_gateway_name) : '');?></label> -->
 											<label class="col-form-label font-weight-normal"><?php echo (isset($payment_gateway_name) ? $payment_gateway_name : '');?></label>
 
 										</div>
@@ -133,33 +132,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										<div class="col-7">
 
-											<input type="number" class="form-control col-6" id="payment_gateway_rate" name="payment_gateway_rate" value="<?php echo (isset($payment_gateway_rate) ? $payment_gateway_rate : '');?>">
+										<input type="number" class="form-control col-6" id="payment_gateway_rate" name="payment_gateway_rate" value="<?php echo (isset($payment_gateway_rate) ? $payment_gateway_rate : '');?>">
 
 										</div>
 
-									</div>
-
-									<div class="form-group row">
-
-										<label for="api_data" class="col-5 col-form-label">API Data</label>
-
-										<div class="col-7">
-
-											<textarea class="form-control" id="api_data" name="api_data" rows="4" value="<?php echo $api_data;?>" ><?php echo $api_data;?></textarea>
-
 										</div>
 
-									</div>
-
-									<div class="form-group row">
-
-										<label for="bank_data" class="col-5 col-form-label">Bank Data</label>
-
-										<div class="col-7">
-
-											<textarea class="form-control" id="bank_data" name="bank_data" rows="3" value="<?php echo $bank_data;?>"><?php echo $bank_data;?></textarea>
-
-										</div>
 
 									</div>
 
@@ -185,9 +163,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
-									</div>
-										<!--  -->
-										<div class="form-group row">
+									</div>			
+
+									<!--  -->
+									<div class="form-group row">
 
 										<label for="is_maintenance" class="col-5 col-form-label"><?php echo $this->lang->line('label_maintenance');?></label>
 
@@ -197,9 +176,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
-									</div>
+										</div>
 
-									<!-- <div class="form-group row">
+										<!-- <div class="form-group row">
 
 										<label for="is_front_end_display" class="col-5 col-form-label"><?php echo $this->lang->line('label_frontend_display');?></label>
 
@@ -209,9 +188,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
-									</div> -->
+										</div> -->
 
-									<div class="form-group row">
+										<div class="form-group row">
 
 										<label for="fixed_maintenance" class="col-5 col-form-label"><?php echo $this->lang->line('label_fixed_maintenance');?></label>
 
@@ -221,9 +200,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
-									</div>
+										</div>
 
-									<div class="form-group row">
+										<div class="form-group row">
 
 										<label for="fixed_day" class="col-5 col-form-label"><?php echo $this->lang->line('label_day');?></label>
 
@@ -267,9 +246,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
-									</div>
+										</div>
 
-									<div class="form-group row">
+										<div class="form-group row">
 
 										<label for="fixed_from_time" class="col-5 col-form-label"><?php echo $this->lang->line('label_from_time');?></label>
 
@@ -289,9 +268,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
-									</div>
+										</div>
 
-									<div class="form-group row">
+										<div class="form-group row">
 
 										<label for="fixed_to_time" class="col-5 col-form-label"><?php echo $this->lang->line('label_to_time');?></label>
 
@@ -310,9 +289,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
-									</div>
+										</div>
 
-									<div class="form-group row">
+										<div class="form-group row">
 
 										<label for="urgent_maintenance" class="col-5 col-form-label"><?php echo $this->lang->line('label_urgent_maintenance');?></label>
 
@@ -322,9 +301,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
-									</div>
+										</div>
 
-									<div class="form-group row">
+										<div class="form-group row">
 
 										<label for="urgent_date" class="col-5 col-form-label"><?php echo $this->lang->line('label_date');?></label>
 
@@ -343,11 +322,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 										</div>
 
+										</div>
+
 									</div>
-
-								</div>
-
-										<!--  -->
 
 									<ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
 

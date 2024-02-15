@@ -36,6 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<input type="checkbox" id="active" name="active" value="1" <?php echo ((isset($active) && $active == STATUS_ACTIVE) ? 'checked' : '');?> data-bootstrap-switch data-off-color="secondary" data-on-color="success">
 										</div>
 									</div>
+									
 									<div class="form-group row">
 										<label for="created_by" class="col-5 col-form-label"><?php echo $this->lang->line('label_created_by');?></label>
 										<div class="col-7">
@@ -738,7 +739,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_DEPOSIT_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_DEPOSIT_VIEW;?>" type="<?php echo (($permissions[PERMISSION_DEPOSIT_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_DEPOSIT_VIEW;?>_<?php echo PERMISSION_DEPOSIT_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_DEPOSIT_UPDATE;?>" <?php echo (($permissions[PERMISSION_DEPOSIT_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_DEPOSIT_UPDATE]['selected']) ? 'checked' : '');?>>
 														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_DEPOSIT_VIEW;?>_<?php echo PERMISSION_DEPOSIT_UPDATE;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
 														</label>
 													</div>
 												</div>
@@ -824,7 +825,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_WITHDRAWAL_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_UPDATE;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_UPDATE]['selected']) ? 'checked' : '');?>>
 														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_UPDATE;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
 														</label>
 													</div>
 												</div>
@@ -2655,7 +2656,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<?php if($permissions[PERMISSION_PROMOTION_UPDATE]['upline'] == TRUE):?>
 												<div class="form-group clearfix col-12" style="padding-left: 30px;">
 													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PROMOTION_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PROMOTION_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PROMOTION_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PROMOTION_VIEW;?>_<?php echo PERMISSION_PROMOTION_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PROMOTION_UPDATE;?>" <?php echo (($permissions[PERMISSION_PROMOTION_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PROMOTION_UPDATE]['selected']) ? 'checked' : '');?>>
+													 	<input class="custom-control-input permission_<?php echo PERMISSION_PROMOTION_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PROMOTION_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PROMOTION_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PROMOTION_VIEW;?>_<?php echo PERMISSION_PROMOTION_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PROMOTION_UPDATE;?>" <?php echo (($permissions[PERMISSION_PROMOTION_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PROMOTION_UPDATE]['upline']) ? 'checked' : '');?>>
 														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PROMOTION_VIEW;?>_<?php echo PERMISSION_PROMOTION_UPDATE;?>">
 														<?php echo $this->lang->line('label_update');?> &nbsp; 
 														</label>

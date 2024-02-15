@@ -55,12 +55,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="col-12">
 
 						<div class="card">
-						<?php if(permission_validation(PERMISSION_USER_ROLE_ADD) == TRUE):?>
+						<?php if(permission_validation(PERMISSION_PAYMENT_GATEWAY_ADD) == TRUE):?>
 							<div class="card-header">
 								<h3 class="card-title"><button onclick="addData()" type="button" class="btn btn-block bg-gradient-primary btn-sm"><i class="fas fa-plus nav-icon"></i> <?php echo $this->lang->line('button_add_new');?></button></h3>
 							</div>
 							<!-- /.card-header -->
 							<?php endif;?>
+
 							<div class="card-body">
 
 								<table id="payment_gateway-table" class="table table-striped table-bordered table-hover">
@@ -78,6 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<?php endif;?>
 
 											<th width="80"><?php echo $this->lang->line('label_sequence');?></th>
+											
 											<th width="50"><?php echo $this->lang->line('label_active');?></th>
 
 											<th width="50"><?php echo $this->lang->line('label_verify');?></th>
@@ -89,7 +91,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<th width="120"><?php echo $this->lang->line('label_min_amounts');?></th>
 
 											<th width="120"><?php echo $this->lang->line('label_max_amounts');?></th>
-											
+
 											<!--  -->
 											<th width="40"><?php echo $this->lang->line('label_maintenance');?></th>
 
