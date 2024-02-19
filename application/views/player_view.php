@@ -208,7 +208,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<thead>
 										<tr>
 											<th width="60"><?php echo $this->lang->line('label_hashtag');?></th>
-											<th width="80"><?php echo $this->lang->line('label_player_username');?></th>
+											<th width="180"><?php echo $this->lang->line('label_player_username');?></th>
 											<th width="80"><?php echo $this->lang->line('label_nickname');?></th>
 											<th width="30"><?php echo $this->lang->line('label_ranking');?></th>
 											<th width="80"><?php echo $this->lang->line('label_tag_player');?></th>
@@ -218,10 +218,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											<th width="80"><?php echo $this->lang->line('label_rewards');?></th>
 											<th width="80"><?php echo $this->lang->line('label_account_status');?></th>
 											<th width="80"><?php echo $this->lang->line('label_mark');?></th>
-											<th width="80"><?php echo $this->lang->line('label_bank_channel_status');?></th>
+											<th width="180"><?php echo $this->lang->line('label_bank_channel_status');?></th>
 											<th width="200"><?php echo $this->lang->line('label_bank_name');?></th>
 											<th width="80"><?php echo $this->lang->line('label_bank_group');?></th>
-											<th width="120"><?php echo $this->lang->line('label_registered_date')." / ".$this->lang->line('label_ip');?></th>
+											<th width="150"><?php echo $this->lang->line('label_registered_date')." / ".$this->lang->line('label_ip');?></th>
 											<th width="120"><?php echo $this->lang->line('label_last_login_date')." / ".$this->lang->line('label_ip');?></th>
 											<th width="120"><?php echo $this->lang->line('label_withdrawal_turnover');?></th>
 											<?php if(permission_validation(PERMISSION_PLAYER_UPDATE) == TRUE OR permission_validation(PERMISSION_VIEW_PLAYER_CONTACT) == TRUE OR permission_validation(PERMISSION_CHANGE_PASSWORD) == TRUE OR permission_validation(PERMISSION_DEPOSIT_POINT_TO_DOWNLINE) == TRUE OR permission_validation(PERMISSION_WITHDRAW_POINT_FROM_DOWNLINE) == TRUE OR permission_validation(PERMISSION_PLAYER_POINT_ADJUSTMENT) == TRUE OR permission_validation(PERMISSION_DEPOSIT_ADD) == TRUE OR permission_validation(PERMISSION_WITHDRAWAL_ADD) == TRUE OR permission_validation(PERMISSION_REWARD_DEDUCT) == TRUE OR permission_validation(PERMISSION_PLAYER_DAILY_REPORT) == TRUE OR permission_validation(PERMISSION_WHITELIST_ADD) == TRUE OR (permission_validation(PERMISSION_PLAYER_PROMOTION_VIEW) == TRUE  && permission_validation(PERMISSION_PLAYER_PROMOTION_UPDATE) == TRUE)):?>

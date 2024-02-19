@@ -417,7 +417,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_PLAYER_USER_VIEW;?> checkbox_option main_permissions sub_permissions_<?php echo PERMISSION_PLAYER_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_PLAYER_USER_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_BANK_PLAYER_USER_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_PLAYER_USER_VIEW;?>" <?php echo (($permissions[PERMISSION_BANK_PLAYER_USER_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_PLAYER_USER_VIEW]['selected']) ? 'checked' : '');?>>
 														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_BANK_PLAYER_USER_VIEW;?>">
-														<?php echo $this->lang->line('title_bank_player');?> &nbsp; 
+														<?php echo $this->lang->line('player_bank_list');?> &nbsp; 
 														</label>
 													</div>
 												</div>
@@ -458,6 +458,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_PLAYER_USER_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PLAYER_VIEW;?> sub_permissions_<?php echo PERMISSION_BANK_PLAYER_USER_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_PLAYER_USER_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_BANK_PLAYER_USER_VIEW;?>_<?php echo PERMISSION_BANK_PLAYER_USER_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_PLAYER_USER_DELETE;?>" <?php echo (($permissions[PERMISSION_BANK_PLAYER_USER_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_PLAYER_USER_DELETE]['selected']) ? 'checked' : '');?>>
 														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_BANK_PLAYER_USER_VIEW;?>_<?php echo PERMISSION_BANK_PLAYER_USER_DELETE;?>">
 														<?php echo $this->lang->line('button_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+
+												<?php if($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_VIEW;?> checkbox_option main_permissions sub_permissions_<?php echo PERMISSION_PLAYER_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_VIEW;?>" <?php echo (($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_VIEW;?>">
+														<?php echo $this->lang->line('title_wallet_transaction_pending');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 60px;">
+													├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PLAYER_VIEW;?> sub_permissions_<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_VIEW;?>_<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_UPDATE;?>" <?php echo (($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_UPDATE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_VIEW;?>_<?php echo PERMISSION_WALLET_TRANSACTION_PENDING_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
 														</label>
 													</div>
 												</div>
@@ -552,6 +573,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</div>
 												</div>
 												<?php endif;?>
+
+												<?php if($permissions[PERMISSION_TAG_PLAYER_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_TAG_PLAYER_VIEW;?> checkbox_option main_permissions sub_permissions_<?php echo PERMISSION_PLAYER_VIEW;?>" type="<?php echo (($permissions[PERMISSION_TAG_PLAYER_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_TAG_PLAYER_VIEW;?>" <?php echo (($permissions[PERMISSION_TAG_PLAYER_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_TAG_PLAYER_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>">
+														<?php echo $this->lang->line('player_label_setup');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<!-- <?php if($permissions[PERMISSION_TAG_PLAYER_ADD]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 60px;">
+													├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_TAG_PLAYER_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_PLAYER_VIEW;?> sub_permissions_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>" type="<?php echo (($permissions[PERMISSION_TAG_PLAYER_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_TAG_PLAYER_ADD;?>" <?php echo (($permissions[PERMISSION_TAG_PLAYER_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_TAG_PLAYER_ADD]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?> -->
+												<?php if($permissions[PERMISSION_TAG_PLAYER_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 60px;">
+													├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_TAG_PLAYER_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PLAYER_VIEW;?> sub_permissions_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>" type="<?php echo (($permissions[PERMISSION_TAG_PLAYER_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_TAG_PLAYER_UPDATE;?>" <?php echo (($permissions[PERMISSION_TAG_PLAYER_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_TAG_PLAYER_UPDATE]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_TAG_PLAYER_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 60px;">
+													├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_TAG_PLAYER_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PLAYER_VIEW;?> sub_permissions_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>" type="<?php echo (($permissions[PERMISSION_TAG_PLAYER_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_TAG_PLAYER_DELETE;?>" <?php echo (($permissions[PERMISSION_TAG_PLAYER_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_TAG_PLAYER_DELETE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_TAG_PLAYER_BULK_MODIFY]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 60px;">
+													├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_TAG_PLAYER_BULK_MODIFY;?> checkbox_option sub_permissions_<?php echo PERMISSION_PLAYER_VIEW;?> sub_permissions_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>" type="<?php echo (($permissions[PERMISSION_TAG_PLAYER_BULK_MODIFY]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_BULK_MODIFY;?>" name="permissions[]" value="<?php echo PERMISSION_TAG_PLAYER_BULK_MODIFY;?>" <?php echo (($permissions[PERMISSION_TAG_PLAYER_BULK_MODIFY]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_TAG_PLAYER_BULK_MODIFY]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_VIEW;?>_<?php echo PERMISSION_TAG_PLAYER_BULK_MODIFY;?>">
+														<?php echo $this->lang->line('label_update_bulk');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+
 												<?php if($permissions[PERMISSION_PLAYER_MOBILE]['upline'] == TRUE):?>
 												<div class="form-group clearfix col-12" style="padding-left: 30px;">
 													├ <div class="custom-control custom-checkbox d-inline">
@@ -873,6 +946,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</div>
 										</div>
 										<?php endif;?>
+										<!-- 
 										<?php if($permissions[PERMISSION_BANK_PLAYER_USER_VIEW]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
 											<div class="form-group row">
@@ -939,6 +1013,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</div>
 										</div>
 										<?php endif;?>
+										-->
 										<?php if($permissions[PERMISSION_PLAYER_BONUS_VIEW]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
 											<div class="form-group row">
@@ -1383,7 +1458,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</div>
 										</div>
 										<?php endif;?>
-										<?php if($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_VIEW]['upline'] == TRUE):?>
+										<!-- <?php if($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_VIEW]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
 											<div class="form-group row">
 												<?php if($permissions[PERMISSION_WALLET_TRANSACTION_PENDING_VIEW]['upline'] == TRUE):?>
@@ -1408,7 +1483,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<?php endif;?>
 											</div>
 										</div>
-										<?php endif;?>
+										<?php endif;?> -->
 										<?php if($permissions[PERMISSION_FINGERPRINT_VIEW]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
 											<div class="form-group row">
@@ -2643,7 +2718,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</div>
 												</div>
 												<?php endif;?>
-												<?php if($permissions[PERMISSION_PROMOTION_ADD]['upline'] == TRUE):?>
+												<!-- <?php if($permissions[PERMISSION_PROMOTION_ADD]['upline'] == TRUE):?>
 												<div class="form-group clearfix col-12" style="padding-left: 30px;">
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_PROMOTION_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_PROMOTION_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PROMOTION_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PROMOTION_VIEW;?>_<?php echo PERMISSION_PROMOTION_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_PROMOTION_ADD;?>" <?php echo (($permissions[PERMISSION_PROMOTION_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PROMOTION_ADD]['selected']) ? 'checked' : '');?>>
@@ -2652,7 +2727,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 														</label>
 													</div>
 												</div>
-												<?php endif;?>
+												<?php endif;?> -->
 												<?php if($permissions[PERMISSION_PROMOTION_UPDATE]['upline'] == TRUE):?>
 												<div class="form-group clearfix col-12" style="padding-left: 30px;">
 													 ├ <div class="custom-control custom-checkbox d-inline">
@@ -2870,6 +2945,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</div>
 										</div>
 										<?php endif;?>
+										<!-- 
 										<?php if($permissions[PERMISSION_TAG_PLAYER_VIEW]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
 											<div class="form-group row">
@@ -2925,7 +3001,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<?php endif;?>
 											</div>
 										</div>
-										<?php endif;?>
+										<?php endif;?> 
+										-->
 									</div>
 									<div class="form-group row">
 										<label for="remark" class="col-5 col-form-label"><?php echo $this->lang->line('title_announcement');?></label>
