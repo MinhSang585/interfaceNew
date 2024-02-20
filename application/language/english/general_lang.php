@@ -2081,4 +2081,10 @@ $lang = array(
 	'payment_gateway_code_mycash' => "MyCash",
 	
 	'error_company_insufficient_points' => "Company Insufficient Points",
+	'reward_management_category' => "Reward Management",
+	'bonus_setup' => "Bonus Setup",
+	'promotion_setup' => "Promotion Setup",
+	'vip_setup' => "VIP Setup",
+
+
 );
