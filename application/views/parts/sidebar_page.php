@@ -77,7 +77,7 @@
 				</li>
 				<?php endif;?>
 				<?php if(permission_validation(PERMISSION_BANK_PLAYER_USER_VIEW) == TRUE || permission_validation(PERMISSION_PLAYER_VIEW) == TRUE || permission_validation(PERMISSION_WALLET_TRANSACTION_PENDING_VIEW) == TRUE || permission_validation(PERMISSION_TAG_PLAYER_VIEW) == TRUE):?>
-				<li class="nav-item has-treeview <?php echo ((($this->uri->segment(1) == 'bank' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'transaction' || $this->uri->segment(1) == 'tag')) ? 'menu-open' : '');?>">
+				<li class="nav-item has-treeview <?php echo (((($this->uri->segment(1) == 'bank' && ($this->uri->segment(2) == 'player')) || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'transaction' || $this->uri->segment(1) == 'tag')) ? 'menu-open' : '');?>">
 					<a href="#" class="nav-link <?php echo ((($this->uri->segment(1) == 'bank' && ($this->uri->segment(2) == 'player'))) || (($this->uri->segment(1) == 'tag' && ($this->uri->segment(2) == 'player'))) || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'transaction'? 'active' : '');?>">
 						<i class="fas fa-user nav-icon"></i>
 						<p>
@@ -197,6 +197,74 @@
 							<a href="<?php echo site_url('level');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'level' && $this->uri->segment(2) == '') ? 'active' : '');?>">
 								<i class="far fa-circle nav-icon"></i>
 								<p><?php echo $this->lang->line('vip_setup');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+						
+					</ul>
+				</li>
+				<?php endif;?>
+
+				<?php if(permission_validation(PERMISSION_PAYMENT_GATEWAY_VIEW) == TRUE || permission_validation(PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW) || permission_validation(PERMISSION_WITHDRAWAL_FEE_RATE_VIEW)== TRUE || permission_validation(PERMISSION_BANK_VIEW)== TRUE || permission_validation(PERMISSION_BANK_ACCOUNT_VIEW) == TRUE || permission_validation(PERMISSION_GROUP_VIEW) == TRUE):?>
+				<li class="nav-item has-treeview <?php echo ((($this->uri->segment(1) == 'paymentgateway' && ($this->uri->segment(2) == '' || $this->uri->segment(2) == 'limited'))) || ($this->uri->segment(1) == 'withdrawal' && $this->uri->segment(2) == 'fee_setting') || ($this->uri->segment(1) == 'bank' && ($this->uri->segment(2) == 'account' || $this->uri->segment(2) == '')) || $this->uri->segment(1) == 'group'? 'menu-open' : '');?>">
+					<a href="#" class="nav-link <?php echo ((($this->uri->segment(1) == 'paymentgateway' && ($this->uri->segment(2) == '' || $this->uri->segment(2) == 'limited'))) || ($this->uri->segment(1) == 'withdrawal' && $this->uri->segment(2) == 'fee_setting') || ($this->uri->segment(1) == 'bank' && ($this->uri->segment(2) == 'account' || $this->uri->segment(2) == '')) || $this->uri->segment(1) == 'group'? 'active' : '');?>">
+						<i class="fas fa-money-bill-alt nav-icon"></i>
+						<p>
+							<?php echo $this->lang->line('title_payment_bank');?>
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<?php if(permission_validation(PERMISSION_PAYMENT_GATEWAY_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('paymentgateway');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'paymentgateway' && $this->uri->segment(2) == '') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_payment_gateway');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+
+						<?php if(permission_validation(PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('paymentgateway/limited');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'paymentgateway' && $this->uri->segment(2) == 'limited') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_payment_limit_setup');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+
+						<?php if(permission_validation(PERMISSION_WITHDRAWAL_FEE_RATE_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('withdrawal/fee_setting');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'withdrawal' && $this->uri->segment(2) == 'fee_setting') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_withdrawal_fee_setting');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+
+						<?php if(permission_validation(PERMISSION_BANK_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('bank');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'bank' && ! $this->uri->segment(2)) ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_bank');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+
+						<?php if(permission_validation(PERMISSION_BANK_ACCOUNT_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('bank/account');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'account') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_bank_account');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+
+						<?php if(permission_validation(PERMISSION_GROUP_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('group');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'group') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_bank_group_setting');?></p>
 							</a>
 						</li>
 						<?php endif;?>
@@ -511,9 +579,9 @@
 					</ul>
 				</li>
 				<?php endif;?>
-				<?php if(permission_validation(PERMISSION_ANNOUNCEMENT_VIEW) == TRUE || permission_validation(PERMISSION_BANK_VIEW) == TRUE || permission_validation(PERMISSION_BANK_ACCOUNT_VIEW) == TRUE || permission_validation(PERMISSION_BANNER_VIEW) == TRUE || permission_validation(PERMISSION_CONTACT_VIEW) == TRUE || permission_validation(PERMISSION_GAME_VIEW) == TRUE || permission_validation(PERMISSION_GAME_MAINTENANCE_VIEW) == TRUE || permission_validation(PERMISSION_GROUP_VIEW) == TRUE || permission_validation(PERMISSION_MISCELLANEOUS_UPDATE) == TRUE || permission_validation(PERMISSION_SEO_VIEW) == TRUE  || permission_validation(PERMISSION_AVATAR_VIEW) == TRUE || permission_validation(PERMISSION_MATCH_VIEW) == TRUE|| permission_validation(PERMISSION_LEVEL_EXECUTE_VIEW) || permission_validation(PERMISSION_PAYMENT_GATEWAY_VIEW) == TRUE  || permission_validation(PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW) == TRUE || permission_validation(PERMISSION_CURRENCIES_VIEW) == TRUE || permission_validation(PERMISSION_WITHDRAWAL_FEE_RATE_VIEW) == TRUE || permission_validation(PERMISSION_USER_ROLE_VIEW) == TRUE || permission_validation(PERMISSION_TAG_VIEW) == TRUE || permission_validation(PERMISSION_CONTENT_VIEW) == TRUE || permission_validation(PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW) == TRUE || permission_validation(PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW) == TRUE || permission_validation(PERMISSION_BANK_VERIFY_SUBMIT) == TRUE):?>
-				<li class="nav-item has-treeview <?php echo (($this->uri->segment(1) == 'announcement' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == '') || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'group' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'avatar' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'account') || ($this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'maintenance') || $this->uri->segment(1) == 'match' || ($this->uri->segment(1) == 'level' && $this->uri->segment(2) == 'level_execute') || $this->uri->segment(1) == 'paymentgateway' || $this->uri->segment(1) == 'currencies'|| ($this->uri->segment(1) == 'withdrawal' && $this->uri->segment(2) == 'fee_setting') || $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'content' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'verify')) ? 'menu-open' : '');?>">
-					<a href="#" class="nav-link <?php echo (($this->uri->segment(1) == 'announcement' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == '') || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'group' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'avatar' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'account') || ($this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'maintenance') || $this->uri->segment(1) == 'match' || ($this->uri->segment(1) == 'level' && $this->uri->segment(2) == 'level_execute') || $this->uri->segment(1) == 'paymentgateway' || $this->uri->segment(1) == 'currencies' || ($this->uri->segment(1) == 'withdrawal' && $this->uri->segment(2) == 'fee_setting') || $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'content' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'verify')) ? 'active' : '');?>">
+				<?php if(permission_validation(PERMISSION_ANNOUNCEMENT_VIEW) == TRUE || permission_validation(PERMISSION_BANNER_VIEW) == TRUE || permission_validation(PERMISSION_CONTACT_VIEW) == TRUE || permission_validation(PERMISSION_GAME_VIEW) == TRUE || permission_validation(PERMISSION_GAME_MAINTENANCE_VIEW) == TRUE || permission_validation(PERMISSION_MISCELLANEOUS_UPDATE) == TRUE || permission_validation(PERMISSION_SEO_VIEW) == TRUE  || permission_validation(PERMISSION_AVATAR_VIEW) == TRUE || permission_validation(PERMISSION_MATCH_VIEW) == TRUE|| permission_validation(PERMISSION_LEVEL_EXECUTE_VIEW) || permission_validation(PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW) == TRUE || permission_validation(PERMISSION_CURRENCIES_VIEW) == TRUE || permission_validation(PERMISSION_USER_ROLE_VIEW) == TRUE || permission_validation(PERMISSION_TAG_VIEW) == TRUE || permission_validation(PERMISSION_CONTENT_VIEW) == TRUE || permission_validation(PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW) == TRUE || permission_validation(PERMISSION_BANK_VERIFY_SUBMIT) == TRUE):?>
+				<li class="nav-item has-treeview <?php echo (($this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'avatar' || ($this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'maintenance') || $this->uri->segment(1) == 'match' || ($this->uri->segment(1) == 'level' && $this->uri->segment(2) == 'level_execute') || ($this->uri->segment(1) == 'paymentgateway' && ($this->uri->segment(2) == 'maintenance' || $this->uri->segment(2) == 'player_amount')) || $this->uri->segment(1) == 'currencies'|| $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'content' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'verify')) ? 'menu-open' : '');?>">
+					<a href="#" class="nav-link <?php echo (($this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'avatar' || ($this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'maintenance') || $this->uri->segment(1) == 'match' || ($this->uri->segment(1) == 'level' && $this->uri->segment(2) == 'level_execute') || ($this->uri->segment(1) == 'paymentgateway' && ($this->uri->segment(2) == 'maintenance' || $this->uri->segment(2) == 'player_amount')) || $this->uri->segment(1) == 'currencies' || $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'content' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'verify')) ? 'active' : '');?>">
 						<i class="nav-icon fas fa-cog"></i>
 						<p>
 							<?php echo $this->lang->line('title_system_setting');?>
@@ -536,23 +604,8 @@
 								<p><?php echo $this->lang->line('title_announcement');?></p>
 							</a>
 						</li>
-						<?php endif;?>
-						<?php if(permission_validation(PERMISSION_BANK_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('bank');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'bank' && ! $this->uri->segment(2)) ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_bank');?></p>
-							</a>
-						</li>
-						<?php endif;?>
-						<?php if(permission_validation(PERMISSION_BANK_ACCOUNT_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('bank/account');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'account') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_bank_account');?></p>
-							</a>
-						</li>
-						<?php endif;?>
+						<?php endif;?>						
+						
 						<?php if(permission_validation(PERMISSION_BANK_VERIFY_SUBMIT) == TRUE):?>
 						<li class="nav-item">
 							<a href="<?php echo site_url('bank/verify');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'verify') ? 'active' : '');?>">
@@ -601,15 +654,7 @@
 								<p><?php echo $this->lang->line('title_game_maintenance');?></p>
 							</a>
 						</li>
-						<?php endif;?>
-						<?php if(permission_validation(PERMISSION_GROUP_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('group');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'group') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_group');?></p>
-							</a>
-						</li>
-						<?php endif;?>
+						<?php endif;?>						
 						
 						<?php if(permission_validation(PERMISSION_LEVEL_EXECUTE_VIEW) == TRUE):?>
 						<li class="nav-item">
@@ -652,14 +697,7 @@
 							</a>
 						</li>
 						<?php endif;?>
-						<?php if(permission_validation(PERMISSION_PAYMENT_GATEWAY_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('paymentgateway');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'paymentgateway' && $this->uri->segment(2) == '') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_payment_gateway');?></p>
-							</a>
-						</li>
-						<?php endif;?>
+						
 						<?php if(permission_validation(PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW) == TRUE):?>
 						<li class="nav-item">
 							<a href="<?php echo site_url('paymentgateway/maintenance');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'paymentgateway' && $this->uri->segment(2) == 'maintenance') ? 'active' : '');?>">
@@ -668,14 +706,7 @@
 							</a>
 						</li>
 						<?php endif;?>
-						<?php if(permission_validation(PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('paymentgateway/limited');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'paymentgateway' && $this->uri->segment(2) == 'limited') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_payment_gateway_limited');?></p>
-							</a>
-						</li>
-						<?php endif;?>
+						
 						<?php if(permission_validation(PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW) == TRUE):?>
 						<li class="nav-item">
 							<a href="<?php echo site_url('paymentgateway/player_amount');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'paymentgateway' && $this->uri->segment(2) == 'player_amount') ? 'active' : '');?>">
@@ -685,14 +716,7 @@
 						</li>
 						<?php endif;?>
 						
-						<?php if(permission_validation(PERMISSION_WITHDRAWAL_FEE_RATE_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('withdrawal/fee_setting');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'withdrawal' && $this->uri->segment(2) == 'fee_setting') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_withdrawal_fee_setting');?></p>
-							</a>
-						</li>
-						<?php endif;?>
+						
 						<?php if(permission_validation(PERMISSION_SEO_VIEW) == TRUE):?>
 						<li class="nav-item">
 							<a href="<?php echo site_url('seo');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'seo') ? 'active' : '');?>">

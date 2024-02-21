@@ -1875,98 +1875,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</div>
 										</div>
 										<?php endif;?>
-										<?php if($permissions[PERMISSION_BANK_VIEW]['upline'] == TRUE):?>
-										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_BANK_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_BANK_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_VIEW;?>" <?php echo (($permissions[PERMISSION_BANK_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_VIEW]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_VIEW;?>">
-														<?php echo $this->lang->line('title_bank');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BANK_ADD]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ADD;?>" <?php echo (($permissions[PERMISSION_BANK_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ADD]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_ADD;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BANK_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_UPDATE;?>" <?php echo (($permissions[PERMISSION_BANK_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_UPDATE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BANK_DELETE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_DELETE;?>" <?php echo (($permissions[PERMISSION_BANK_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_DELETE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_DELETE;?>">
-														<?php echo $this->lang->line('label_delete');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-										</div>
-										<?php endif;?>
-										<?php if($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline'] == TRUE):?>
-										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>">
-														<?php echo $this->lang->line('title_bank_account');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BANK_ACCOUNT_ADD]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ACCOUNT_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_ACCOUNT_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ACCOUNT_ADD;?>" <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_ADD]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_ADD;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BANK_ACCOUNT_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ACCOUNT_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_ACCOUNT_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ACCOUNT_UPDATE;?>" <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_UPDATE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BANK_ACCOUNT_DELETE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ACCOUNT_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_ACCOUNT_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ACCOUNT_DELETE;?>" <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_DELETE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_DELETE;?>">
-														<?php echo $this->lang->line('label_delete');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-										</div>
-										<?php endif;?>
+										
 										<?php if($permissions[PERMISSION_BANNER_VIEW]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
 											<div class="form-group row">
@@ -2131,53 +2040,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<?php endif;?>
 											</div>
 										</div>
-										<?php endif;?>
-										<?php if($permissions[PERMISSION_GROUP_VIEW]['upline'] == TRUE):?>
-										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_GROUP_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_GROUP_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_GROUP_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_GROUP_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_GROUP_VIEW;?>" <?php echo (($permissions[PERMISSION_GROUP_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_GROUP_VIEW]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_GROUP_VIEW;?>">
-														<?php echo $this->lang->line('title_group');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_GROUP_ADD]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_GROUP_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_GROUP_VIEW;?>" type="<?php echo (($permissions[PERMISSION_GROUP_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_GROUP_ADD;?>" <?php echo (($permissions[PERMISSION_GROUP_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_GROUP_ADD]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_ADD;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_GROUP_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_GROUP_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_GROUP_VIEW;?>" type="<?php echo (($permissions[PERMISSION_GROUP_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_GROUP_UPDATE;?>" <?php echo (($permissions[PERMISSION_GROUP_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_GROUP_UPDATE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_GROUP_DELETE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_GROUP_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_GROUP_VIEW;?>" type="<?php echo (($permissions[PERMISSION_GROUP_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_GROUP_DELETE;?>" <?php echo (($permissions[PERMISSION_GROUP_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_GROUP_DELETE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_DELETE;?>">
-														<?php echo $this->lang->line('label_delete');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-										</div>
-										<?php endif;?>
+										<?php endif;?>										
 										
 										<?php if($permissions[PERMISSION_USER_ROLE_VIEW]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
@@ -2286,206 +2149,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<?php endif;?>
 											</div>
 										</div>
-										<?php endif;?>
-										<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline'] == TRUE || $permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline'] == TRUE):?>
-										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>">
-														<?php echo $this->lang->line('title_payment_gateway');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_UPDATE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_UPDATE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>">
-														<?php echo $this->lang->line('title_payment_gateway_maintenance');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE;?>">
-														<?php echo $this->lang->line('label_delete');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>">
-														<?php echo $this->lang->line('title_payment_gateway_limited');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE;?>">
-														<?php echo $this->lang->line('label_delete');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>">
-														<?php echo $this->lang->line('title_payment_gateway_player_amount');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE;?>">
-														<?php echo $this->lang->line('label_delete');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-										</div>
-										<?php endif;?>
+										<?php endif;?>	
 										
-										<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline'] == TRUE):?>
-										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>">
-														<?php echo $this->lang->line('title_withdrawal_fee_setting');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_ADD]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_ADD;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_ADD]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_ADD;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_DELETE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_DELETE;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_DELETE]['upline']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_DELETE;?>">
-														<?php echo $this->lang->line('label_delete');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-										</div>
-										<?php endif;?>
 										<?php if($permissions[PERMISSION_SEO_VIEW]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
 											<div class="form-group row">
@@ -3137,6 +2802,368 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</div>
 												<?php endif;?>
 											</div>
+										</div>
+										<?php endif;?>
+
+									</div>
+
+									<div class="form-group row">
+										<label for="remark" class="col-5 col-form-label"><?php echo $this->lang->line('title_payment_bank');?></label>
+									</div>
+									<div class="form-group row">
+									<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline'] == TRUE || $permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline'] == TRUE):?>
+										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>">
+														<?php echo $this->lang->line('title_payment_gateway');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_UPDATE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_UPDATE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_DELETE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_DELETE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+											
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>">
+														<?php echo $this->lang->line('title_payment_limit_setup');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_LIMITED_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>">
+														<?php echo $this->lang->line('title_payment_gateway_maintenance');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+											
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>">
+														<?php echo $this->lang->line('title_payment_gateway_player_amount');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>" type="<?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE;?>" <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW;?>_<?php echo PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+										</div>
+										<?php endif;?>
+
+										<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline'] == TRUE):?>
+										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>">
+														<?php echo $this->lang->line('title_withdrawal_fee_setting');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_ADD]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_ADD;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_ADD]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_DELETE;?>" <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_WITHDRAWAL_FEE_RATE_DELETE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_VIEW;?>_<?php echo PERMISSION_WITHDRAWAL_FEE_RATE_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_GROUP_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_GROUP_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_GROUP_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_GROUP_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_GROUP_VIEW;?>" <?php echo (($permissions[PERMISSION_GROUP_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_GROUP_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_GROUP_VIEW;?>">
+														<?php echo $this->lang->line('title_group');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_GROUP_ADD]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_GROUP_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_GROUP_VIEW;?>" type="<?php echo (($permissions[PERMISSION_GROUP_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_GROUP_ADD;?>" <?php echo (($permissions[PERMISSION_GROUP_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_GROUP_ADD]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_GROUP_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_GROUP_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_GROUP_VIEW;?>" type="<?php echo (($permissions[PERMISSION_GROUP_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_GROUP_UPDATE;?>" <?php echo (($permissions[PERMISSION_GROUP_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_GROUP_UPDATE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_GROUP_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_GROUP_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_GROUP_VIEW;?>" type="<?php echo (($permissions[PERMISSION_GROUP_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_GROUP_DELETE;?>" <?php echo (($permissions[PERMISSION_GROUP_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_GROUP_DELETE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_GROUP_VIEW;?>_<?php echo PERMISSION_GROUP_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+										</div>
+										<?php endif;?>
+
+										<?php if($permissions[PERMISSION_BANK_VIEW]['upline'] == TRUE):?>
+										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_BANK_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_BANK_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_VIEW;?>" <?php echo (($permissions[PERMISSION_BANK_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_VIEW;?>">
+														<?php echo $this->lang->line('title_bank');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BANK_ADD]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ADD;?>" <?php echo (($permissions[PERMISSION_BANK_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ADD]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BANK_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_UPDATE;?>" <?php echo (($permissions[PERMISSION_BANK_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_UPDATE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BANK_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_DELETE;?>" <?php echo (($permissions[PERMISSION_BANK_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_DELETE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_VIEW;?>_<?php echo PERMISSION_BANK_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+										</div>
+										<?php endif;?>
+
+										<?php if($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline'] == TRUE):?>
+										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_VIEW]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>">
+														<?php echo $this->lang->line('title_bank_account');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BANK_ACCOUNT_ADD]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ACCOUNT_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_ACCOUNT_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ACCOUNT_ADD;?>" <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_ADD]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BANK_ACCOUNT_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ACCOUNT_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_ACCOUNT_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ACCOUNT_UPDATE;?>" <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_UPDATE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BANK_ACCOUNT_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BANK_ACCOUNT_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BANK_ACCOUNT_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_BANK_ACCOUNT_DELETE;?>" <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BANK_ACCOUNT_DELETE]['upline']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BANK_ACCOUNT_VIEW;?>_<?php echo PERMISSION_BANK_ACCOUNT_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+										</div>
+										<?php endif;?>
+
+										<?php if($permissions[PERMISSION_GROUP_VIEW]['upline'] == TRUE):?>
+										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
+											
 										</div>
 										<?php endif;?>
 

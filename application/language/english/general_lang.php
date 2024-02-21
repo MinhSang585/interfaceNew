@@ -2046,8 +2046,8 @@ $lang = array(
 	'label_max_amounts' => "Maximum amount",
 	'label_current_usage' => "The current usage amount",
 	'title_payment_gateway_limited' => "Three-party channel limit",
-	'title_add_payment_gateway_limited' => "Add three-party channel limit",
-	'title_payment_gateway_limited_setting' => "Three-party channel limit setting",
+	'title_add_payment_gateway_limited' => "Add Payment Limit",
+	'title_payment_gateway_limited_setting' => "Payment Limit setting",
 	'label_is_reset_daily_limit_same_payment_gateway' => "Reset the same three-party channel",
 	'label_per_limit' => "Each limit",
 	'title_payment_gateway_player_amount' => "Member tripartite channel amount",
@@ -2085,6 +2085,10 @@ $lang = array(
 	'bonus_setup' => "Bonus Setup",
 	'promotion_setup' => "Promotion Setup",
 	'vip_setup' => "VIP Setup",
+	'title_payment_bank' => "Payment & Bank",
+	'title_payment_limit_setup' => "Payment Limit Setup",
+	'title_bank_group_setting' => "Bank Group Setting",
+
 
 
 );
