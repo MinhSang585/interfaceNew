@@ -1180,7 +1180,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_CASH_TRANSACTION_REPORT;?> checkbox_option sub_permissions_<?php echo PERMISSION_REPORT_EXPORT_EXCEL;?>" type="<?php echo (($permissions[PERMISSION_CASH_TRANSACTION_REPORT]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_REPORT_EXPORT_EXCEL;?>_<?php echo PERMISSION_CASH_TRANSACTION_REPORT;?>" name="permissions[]" value="<?php echo PERMISSION_CASH_TRANSACTION_REPORT;?>" <?php echo (($permissions[PERMISSION_CASH_TRANSACTION_REPORT]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_CASH_TRANSACTION_REPORT]['upline']) ? 'checked' : '');?>>
 														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_REPORT_EXPORT_EXCEL;?>_<?php echo PERMISSION_CASH_TRANSACTION_REPORT;?>">
-														<?php echo $this->lang->line('title_cash_transaction_report');?> &nbsp; 
+														<?php echo $this->lang->line('title_cash_transaction_report_newBO');?> &nbsp; 
 														</label>
 													</div>
 												</div>

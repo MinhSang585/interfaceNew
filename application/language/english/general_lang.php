@@ -2088,6 +2088,8 @@ $lang = array(
 	'title_payment_bank' => "Payment & Bank",
 	'title_payment_limit_setup' => "Payment Limit Setup",
 	'title_bank_group_setting' => "Bank Group Setting",
+	'title_cash_transaction_report_newBO' => "Credit Transaction Report",
+
 
 
 

@@ -359,7 +359,7 @@
 						<li class="nav-item">
 							<a href="<?php echo site_url('report/cash');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'report' && $this->uri->segment(2) == 'cash') ? 'active' : '');?>">
 								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_cash_transaction_report');?></p>
+								<p><?php echo $this->lang->line('title_cash_transaction_report_newBO');?></p>
 							</a>
 						</li>
 						<?php endif;?>

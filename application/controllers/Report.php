@@ -779,7 +779,7 @@ class Report extends MY_Controller {
 		{
 			$this->save_current_url('report/cash');
 			$data = quick_search();
-			$data['page_title'] = $this->lang->line('title_cash_transaction_report');
+			$data['page_title'] = $this->lang->line('title_cash_transaction_report_newBO');
 			$this->session->unset_userdata('search_report_cash');
 			$this->load->view('cash_transaction_report_view', $data);
 		}
