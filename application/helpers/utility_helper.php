@@ -1122,6 +1122,14 @@ function get_platform_full_permission()
 		PERMISSION_REGISTER_DEPOSIT_RATE_REPORT_EXPORT_EXCEL,
 		PERMISSION_REGISTER_DEPOSIT_RATE_YEARLY_REPORT_EXPORT_EXCEL,
 		PERMISSION_REPORT_ALL,		
+		PERMISSION_SUB_GAME_VIEW,
+		PERMISSION_SUB_GAME_ADD,
+		PERMISSION_SUB_GAME_UPDATE,
+		PERMISSION_SUB_GAME_DELETE,
+		PERMISSION_MARQUEE_ADD,
+		PERMISSION_MARQUEE_UPDATE,
+		PERMISSION_MARQUEE_VIEW,
+		PERMISSION_MARQUEE_DELETE,
 	);
 	$exclude_permission_list = array(
 		PERMISSION_PERMISSION_SETUP,
@@ -3214,6 +3222,30 @@ function get_payment_gateway_code_bank_withdrawal_verify($type = NULL){
 	    }else{
 	        return 'deposit_online_banking';
 	    }
+	}	
+	else
+	{
+		return $list;
+	}
+}
+function sub_game_image_location($type = NULL){
+	$list = array(
+		GAME_SPORTSBOOK => "sportsbook",
+		GAME_LIVE_CASINO => "casino",
+		GAME_SLOTS => "slots",
+		GAME_FISHING => "fishing",
+		GAME_ESPORTS => "esports",
+		GAME_BOARD_GAME => "boardgame",
+		GAME_LOTTERY => "lottery",
+		GAME_KENO => "keno",
+		GAME_VIRTUAL_SPORTS => "vsportsbook",
+		GAME_POKER => "poker",
+		GAME_COCKFIGHTING => "cockfighting",
+		GAME_OTHERS => "others",
+	);
+	if( ! empty($type))
+	{
+		return $list[$type];
 	}	
 	else
 	{

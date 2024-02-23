@@ -414,6 +414,77 @@
 					</ul>
 				</li>
 				<?php endif;?>
+
+				<?php if(permission_validation(PERMISSION_ANNOUNCEMENT_VIEW) == TRUE || permission_validation(PERMISSION_BANNER_VIEW) == TRUE || permission_validation(PERMISSION_CONTACT_VIEW) == TRUE || permission_validation(PERMISSION_SEO_VIEW) == TRUE || permission_validation(PERMISSION_SUB_GAME_VIEW) == TRUE || permission_validation(PERMISSION_MARQUEE_VIEW) == TRUE):?>
+				<li class="nav-item has-treeview <?php echo ($this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'sub_game' || $this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'marquee'? 'menu-open' : '');?>">
+					<a href="#" class="nav-link <?php echo ($this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'sub_game' || $this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'marquee'? 'active' : '');?>">
+						<i class="fas fa-users-cog nav-icon"></i>
+						<p>
+							<?php echo $this->lang->line('title_cms');?>
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<?php if(permission_validation(PERMISSION_BANNER_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('banner');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'banner') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_banner');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+
+						<?php if(permission_validation(PERMISSION_ANNOUNCEMENT_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('announcement');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'announcement') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_announcement');?></p>
+							</a>
+						</li>
+						<?php endif;?>	
+
+						<?php if(permission_validation(PERMISSION_SUB_GAME_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('game/sub_game');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'sub_game') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_sub_game');?></p>
+							</a>
+						</li>
+
+						<?php endif;?>
+						<!-- START PERMISSION_MARQUEE_VIEW -->
+						<?php if(permission_validation(PERMISSION_MARQUEE_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('marquee');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'marquee') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_marquee');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+						<!-- END PERMISSION_MARQUEE_VIEW -->
+
+						<?php if(permission_validation(PERMISSION_CONTACT_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('contact');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'contact') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_contact');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+
+						<?php if(permission_validation(PERMISSION_SEO_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('seo');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'seo') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_seo');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+						
+					</ul>
+				</li>
+				<?php endif;?>
+
 				<?php if(permission_validation(PERMISSION_REWARD_VIEW) == TRUE):?>	
 				<li class="nav-item">
 					<a href="<?php echo site_url('reward');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'reward') ? 'active' : '');?>">
@@ -579,9 +650,9 @@
 					</ul>
 				</li>
 				<?php endif;?>
-				<?php if(permission_validation(PERMISSION_ANNOUNCEMENT_VIEW) == TRUE || permission_validation(PERMISSION_BANNER_VIEW) == TRUE || permission_validation(PERMISSION_CONTACT_VIEW) == TRUE || permission_validation(PERMISSION_GAME_VIEW) == TRUE || permission_validation(PERMISSION_GAME_MAINTENANCE_VIEW) == TRUE || permission_validation(PERMISSION_MISCELLANEOUS_UPDATE) == TRUE || permission_validation(PERMISSION_SEO_VIEW) == TRUE  || permission_validation(PERMISSION_AVATAR_VIEW) == TRUE || permission_validation(PERMISSION_MATCH_VIEW) == TRUE|| permission_validation(PERMISSION_LEVEL_EXECUTE_VIEW) || permission_validation(PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW) == TRUE || permission_validation(PERMISSION_CURRENCIES_VIEW) == TRUE || permission_validation(PERMISSION_USER_ROLE_VIEW) == TRUE || permission_validation(PERMISSION_TAG_VIEW) == TRUE || permission_validation(PERMISSION_CONTENT_VIEW) == TRUE || permission_validation(PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW) == TRUE || permission_validation(PERMISSION_BANK_VERIFY_SUBMIT) == TRUE):?>
-				<li class="nav-item has-treeview <?php echo (($this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'avatar' || ($this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'maintenance') || $this->uri->segment(1) == 'match' || ($this->uri->segment(1) == 'level' && $this->uri->segment(2) == 'level_execute') || ($this->uri->segment(1) == 'paymentgateway' && ($this->uri->segment(2) == 'maintenance' || $this->uri->segment(2) == 'player_amount')) || $this->uri->segment(1) == 'currencies'|| $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'content' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'verify')) ? 'menu-open' : '');?>">
-					<a href="#" class="nav-link <?php echo (($this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'avatar' || ($this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'maintenance') || $this->uri->segment(1) == 'match' || ($this->uri->segment(1) == 'level' && $this->uri->segment(2) == 'level_execute') || ($this->uri->segment(1) == 'paymentgateway' && ($this->uri->segment(2) == 'maintenance' || $this->uri->segment(2) == 'player_amount')) || $this->uri->segment(1) == 'currencies' || $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'content' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'verify')) ? 'active' : '');?>">
+				<?php if(permission_validation(PERMISSION_GAME_VIEW) == TRUE || permission_validation(PERMISSION_GAME_MAINTENANCE_VIEW) == TRUE || permission_validation(PERMISSION_MISCELLANEOUS_UPDATE) == TRUE || permission_validation(PERMISSION_AVATAR_VIEW) == TRUE || permission_validation(PERMISSION_MATCH_VIEW) == TRUE|| permission_validation(PERMISSION_LEVEL_EXECUTE_VIEW) || permission_validation(PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_VIEW) == TRUE || permission_validation(PERMISSION_CURRENCIES_VIEW) == TRUE || permission_validation(PERMISSION_USER_ROLE_VIEW) == TRUE || permission_validation(PERMISSION_TAG_VIEW) == TRUE || permission_validation(PERMISSION_CONTENT_VIEW) == TRUE || permission_validation(PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_VIEW) == TRUE || permission_validation(PERMISSION_BANK_VERIFY_SUBMIT) == TRUE):?>
+				<li class="nav-item has-treeview <?php echo (($this->uri->segment(1) == 'game' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'avatar' || ($this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'maintenance') || $this->uri->segment(1) == 'match' || ($this->uri->segment(1) == 'level' && $this->uri->segment(2) == 'level_execute') || ($this->uri->segment(1) == 'paymentgateway' && ($this->uri->segment(2) == 'maintenance' || $this->uri->segment(2) == 'player_amount')) || $this->uri->segment(1) == 'currencies'|| $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'content' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'verify')) ? 'menu-open' : '');?>">
+					<a href="#" class="nav-link <?php echo (($this->uri->segment(1) == 'game' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'avatar' || ($this->uri->segment(1) == 'game' && $this->uri->segment(2) == 'maintenance') || $this->uri->segment(1) == 'match' || ($this->uri->segment(1) == 'level' && $this->uri->segment(2) == 'level_execute') || ($this->uri->segment(1) == 'paymentgateway' && ($this->uri->segment(2) == 'maintenance' || $this->uri->segment(2) == 'player_amount')) || $this->uri->segment(1) == 'currencies' || $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' && $this->uri->segment(2) == '' || $this->uri->segment(1) == 'content' || ($this->uri->segment(1) == 'bank' && $this->uri->segment(2) == 'verify')) ? 'active' : '');?>">
 						<i class="nav-icon fas fa-cog"></i>
 						<p>
 							<?php echo $this->lang->line('title_system_setting');?>
@@ -597,14 +668,7 @@
 							</a>
 						</li>
 						<?php endif;?>
-						<?php if(permission_validation(PERMISSION_ANNOUNCEMENT_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('announcement');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'announcement') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_announcement');?></p>
-							</a>
-						</li>
-						<?php endif;?>						
+												
 						
 						<?php if(permission_validation(PERMISSION_BANK_VERIFY_SUBMIT) == TRUE):?>
 						<li class="nav-item">
@@ -614,23 +678,7 @@
 							</a>
 						</li>
 						<?php endif;?>
-						<?php if(permission_validation(PERMISSION_BANNER_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('banner');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'banner') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_banner');?></p>
-							</a>
-						</li>
-						<?php endif;?>
 						
-						<?php if(permission_validation(PERMISSION_CONTACT_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('contact');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'contact') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_contact');?></p>
-							</a>
-						</li>
-						<?php endif;?>
 						<?php if(permission_validation(PERMISSION_GAME_VIEW) == TRUE):?>
 						<li class="nav-item d-none">
 							<a href="<?php echo site_url('game');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'game' && $this->uri->segment(2) == '') ? 'active' : '');?>">
@@ -715,16 +763,7 @@
 							</a>
 						</li>
 						<?php endif;?>
-						
-						
-						<?php if(permission_validation(PERMISSION_SEO_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('seo');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'seo') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_seo');?></p>
-							</a>
-						</li>
-						<?php endif;?>
+
 						<?php if(permission_validation(PERMISSION_CONTENT_VIEW) == TRUE):?>
 						<li class="nav-item">
 							<a href="<?php echo site_url('content');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'content') ? 'active' : '');?>">

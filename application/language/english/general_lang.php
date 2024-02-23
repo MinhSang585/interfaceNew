@@ -600,7 +600,7 @@ $lang = array(
 	'title_wallet_transaction_report' => "Wallet Transaction Report",
 	'title_login_report' => "Login Report",
 	'title_system_setting' => "System Setting",
-	'title_announcement' => "Announcement",
+	'title_announcement' => "Pop-Up Window",
 	'title_bank' => "Bank",
 	'title_bank_account' => "Bank Account",
 	'title_banner' => "Banner",
@@ -618,8 +618,8 @@ $lang = array(
 	'title_game_setting' => "Game Setting",
 	'title_add_banner' => "Add Banner",
 	'title_banner_setting' => "Banner Setting",
-	'title_add_announcement' => "Add Announcement",
-	'title_announcement_setting' => "Announcement Setting",
+	'title_add_announcement' => "Add Pop-Up Window",
+	'title_announcement_setting' => "Pop-Up Window Setting",
 	'title_add_group' => "Add Group",
 	'title_group_setting' => "Group Setting",
 	'title_add_bank' => "Add Bank",
@@ -2089,7 +2089,13 @@ $lang = array(
 	'title_payment_limit_setup' => "Payment Limit Setup",
 	'title_bank_group_setting' => "Bank Group Setting",
 	'title_cash_transaction_report_newBO' => "Credit Transaction Report",
-
+	'title_cms' => "CMS",
+    'title_sub_game' => "Subgame",
+	'title_add_sub_game' => "Add subgame",
+	'title_sub_game_setting' => "Sub game settings",
+	'title_marquee' => "Carousel",
+	'title_add_marquee' => "Add Carousel",
+	'title_marquee_setting' => "Carousel Setting",
 
 
 

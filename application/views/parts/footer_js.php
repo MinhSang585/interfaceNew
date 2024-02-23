@@ -36,7 +36,7 @@
 
 <?php endif;?>
 
-<?php if($this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'group' || $this->uri->segment(1) == 'bank' || $this->uri->segment(1) == 'avatar'  || $this->uri->segment(1) == 'message' || $this->uri->segment(1) == 'fingerprint' || $this->uri->segment(1) == 'promotion' || $this->uri->segment(1) == 'playerpromotion' || $this->uri->segment(1) == 'bonus' || $this->uri->segment(1) == 'bank' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'user'|| $this->uri->segment(1) == 'account' || $this->uri->segment(1) == 'reward' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'paymentgateway'  || $this->uri->segment(1) == 'log' || $this->uri->segment(1) == 'report' || $this->uri->segment(1) == 'blacklist' || $this->uri->segment(1) == 'whitelist' || $this->uri->segment(1) == 'blog' || $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'deposit' || $this->uri->segment(1) == 'withdrawal' || $this->uri->segment(1) == 'content' || $this->uri->segment(1) == 'tag'):?>
+<?php if($this->uri->segment(1) == 'marquee' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'group' || $this->uri->segment(1) == 'bank' || $this->uri->segment(1) == 'avatar'  || $this->uri->segment(1) == 'message' || $this->uri->segment(1) == 'fingerprint' || $this->uri->segment(1) == 'promotion' || $this->uri->segment(1) == 'playerpromotion' || $this->uri->segment(1) == 'bonus' || $this->uri->segment(1) == 'bank' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'user'|| $this->uri->segment(1) == 'account' || $this->uri->segment(1) == 'reward' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'paymentgateway'  || $this->uri->segment(1) == 'log' || $this->uri->segment(1) == 'report' || $this->uri->segment(1) == 'blacklist' || $this->uri->segment(1) == 'whitelist' || $this->uri->segment(1) == 'blog' || $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'deposit' || $this->uri->segment(1) == 'withdrawal' || $this->uri->segment(1) == 'content' || $this->uri->segment(1) == 'tag' || $this->uri->segment(1) == 'agent'):?>
 
 <!-- Select2 -->
 
@@ -44,7 +44,7 @@
 
 <?php endif;?>
 
-<?php if($this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'deposit' || $this->uri->segment(1) == 'withdrawal' || $this->uri->segment(1) == 'report' || $this->uri->segment(1) == 'reportorder' || $this->uri->segment(1) == 'message' || $this->uri->segment(1) == 'fingerprint' || $this->uri->segment(1) == 'promotion' || $this->uri->segment(1) == 'playerpromotion' || $this->uri->segment(1) == 'bonus' || $this->uri->segment(1) == 'bank' || $this->uri->segment(1) == 'match' || $this->uri->segment(1) == 'level' || $this->uri->segment(1) == 'reward' || $this->uri->segment(1) == 'paymentgateway' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'log'|| $this->uri->segment(1) == 'transaction' || $this->uri->segment(1) == 'blacklist' || $this->uri->segment(1) == 'whitelist' || $this->uri->segment(1) == 'blog' || $this->uri->segment(1) == 'content'):?>
+<?php if($this->uri->segment(1) == 'marquee' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'home' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'deposit' || $this->uri->segment(1) == 'withdrawal' || $this->uri->segment(1) == 'report' || $this->uri->segment(1) == 'reportorder' || $this->uri->segment(1) == 'message' || $this->uri->segment(1) == 'fingerprint' || $this->uri->segment(1) == 'promotion' || $this->uri->segment(1) == 'playerpromotion' || $this->uri->segment(1) == 'bonus' || $this->uri->segment(1) == 'bank' || $this->uri->segment(1) == 'match' || $this->uri->segment(1) == 'level' || $this->uri->segment(1) == 'reward' || $this->uri->segment(1) == 'paymentgateway' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'log'|| $this->uri->segment(1) == 'transaction' || $this->uri->segment(1) == 'blacklist' || $this->uri->segment(1) == 'whitelist' || $this->uri->segment(1) == 'blog' || $this->uri->segment(1) == 'content' || $this->uri->segment(1) == 'agent'):?>
 
 <!-- InputMask -->
 
@@ -60,7 +60,7 @@
 
 <?php endif;?>
 
-<?php if($this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'group' || $this->uri->segment(1) == 'bank' || $this->uri->segment(1) == 'account' || $this->uri->segment(1) == 'user' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'avatar'  || $this->uri->segment(1) == 'message' || $this->uri->segment(1) == 'fingerprint' || $this->uri->segment(1) == 'promotion' || $this->uri->segment(1) == 'playerpromotion' || $this->uri->segment(1) == 'bonus' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'level' || $this->uri->segment(1) == 'bank'|| $this->uri->segment(1) == 'match' || $this->uri->segment(1) == 'reward' || $this->uri->segment(1) == 'paymentgateway' || $this->uri->segment(1) == 'currencies' || $this->uri->segment(1) == 'blacklist' || $this->uri->segment(1) == 'whitelist' || $this->uri->segment(1) == 'blog' || $this->uri->segment(1) == 'withdrawal' || $this->uri->segment(1) == 'report' || $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'content'):?>
+<?php if($this->uri->segment(1) == 'marquee' || $this->uri->segment(1) == 'contact' || $this->uri->segment(1) == 'game' || $this->uri->segment(1) == 'banner' || $this->uri->segment(1) == 'announcement' || $this->uri->segment(1) == 'group' || $this->uri->segment(1) == 'bank' || $this->uri->segment(1) == 'account' || $this->uri->segment(1) == 'user' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'avatar'  || $this->uri->segment(1) == 'message' || $this->uri->segment(1) == 'fingerprint' || $this->uri->segment(1) == 'promotion' || $this->uri->segment(1) == 'playerpromotion' || $this->uri->segment(1) == 'bonus' || $this->uri->segment(1) == 'miscellaneous' || $this->uri->segment(1) == 'level' || $this->uri->segment(1) == 'bank'|| $this->uri->segment(1) == 'match' || $this->uri->segment(1) == 'reward' || $this->uri->segment(1) == 'paymentgateway' || $this->uri->segment(1) == 'currencies' || $this->uri->segment(1) == 'blacklist' || $this->uri->segment(1) == 'whitelist' || $this->uri->segment(1) == 'blog' || $this->uri->segment(1) == 'withdrawal' || $this->uri->segment(1) == 'report' || $this->uri->segment(1) == 'role' || $this->uri->segment(1) == 'tag' || $this->uri->segment(1) == 'seo' || $this->uri->segment(1) == 'content' || $this->uri->segment(1) == 'agent'):?>
 
 <!-- Bootstrap Switch -->
 
@@ -72,7 +72,7 @@
 
 <script src="<?php echo base_url('assets/dist/js/adminlte.js');?>"></script>
 
-<?php if($this->uri->segment(1) == 'profile' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'withdrawal' || $this->uri->segment(1) == 'deposit' || $this->uri->segment(1) == 'report'):?>
+<?php if($this->uri->segment(1) == 'profile' || $this->uri->segment(1) == 'player' || $this->uri->segment(1) == 'withdrawal' || $this->uri->segment(1) == 'deposit' || $this->uri->segment(1) == 'report' || $this->uri->segment(1) == 'agent'):?>
 
 <script src="<?php echo base_url('assets/dist/js/qrcodejs/qrcode.js');?>"></script>
 
@@ -80,7 +80,7 @@
 
 <?php endif;?>
 
-<?php if($this->uri->segment(1) == 'promotion'):?>
+<?php if($this->uri->segment(1) == 'marquee' || $this->uri->segment(1) == 'promotion' || $this->uri->segment(1) == 'announcement'):?>
 
 <!--Summernote-->
 
@@ -137,8 +137,6 @@
 			}
 
 		});
-
-
 
 		$.ajax({url: "<?php echo site_url('home/today_active_user_by_agent');?>",
 
