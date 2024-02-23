@@ -1513,7 +1513,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</div>
 												</div>
 												<?php endif;?>
-												<?php if($permissions[PERMISSION_BLACKLIST_ADD]['upline'] == TRUE):?>
+												<?php if($permissions[PERMISSION_BLACKLIST_ADD]['selected'] == TRUE):?>
 												<div class="form-group clearfix col-12" style="padding-left: 30px;">
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_BLACKLIST_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLACKLIST_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLACKLIST_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLACKLIST_VIEW;?>_<?php echo PERMISSION_BLACKLIST_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BLACKLIST_ADD;?>" <?php echo (($permissions[PERMISSION_BLACKLIST_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLACKLIST_ADD]['selected']) ? 'checked' : '');?>>
@@ -1578,7 +1578,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</div>
 												<?php endif;?>
 
-												<?php if($permissions[PERMISSION_BLACKLIST_IMPORT_ADD]['upline'] == TRUE):?>
+												<?php if($permissions[PERMISSION_BLACKLIST_IMPORT_ADD]['selected'] == TRUE):?>
 												<div class="form-group clearfix col-12" style="padding-left: 30px;">
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_BLACKLIST_IMPORT_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLACKLIST_IMPORT_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLACKLIST_IMPORT_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLACKLIST_IMPORT_VIEW;?>_<?php echo PERMISSION_BLACKLIST_IMPORT_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BLACKLIST_IMPORT_ADD;?>" <?php echo (($permissions[PERMISSION_BLACKLIST_IMPORT_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLACKLIST_IMPORT_ADD]['selected']) ? 'checked' : '');?>>

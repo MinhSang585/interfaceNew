@@ -271,7 +271,8 @@ class Role extends MY_Controller {
 					  $i+2 == PERMISSION_PLAYER_BONUS_ADD || $i+2 == PERMISSION_BONUS_ADD || $i+2 == PERMISSION_LEVEL_ADD || $arr[$i] == PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD || 
 					  $arr[$i] == PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD || $arr[$i] == PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD || $arr[$i] == PERMISSION_WITHDRAWAL_FEE_RATE_ADD ||
 					  $arr[$i] == PERMISSION_BANK_ADD || $arr[$i] == PERMISSION_BANK_ACCOUNT_ADD || $arr[$i] == PERMISSION_GROUP_ADD || $arr[$i] == PERMISSION_ANNOUNCEMENT_ADD ||
-					  $arr[$i] == PERMISSION_BANNER_ADD || $arr[$i] == PERMISSION_SEO_ADD || $arr[$i] == PERMISSION_MARQUEE_ADD || $arr[$i] == PERMISSION_SUB_GAME_ADD)
+					  $arr[$i] == PERMISSION_BANNER_ADD || $arr[$i] == PERMISSION_SEO_ADD || $arr[$i] == PERMISSION_MARQUEE_ADD || $arr[$i] == PERMISSION_SUB_GAME_ADD || $arr[$i] == PERMISSION_BLACKLIST_ADD ||
+					  $arr[$i] == PERMISSION_BLACKLIST_IMPORT_ADD)
 						$data['permissions'][$arr[$i]]['upline'] = FALSE;
 				}
 				else{
