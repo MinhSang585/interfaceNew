@@ -44,41 +44,20 @@ class Role extends MY_Controller {
 					'msg' => array(
 										'from_date_error' => '',
 										'to_date_error' => '',
-										'general_error' => '',
-										'rolename_error' => ''
+										'general_error' => ''
 									),
 					'csrfTokenName' => $this->security->get_csrf_token_name(), 
 					'csrfHash' => $this->security->get_csrf_hash()
 				);
 			
-			//Set form rules
-			$config = array(
-				array(
-					'field' => 'role_name',
-					'label' => strtolower($this->lang->line('label_name')),
-					'rules' => 'trim|required|is_unique[user_role.role_name]',
-					'errors' => array(
-						'required' => $this->lang->line('error_enter_rolename'),
-						'is_unique' => $this->lang->line('error_username_already_exits')
-					)
-				)
-			);		
-			$this->form_validation->set_rules($config);
-			if ($this->form_validation->run() == TRUE)
-			{
-				$data = array(
-					'name' => trim($this->input->post('name', TRUE)),
-					'status' => trim($this->input->post('status', TRUE)),
-				);
-				
-				$this->session->set_userdata('search_user_role', $data);
-				
-				$json['status'] = EXIT_SUCCESS;
-			}
-			else 
-			{
-				$json['msg']['rolename_error'] = form_error('role_name');
-			}
+			$data = array(
+			    'name' => trim($this->input->post('name', TRUE)),
+				'status' => trim($this->input->post('status', TRUE)),
+			);
+			
+			$this->session->set_userdata('search_user_role', $data);
+			
+			$json['status'] = EXIT_SUCCESS;
 				
 			
 			//Output
@@ -137,7 +116,9 @@ class Role extends MY_Controller {
 			}
 			
 			$arr = $this->session->userdata('search_user_role');	
-			$where = '';		
+			$dataUserLogin = $this->session->userdata('dataUserLogin');
+			
+			$where = "WHERE (created_by ='".$dataUserLogin['username']."' OR user_role_id = ".$dataUserLogin['user_role'].")";
 				
 			if($arr['status'] == STATUS_ACTIVE OR $arr['status'] == STATUS_INACTIVE)
 			{
@@ -156,30 +137,26 @@ class Role extends MY_Controller {
 					$where .= " AND role_name = '" . $arr['name']."'";
 				}
 			}
-			
-			
 			$select = implode(',', $columns);
 			$dbprefix = $this->db->dbprefix;
 
-			//$userRoleID = $this->session->userdata('user_role_id');
-			$dataUserLogin = $this->session->userdata('dataUserLogin');
-			$userRoleID = $dataUserLogin['user_role'];
-			if(isset($userRoleID)){
-				$query_string_3 = "SELECT * FROM {$dbprefix}user_role WHERE user_role_id =".$userRoleID;
-				$query = $this->db->query($query_string_3);
-				if($query->num_rows() > 0)
-				{
-					$dataUserRole = $query->row_array();
+			// $userRoleID = $dataUserLogin['user_role'];
+			// if(isset($userRoleID)){
+			// 	$query_string_3 = "SELECT * FROM {$dbprefix}user_role WHERE user_role_id =".$userRoleID;
+			// 	$query = $this->db->query($query_string_3);
+			// 	if($query->num_rows() > 0)
+			// 	{
+			// 		$dataUserRole = $query->row_array();
 
-					//if($dataUserRole['role_name'] != "Master")					{
-						if($where == ""){
-							$where .= "WHERE user_role_id = '" . $userRoleID."'";
-						}else{
-							$where .= " AND user_role_id = '" . $userRoleID."'";
-						}
-					//}
-				}
-			}
+			// 		//if($dataUserRole['role_name'] != "Master")					{
+			// 			if($where == ""){
+			// 				$where .= "WHERE user_role_id = '" . $userRoleID."'";
+			// 			}else{
+			// 				$where .= " AND user_role_id = '" . $userRoleID."'";
+			// 			}
+			// 		//}
+			// 	}
+			// }
 
 			$posts = NULL;
 			$query_string = "SELECT {$select} FROM {$dbprefix}user_role $where";
@@ -194,10 +171,10 @@ class Role extends MY_Controller {
 			{
 				$posts = $query->result();  
 			}
-			
 			$query->free_result();
 			
 			$query = $this->db->query($query_string);
+			//$query = $this->db->query("SELECT * FROM {$dbprefix}user_role");
 			$totalFiltered = $query->num_rows();
 			
 			$query->free_result();
@@ -205,18 +182,18 @@ class Role extends MY_Controller {
 			//Prepare data
 			$data = array();
 
-			//get list role added
-			if(isset($dataUserLogin['username'])){
-				$query_string_4 = "SELECT * FROM {$dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
-				$query_4 = $this->db->query($query_string_4);
-				if($query_4->num_rows() > 0)
-				{
-					$listRole = $query_4->result();
-				}
-				if(!empty($listRole))
-					foreach($listRole as $role)
-						array_push($posts, $role);
-			}
+			// //get list role added
+			// if(isset($dataUserLogin['username'])){
+			// 	$query_string_4 = "SELECT * FROM {$dbprefix}user_role WHERE created_by ='".$dataUserLogin['username']."'";
+			// 	$query_4 = $this->db->query($query_string_4);
+			// 	if($query_4->num_rows() > 0)
+			// 	{
+			// 		$listRole = $query_4->result();
+			// 	}
+			// 	if(!empty($listRole))
+			// 		foreach($listRole as $role)
+			// 			array_push($posts, $role);
+			// }
 
 			if(!empty($posts))
 			{
@@ -280,11 +257,6 @@ class Role extends MY_Controller {
 
 			$data['permissions'] = array();
 			$arr = get_platform_full_permission();
-			log_message('error', print_r($arr, true));
-			log_message('error', print_r($old_permissions, true));
-			if(ENVIRONMENT == 'development') {
-				array_push($arr,41,176,177,140);
-			}
 			
 			for($i=0;$i<sizeof($arr);$i++) {
 				$data['permissions'][$arr[$i]]['upline'] = TRUE;
@@ -298,7 +270,8 @@ class Role extends MY_Controller {
 					if($i +1 == PERMISSION_PROMOTION_ADD || $i+5 == PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD || $i+5 == PERMISSION_TAG_PLAYER_ADD || $i+2 == PERMISSION_PLAYER_PROMOTION_ADD ||
 					  $i+2 == PERMISSION_PLAYER_BONUS_ADD || $i+2 == PERMISSION_BONUS_ADD || $i+2 == PERMISSION_LEVEL_ADD || $arr[$i] == PERMISSION_PAYMENT_GATEWAY_MAINTENANCE_ADD || 
 					  $arr[$i] == PERMISSION_PAYMENT_GATEWAY_LIMITED_ADD || $arr[$i] == PERMISSION_PAYMENT_GATEWAY_PLAYER_LIMITED_ADD || $arr[$i] == PERMISSION_WITHDRAWAL_FEE_RATE_ADD ||
-					  $arr[$i] == PERMISSION_BANK_ADD || $arr[$i] == PERMISSION_BANK_ACCOUNT_ADD || $arr[$i] == PERMISSION_GROUP_ADD)
+					  $arr[$i] == PERMISSION_BANK_ADD || $arr[$i] == PERMISSION_BANK_ACCOUNT_ADD || $arr[$i] == PERMISSION_GROUP_ADD || $arr[$i] == PERMISSION_ANNOUNCEMENT_ADD ||
+					  $arr[$i] == PERMISSION_BANNER_ADD || $arr[$i] == PERMISSION_SEO_ADD || $arr[$i] == PERMISSION_MARQUEE_ADD || $arr[$i] == PERMISSION_SUB_GAME_ADD)
 						$data['permissions'][$arr[$i]]['upline'] = FALSE;
 				}
 				else{
@@ -331,14 +304,22 @@ class Role extends MY_Controller {
 			//Set form rules
 			$config = array(
 				array(
-					'field' => 'role_name',
-					'label' => strtolower($this->lang->line('label_name')),
-					'rules' => 'trim|required|is_unique[user_role.role_name]',
-					'errors' => array(
-						'required' => $this->lang->line('error_enter_rolename'),
-						'is_unique' => $this->lang->line('error_username_already_exits')
-					)
+						'field' => 'role_name',
+						'label' => strtolower($this->lang->line('label_name')),
+						'rules' => 'trim|required|is_unique[user_role.role_name]',
+						'errors' => array(
+							'required' => $this->lang->line('error_enter_match_name'),
+							'is_unique' => $this->lang->line('error_username_already_exits')
+						)
 				),
+				// array(
+				// 	'field' => 'role_name',
+				// 	'label' => strtolower($this->lang->line('role_name')),
+				// 	'rules' => 'is_unique[user_role.role_name]',
+				// 	'errors' => array(
+				// 		'is_unique' => $this->lang->line('error_username_already_exits')
+				// 	)
+				// ),
 				// array(
 				// 		'field' => 'level',
 				// 		'label' => strtolower($this->lang->line('label_level')),
