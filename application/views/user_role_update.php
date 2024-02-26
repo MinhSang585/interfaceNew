@@ -1672,7 +1672,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</div>
 												<?php endif;?>
 
-												<?php if($permissions[PERMISSION_SYSTEM_MESSAGE_ADD]['upline'] == TRUE):?>
+												<?php if($permissions[PERMISSION_SYSTEM_MESSAGE_ADD]['selected'] == TRUE):?>
 												<div class="form-group clearfix col-12" style="padding-left: 30px;">
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_SYSTEM_MESSAGE_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_SYSTEM_MESSAGE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_SYSTEM_MESSAGE_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_SYSTEM_MESSAGE_VIEW;?>_<?php echo PERMISSION_SYSTEM_MESSAGE_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_SYSTEM_MESSAGE_ADD;?>" <?php echo (($permissions[PERMISSION_SYSTEM_MESSAGE_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_SYSTEM_MESSAGE_ADD]['selected']) ? 'checked' : '');?>>
