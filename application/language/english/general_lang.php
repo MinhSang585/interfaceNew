@@ -2096,7 +2096,6 @@ $lang = array(
 	'title_marquee' => "Carousel",
 	'title_add_marquee' => "Add Carousel",
 	'title_marquee_setting' => "Carousel Setting",
-
-
+	'title_optional_function' => "Optional Function",
 
 );

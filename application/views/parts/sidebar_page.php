@@ -492,16 +492,8 @@
 						<p><?php echo $this->lang->line('title_player_reward');?></p>
 					</a>
 				</li>
-				<?php endif;?>
+				<?php endif;?>				
 				
-				<?php if(permission_validation(PERMISSION_FINGERPRINT_VIEW) == TRUE):?>
-				<li class="nav-item">
-					<a href="<?php echo site_url('fingerprint');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'fingerprint') ? 'active' : '');?>">
-						<i class="fas fa-fingerprint nav-icon"></i>
-						<p><?php echo $this->lang->line('title_fingerprint');?></p>
-					</a>
-				</li>
-				<?php endif;?>
 				<?php if(permission_validation(PERMISSION_BLACKLIST_VIEW) == TRUE || permission_validation(PERMISSION_BLACKLIST_REPORT) == TRUE || permission_validation(PERMISSION_BLACKLIST_IMPORT_VIEW) == TRUE):?>
 				<li class="nav-item has-treeview <?php echo (($this->uri->segment(1) == 'blacklist') ? 'menu-open' : '');?>">
 					<a href="#" class="nav-link <?php echo (($this->uri->segment(1) == 'blacklist') ? 'active' : '');?>">
@@ -576,6 +568,36 @@
 					</ul>
 				</li>
 				<?php endif;?>
+				<?php if(permission_validation(PERMISSION_BLOG_VIEW) == TRUE || permission_validation(PERMISSION_FINGERPRINT_VIEW) == TRUE):?>
+				<li class="nav-item has-treeview <?php echo (($this->uri->segment(1) == 'fingerprint' || $this->uri->segment(1) == 'blog') ? 'menu-open' : '');?>">
+					<a href="#" class="nav-link <?php echo (($this->uri->segment(1) == 'fingerprint'  || $this->uri->segment(1) == 'blog') ? 'active' : '');?>">
+						<i class="nav-icon fas fa-cog"></i>
+						<p>
+							<?php echo $this->lang->line('title_optional_function');?>
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<?php if(permission_validation(PERMISSION_BLOG_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('blog');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'blog' && $this->uri->segment(2) == '') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_blog');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+
+						<?php if(permission_validation(PERMISSION_FINGERPRINT_VIEW) == TRUE):?>
+						<li class="nav-item">
+							<a href="<?php echo site_url('fingerprint');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'fingerprint') ? 'active' : '');?>">
+								<i class="far fa-circle nav-icon"></i>
+								<p><?php echo $this->lang->line('title_fingerprint');?></p>
+							</a>
+						</li>
+						<?php endif;?>
+					</ul>
+				</li>
+				<?php endif;?>
 				<?php if(permission_validation(PERMISSION_ADMIN_LOG_VIEW) == TRUE || permission_validation(PERMISSION_ADMIN_PLAYER_LOG_VIEW) == TRUE || permission_validation(PERMISSION_SUB_ACCOUNT_LOG_VIEW) == TRUE || permission_validation(PERMISSION_SUB_ACCOUNT_PLAYER_LOG_VIEW) == TRUE):?>
 				<li class="nav-item has-treeview <?php echo (($this->uri->segment(1) == 'log') ? 'menu-open' : '');?>">
 					<a href="#" class="nav-link <?php echo (($this->uri->segment(1) == 'log') ? 'active' : '');?>">
@@ -621,9 +643,9 @@
 					</ul>
 				</li>
 				<?php endif;?>
-				<?php if(permission_validation(PERMISSION_BLOG_VIEW) == TRUE || permission_validation(PERMISSION_BLOG_CATEGORY_VIEW) == TRUE):?>
-				<li class="nav-item has-treeview <?php echo (($this->uri->segment(1) == 'blog') ? 'menu-open' : '');?>">
-					<a href="#" class="nav-link <?php echo (($this->uri->segment(1) == 'blog') ? 'active' : '');?>">
+				<?php if(permission_validation(PERMISSION_BLOG_CATEGORY_VIEW) == TRUE):?>
+				<li class="nav-item has-treeview <?php echo (($this->uri->segment(1) == 'blog' && $this->uri->segment(2) == 'category') ? 'menu-open' : '');?>">
+					<a href="#" class="nav-link <?php echo (($this->uri->segment(1) == 'blog' && $this->uri->segment(2) == 'category') ? 'active' : '');?>">
 						<i class="nav-icon fas fa-clipboard-list"></i>
 						<p>
 							<?php echo $this->lang->line('title_blog');?>
@@ -631,14 +653,7 @@
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
-						<?php if(permission_validation(PERMISSION_BLOG_VIEW) == TRUE):?>
-						<li class="nav-item">
-							<a href="<?php echo site_url('blog');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'blog' && $this->uri->segment(2) == '') ? 'active' : '');?>">
-								<i class="far fa-circle nav-icon"></i>
-								<p><?php echo $this->lang->line('title_blog');?></p>
-							</a>
-						</li>
-						<?php endif;?>
+						
 						<?php if(permission_validation(PERMISSION_BLOG_CATEGORY_VIEW) == TRUE):?>
 						<li class="nav-item">
 							<a href="<?php echo site_url('blog/category');?>" class="nav-link <?php echo (($this->uri->segment(1) == 'blog' && $this->uri->segment(2) == 'category') ? 'active' : '');?>">
@@ -774,7 +789,7 @@
 						<?php endif;?>
 					</ul>
 				</li>
-				<?php endif;?>
+				<?php endif;?>				
 				<li class="nav-item">
 					<a href="<?php echo site_url('logout');?>" class="nav-link">
 						<i class="fas fa-sign-out-alt nav-icon"></i>

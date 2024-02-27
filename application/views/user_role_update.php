@@ -1804,102 +1804,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</div>
 										</div>
 										<?php endif;?>
-										<?php if($permissions[PERMISSION_BLOG_VIEW]['upline'] == TRUE || $permissions[PERMISSION_BLOG_CATEGORY_VIEW]['upline'] == TRUE):?>
-										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_BLOG_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_BLOG_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_VIEW;?>" <?php echo (($permissions[PERMISSION_BLOG_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_VIEW]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>">
-														<?php echo $this->lang->line('label_blog');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BLOG_FRONTEND_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_FRONTEND_VIEW;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_FRONTEND_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_FRONTEND_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_FRONTEND_VIEW;?>" <?php echo (($permissions[PERMISSION_BLOG_FRONTEND_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_FRONTEND_VIEW]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_FRONTEND_VIEW;?>">
-														<?php echo $this->lang->line('label_view');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BLOG_ADD]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_ADD;?>" <?php echo (($permissions[PERMISSION_BLOG_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_ADD]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_ADD;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BLOG_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_UPDATE;?>" <?php echo (($permissions[PERMISSION_BLOG_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_UPDATE]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BLOG_DELETE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_DELETE;?>" <?php echo (($permissions[PERMISSION_BLOG_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_DELETE]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_DELETE;?>">
-														<?php echo $this->lang->line('label_delete');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BLOG_CATEGORY_VIEW]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_BLOG_CATEGORY_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_VIEW]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>">
-														<?php echo $this->lang->line('title_blog_category');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BLOG_CATEGORY_ADD]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_CATEGORY_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_CATEGORY_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_CATEGORY_ADD;?>" <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_ADD]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_ADD;?>">
-														<?php echo $this->lang->line('label_add');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BLOG_CATEGORY_UPDATE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_CATEGORY_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_CATEGORY_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_CATEGORY_UPDATE;?>" <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_UPDATE]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_UPDATE;?>">
-														<?php echo $this->lang->line('label_update');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-												<?php if($permissions[PERMISSION_BLOG_CATEGORY_DELETE]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12" style="padding-left: 30px;">
-													 ├ <div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_CATEGORY_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_CATEGORY_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_CATEGORY_DELETE;?>" <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_DELETE]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_DELETE;?>">
-														<?php echo $this->lang->line('label_delete');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-										</div>
-										<?php endif;?>
+										
 									</div>
 									<div class="form-group row">
 										<label for="remark" class="col-5 col-form-label"><?php echo $this->lang->line('title_system_setting');?></label>
@@ -2011,7 +1916,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													</div>
 												</div>
 												<?php endif;?>
-												<?php if($permissions[PERMISSION_GAME_MAINTENANCE_ADD]['upline'] == TRUE):?>
+												<?php if($permissions[PERMISSION_GAME_MAINTENANCE_ADD]['selected'] == TRUE):?>
 												<div class="form-group clearfix col-12" style="padding-left: 30px;">
 													 ├ <div class="custom-control custom-checkbox d-inline">
 														<input class="custom-control-input permission_<?php echo PERMISSION_GAME_MAINTENANCE_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_GAME_MAINTENANCE_VIEW;?>" type="<?php echo (($permissions[PERMISSION_GAME_MAINTENANCE_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_GAME_MAINTENANCE_VIEW;?>_<?php echo PERMISSION_GAME_MAINTENANCE_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_GAME_MAINTENANCE_ADD;?>" <?php echo (($permissions[PERMISSION_GAME_MAINTENANCE_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_GAME_MAINTENANCE_ADD]['selected']) ? 'checked' : '');?>>
@@ -3491,6 +3396,125 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</div>
 
 									<div class="form-group row">
+										<label for="remark" class="col-5 col-form-label"><?php echo $this->lang->line('title_optional_function');?></label>
+									</div>
+									<div class="form-group row">
+									<?php if($permissions[PERMISSION_BLOG_VIEW]['upline'] == TRUE || $permissions[PERMISSION_FINGERPRINT_VIEW]['upline'] == TRUE):?>
+										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_BLOG_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_BLOG_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_VIEW;?>" <?php echo (($permissions[PERMISSION_BLOG_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_VIEW]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>">
+														<?php echo $this->lang->line('label_blog');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BLOG_FRONTEND_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_FRONTEND_VIEW;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_FRONTEND_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_FRONTEND_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_FRONTEND_VIEW;?>" <?php echo (($permissions[PERMISSION_BLOG_FRONTEND_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_FRONTEND_VIEW]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_FRONTEND_VIEW;?>">
+														<?php echo $this->lang->line('label_view');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BLOG_ADD]['selected'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_ADD;?>" <?php echo (($permissions[PERMISSION_BLOG_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_ADD]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BLOG_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_UPDATE;?>" <?php echo (($permissions[PERMISSION_BLOG_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_UPDATE]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BLOG_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_DELETE;?>" <?php echo (($permissions[PERMISSION_BLOG_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_DELETE]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_VIEW;?>_<?php echo PERMISSION_BLOG_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BLOG_CATEGORY_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_BLOG_CATEGORY_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_VIEW]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>">
+														<?php echo $this->lang->line('title_blog_category');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BLOG_CATEGORY_ADD]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_CATEGORY_ADD;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_CATEGORY_ADD]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_ADD;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_CATEGORY_ADD;?>" <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_ADD]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_ADD]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_ADD;?>">
+														<?php echo $this->lang->line('label_add');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BLOG_CATEGORY_UPDATE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_CATEGORY_UPDATE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_CATEGORY_UPDATE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_UPDATE;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_CATEGORY_UPDATE;?>" <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_UPDATE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_UPDATE]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_UPDATE;?>">
+														<?php echo $this->lang->line('label_update');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+												<?php if($permissions[PERMISSION_BLOG_CATEGORY_DELETE]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12" style="padding-left: 30px;">
+													 ├ <div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_BLOG_CATEGORY_DELETE;?> checkbox_option sub_permissions_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>" type="<?php echo (($permissions[PERMISSION_BLOG_CATEGORY_DELETE]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_DELETE;?>" name="permissions[]" value="<?php echo PERMISSION_BLOG_CATEGORY_DELETE;?>" <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_DELETE]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_BLOG_CATEGORY_DELETE]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_BLOG_CATEGORY_VIEW;?>_<?php echo PERMISSION_BLOG_CATEGORY_DELETE;?>">
+														<?php echo $this->lang->line('label_delete');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+										</div>
+										<?php endif;?>
+
+										<?php if($permissions[PERMISSION_FINGERPRINT_VIEW]['upline'] == TRUE):?>
+										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3 pt-3">
+											<div class="form-group row">
+												<?php if($permissions[PERMISSION_FINGERPRINT_VIEW]['upline'] == TRUE):?>
+												<div class="form-group clearfix col-12">
+													<div class="custom-control custom-checkbox d-inline">
+														<input class="custom-control-input permission_<?php echo PERMISSION_FINGERPRINT_VIEW;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_FINGERPRINT_VIEW]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_FINGERPRINT_VIEW;?>" name="permissions[]" value="<?php echo PERMISSION_FINGERPRINT_VIEW;?>" <?php echo (($permissions[PERMISSION_FINGERPRINT_VIEW]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_FINGERPRINT_VIEW]['selected']) ? 'checked' : '');?>>
+														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_FINGERPRINT_VIEW;?>">
+														<?php echo $this->lang->line('title_fingerprint');?> &nbsp; 
+														</label>
+													</div>
+												</div>
+												<?php endif;?>
+											</div>
+										</div>
+										<?php endif;?>		
+									</div>
+
+									<div class="form-group row">
 										<label for="remark" class="col-5 col-form-label"><?php echo $this->lang->line('title_special');?></label>
 									</div>
 									<div class="form-group row">
@@ -3590,22 +3614,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 											</div>
 										</div>
 										<?php endif;?>
-										<?php if($permissions[PERMISSION_FINGERPRINT_MANAGEMENT]['upline'] == TRUE):?>
-										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3">
-											<div class="form-group row">
-												<?php if($permissions[PERMISSION_FINGERPRINT_MANAGEMENT]['upline'] == TRUE):?>
-												<div class="form-group clearfix col-12">
-													<div class="custom-control custom-checkbox d-inline">
-														<input class="custom-control-input permission_<?php echo PERMISSION_FINGERPRINT_MANAGEMENT;?> checkbox_option main_permissions" type="<?php echo (($permissions[PERMISSION_FINGERPRINT_MANAGEMENT]['upline'] == FALSE) ? 'button' : 'checkbox');?>" id="permission_<?php echo PERMISSION_FINGERPRINT_MANAGEMENT;?>" name="permissions[]" value="<?php echo PERMISSION_FINGERPRINT_MANAGEMENT;?>" <?php echo (($permissions[PERMISSION_FINGERPRINT_MANAGEMENT]['upline'] == FALSE) ? 'disabled' : '');?> <?php echo (($permissions[PERMISSION_FINGERPRINT_MANAGEMENT]['selected']) ? 'checked' : '');?>>
-														<label class="custom-control-label font-weight-normal" for="permission_<?php echo PERMISSION_FINGERPRINT_MANAGEMENT;?>">
-														<?php echo $this->lang->line('title_fingerprint');?> &nbsp; 
-														</label>
-													</div>
-												</div>
-												<?php endif;?>
-											</div>
-										</div>
-										<?php endif;?>
+										
 										<?php if($permissions[PERMISSION_LEVEL_MANAGEMENT]['upline'] == TRUE):?>
 										<div class="form-group clearfix col-12 col-sm-6 col-md-4 col-lg-3">
 											<div class="form-group row">
