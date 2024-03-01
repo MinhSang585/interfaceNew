@@ -17,13 +17,122 @@ class Home extends MY_Controller {
 		{
 			$this->save_current_url('home');
 			$data['page_title'] = $this->lang->line('title_home');
-			//$data['deposit'] = $this->deposit_model->today_total_only_agent_deposit();
-			//$data['withdrawal'] = $this->withdrawal_model->today_total_only_agent_withdrawal();
-			//$data['player'] = $this->player_model->today_total_player();
-			//$data['player_win_loss'] = $this->player_model->player_today_win_loss();
-			//$data['active_player'] = $this->player_model->player_active_five_minute();
-			//$data['promotion'] = $this->promotion_model->today_total_promotion();
-			//$data['bonus'] = $this->bonus_model->today_total_bonus();
+			$data['deposit'] = 45;
+			$data['withdrawal'] = $this->withdrawal_model->today_total_only_agent_withdrawal();
+			$data['player'] = $this->player_model->today_total_player();
+			$data['player_win_loss'] = $this->player_model->player_today_win_loss();
+			$data['active_player'] = $this->player_model->player_active_five_minute();
+			
+			$last30Days = 
+			[
+				[
+				  'name' => 'Last',
+				  'data' => [5, -33, 4, 7, 2],
+				],
+				[
+				  'name' => 'Current',
+				  'data' => [2, -2, -3, 2, 1],
+				],
+			];
+
+			$lastMonth = 
+			[
+				[
+				  'name' => 'Last',
+				  'data' => [56, -33, 4, 7, 2],
+				],
+				[
+				  'name' => 'Current',
+				  'data' => [28, -2, -3, 2, 1],
+				],
+			];
+
+			$yesterday = 
+			[
+				[
+				  'name' => 'Last',
+				  'data' => [7, -3, 3, -7, 2],
+				],
+				[
+				  'name' => 'Current',
+				  'data' => [18, -2, -13, 2, 1],
+				],
+			];
+
+			$today = 
+			[
+				[
+				  'name' => 'Last',
+				  'data' => [2, -3, 5, -7, 2],
+				],
+				[
+				  'name' => 'Current',
+				  'data' => [10, -2, -3, 2, 1],
+				],
+			];
+
+			$thisWeek = 
+			[
+				[
+				  'name' => 'Last',
+				  'data' => [12, -5, 5, -8, 2],
+				],
+				[
+				  'name' => 'Current',
+				  'data' => [4, -6, -3, 11, 1],
+				],
+			];
+
+			$thisMonth = 
+			[
+				[
+				  'name' => 'Last',
+				  'data' => [15, -5, 15, -8, 2],
+				],
+				[
+				  'name' => 'Current',
+				  'data' => [14, -16, -3, 10, 1],
+				],
+			];
+			  
+			$data['last30Days'] = json_encode($last30Days);
+			$data['lastMonth'] = json_encode($lastMonth);
+			$data['yesterday'] = json_encode($yesterday);
+			$data['today'] = json_encode($today);
+			$data['thisWeek'] = json_encode($thisWeek);
+			$data['thisMonth'] = json_encode($thisMonth);
+			
+			$data['player_statistics'] =  [
+				[
+					['Active Players <h1>+57%</h1>', 500],
+					['New Players', 600]
+				]
+				,
+				[
+					['Active Players +37%', 300],
+					['New Players', 700]
+				]
+				,
+				[
+					['Active Players +87%', 200],
+					['New Players', 500]
+				]
+				,
+				[
+					['Active Players +27%', 368],
+					['New Players', 780]
+				]
+				,
+				[
+					['Active Players +37%', 300],
+					['New Players', 800]
+				]
+				,
+				[
+					['Active Players +27%', 100],
+					['New Players', 1500]
+				]
+			];
 			$this->load->view('home_page', $data);
 		}	
 	}

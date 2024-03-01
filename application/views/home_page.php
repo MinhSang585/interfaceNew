@@ -4,6 +4,109 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="<?php echo get_language_code('iso');?>">
 <head>
 	<?php $this->load->view('parts/head_meta');?>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+	<style>
+		#container_player {
+		height: 500px;
+		/* margin-top: 75px; */
+		}
+
+	.highcharts-figure,
+	.highcharts-data-table table {
+		min-width: 30px;
+		max-width: 800px;
+		margin: 1em auto;
+	}
+
+	.highcharts-data-table table {
+		font-family: Verdana, sans-serif;
+		border-collapse: collapse;
+		border: 1px solid #ebebeb;
+		margin: 10px auto;
+		text-align: center;
+		width: 100%;
+		max-width: 500px;
+	}
+
+	.highcharts-data-table caption {
+		padding: 1em 0;
+		font-size: 1.2em;
+		color: #555;
+	}
+
+	.highcharts-data-table th {
+		font-weight: 600;
+		padding: 0.5em;
+	}
+
+	.highcharts-data-table td,
+	.highcharts-data-table th,
+	.highcharts-data-table caption {
+		padding: 0.5em;
+	}
+
+	.highcharts-data-table thead tr,
+	.highcharts-data-table tr:nth-child(even) {
+		background: #f8f8f8;
+	}
+
+	.highcharts-data-table tr:hover {
+		background: #f1f7ff;
+	}
+
+	/* chart 2 */
+	#container {
+    min-width: 310px;
+    max-width: 800px;
+    height: 500px;
+    margin: 0 auto;
+	}
+
+	.buttons {
+		min-width: 310px;
+		text-align: center;
+		margin: 1rem 0;
+		font-size: 0;
+	}
+
+	.buttons button {
+		cursor: pointer;
+		border: 1px solid silver;
+		border-right-width: 0;
+		background-color: #f8f8f8;
+		font-size: 1rem;
+		padding: 0.5rem;
+		transition-duration: 0.3s;
+		margin: 0;
+	}
+
+	.buttons button:first-child {
+		border-top-left-radius: 0.3em;
+		border-bottom-left-radius: 0.3em;
+	}
+
+	.buttons button:last-child {
+		border-top-right-radius: 0.3em;
+		border-bottom-right-radius: 0.3em;
+		border-right-width: 1px;
+	}
+
+	.buttons button:hover {
+		color: white;
+		background-color: rgb(158 159 163);
+		outline: none;
+	}
+
+	.buttons button.active {
+		background-color: #0051b4;
+		color: white;
+	}
+	</style>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 	<div class="wrapper">
@@ -23,122 +126,65 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			if(permission_validation(PERMISSION_HOME) == TRUE){
 			?>
 			<section class="content">
-				<div class="container-fluid">
-					<!-- Info boxes -->
-					<div class="row">
-						<div class="col-12 col-sm-6 col-md-3">
-							<div class="info-box">
-								<span class="info-box-icon bg-info elevation-1"><i class="fas fa-donate"></i></span>
-								<div class="info-box-content">
-									<span class="info-box-text"><?php echo $this->lang->line('label_today_deposits');?></span>
-									<span class="info-box-number" id="val-deposit"></span>
-								</div>
-								<!-- /.info-box-content -->
-								<div class="overlay dark" id="load-deposit">
-									<i class="fas fa-2x fa-spinner fa-pulse"></i>
-								</div>
-							</div>
-							<!-- /.info-box -->
+			<div class="row">
+				<div class="clearfix col-md-6">
+				<figure class="highcharts-figure">
+					<div id="container"></div>
+					<div class="highcharts-description">
+						<div class='buttons'>
+							<button id='last30Days'>
+								Last 30days
+							</button>
+							<button id='lastMonth'>
+								Last Month
+							</button>
+							<button id='yesterday'>
+								Yesterday
+							</button>
+							<button id='today' class='active'>
+								Today
+							</button>
+							<button id='thisWeek'>
+								This Week
+							</button>
+							<button id='thisMonth'>
+								This Month
+							</button>
 						</div>
-						<div class="col-12 col-sm-6 col-md-3">
-							<div class="info-box">
-								<span class="info-box-icon bg-primary elevation-1"><i class="fas fa-coins"></i></span>
-								<div class="info-box-content">
-									<span class="info-box-text"><?php echo $this->lang->line('label_today_promotion');?></span>
-									<span class="info-box-number" id="val-promotion"></span>
-								</div>
-								<!-- /.info-box-content -->
-								<div class="overlay dark" id="load-promotion">
-									<i class="fas fa-2x fa-spinner fa-pulse"></i>
-								</div>
-							</div>
-							<!-- /.info-box -->
-						</div>
-						<!-- fix for small devices only -->
-						<div class="clearfix hidden-md-up"></div>
-						<div class="col-12 col-sm-6 col-md-3">
-							<div class="info-box">
-								<span class="info-box-icon bg-teal elevation-1"><i class="fas fa-coins"></i></span>
-								<div class="info-box-content">
-									<span class="info-box-text"><?php echo $this->lang->line('label_today_bonus');?></span>
-									<span class="info-box-number" id="val-bonus"></span>
-								</div>
-								<!-- /.info-box-content -->
-								<div class="overlay dark" id="load-bonus">
-									<i class="fas fa-2x fa-spinner fa-pulse"></i>
-								</div>
-							</div>
-							<!-- /.info-box -->
-						</div>
-						<!-- /.col -->
-						<div class="col-12 col-sm-6 col-md-3">
-							<div class="info-box mb-3">
-								<span class="info-box-icon bg-danger elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
-								<div class="info-box-content">
-									<span class="info-box-text"><?php echo $this->lang->line('label_today_withdrawals');?></span>
-									<span class="info-box-number" id="val-wd"></span>
-								</div>
-								<!-- /.info-box-content -->
-								<div class="overlay dark" id="load-wd">
-									<i class="fas fa-2x fa-spinner fa-pulse"></i>
-								</div>
-							</div>
-							<!-- /.info-box -->
-						</div>
-						<!-- /.col -->
-						<!-- fix for small devices only -->
-						<div class="clearfix hidden-md-up"></div>
-						<div class="col-12 col-sm-6 col-md-3">
-							<div class="info-box mb-3">
-								<span class="info-box-icon bg-success elevation-1"><i class="fas fa-dollar-sign"></i></span>
-								<div class="info-box-content">
-									<span class="info-box-text"><?php echo $this->lang->line('label_today_profit');?></span>
-									<span class="info-box-number" id="val-profit"></span>
-								</div>
-								<!-- /.info-box-content -->
-								<div class="overlay dark" id="load-profit">
-									<i class="fas fa-2x fa-spinner fa-pulse"></i>
-								</div>
-							</div>
-							<!-- /.info-box -->
-						</div>
-						<!-- /.col -->
-						<div class="col-12 col-sm-6 col-md-3">
-							<div class="info-box mb-3">
-								<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-								<div class="info-box-content">
-									<span class="info-box-text"><?php echo $this->lang->line('label_new_players');?></span>
-									<span class="info-box-number" id="val-nu"></span>
-								</div>
-								<!-- /.info-box-content -->
-								<div class="overlay dark" id="load-nu">
-									<i class="fas fa-2x fa-spinner fa-pulse"></i>
-								</div>
-							</div>
-							<!-- /.info-box -->
-						</div>
-						<!-- /.col -->
-						<!-- fix for small devices only -->
-						<div class="clearfix hidden-md-up"></div>
-						<!-- /.col -->
-						<div class="col-12 col-sm-6 col-md-3">
-							<div class="info-box mb-3">
-								<span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-user"></i></span>
-								<div class="info-box-content">
-									<span class="info-box-text"><?php echo $this->lang->line('label_active_players');?></span>
-									<span class="info-box-number" id="val-active"></span>
-								</div>
-								<!-- /.info-box-content -->
-								<div class="overlay dark" id="load-active">
-									<i class="fas fa-2x fa-spinner fa-pulse"></i>
-								</div>
-							</div>
-							<!-- /.info-box -->
-						</div>
-						<!-- /.col -->
 					</div>
-					<!-- /.row -->
-				</div><!--/. container-fluid -->
+				</figure>
+				</div>
+
+				<div class="clearfix col-md-6">
+					<figure class="highcharts-figure">
+						<div id="container_player"></div>
+						<div class="highcharts-description">	
+							<div class='buttons'>
+								<button id='last30DaysPlayer'>
+									Last 30days
+								</button>
+								<button id='lastMonthPlayer'>
+									Last Month
+								</button>
+								<button id='yesterdayPlayer'>
+									Yesterday
+								</button>
+								<button id='todayPlayer' class='active'>
+									Today
+								</button>
+								<button id='thisWeekPlayer'>
+									This Week
+								</button>
+								<button id='thisMonthPlayer'>
+									This Month
+								</button>
+							</div>
+						</div>
+					</figure>
+				</div>
+				
+			</div>
+			
 			</section>
 			<?php } ?>
 			<!-- /.content -->
@@ -319,6 +365,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		});
 	}
+	function updateChartAndButtons(data, buttonId, chart, type = 'player') {
+		console.log(buttonId);
+		console.log(data);
+		//chart.series[0].setData(data);
+
+		if(type =='player'){
+			chart.series[0].setData(data);
+
+			// Remove 'active' class from all buttons
+			$('#last30DaysPlayer, #lastMonthPlayer, #yesterdayPlayer, #todayPlayer, #thisWeekPlayer, #thisMonthPlayer').removeClass('active');
+
+			// Add 'active' class to the clicked button
+			$('#' + buttonId).addClass('active');
+		}else {
+			chart.series[0].setData(data[0].data);
+  			chart.series[1].setData(data[1].data);
+			
+			// Remove 'active' class from all buttons
+			$('#last30Days, #lastMonth, #yesterday, #today, #thisWeek, #thisMonth').removeClass('active');
+
+			// Add 'active' class to the clicked button
+			$('#' + buttonId).addClass('active');
+		}
+		
+	}
+
 	$(document).ready(function() {				
 		today_deposit();
 		today_promotion();
@@ -332,3 +404,146 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</script>
 </body>
 </html>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		//alert(<?php echo json_encode($test01); ?>);
+		//alert($test01);
+		var chartOptionPlayer =	{
+			chart: {
+				type: 'pie'
+			},
+			title: {
+				text: 'Player'
+			},
+			xAxis: {
+				type: 'category',
+				labels: {
+					autoRotation: [-45, -90],
+					style: {
+						fontSize: '13px',
+						fontFamily: 'Verdana, sans-serif'
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: 'Players'
+				}
+			},
+			legend: {
+				enabled: false
+			},
+			series: [{
+				name: 'Players',
+				colors: [
+					'#3667c9', '#00f194'
+				],
+				colorByPoint: true,
+				groupPadding: 0,
+				data: <?php echo json_encode($player_statistics[3]); ?>,
+				dataLabels: {
+					enabled: true,
+					rotation: -90,
+					color: '#FFFFFF',
+					align: 'right',
+					format: '{point.y:.1f}', // one decimal
+					y: 10, // 10 pixels down from the top
+					style: {
+						fontSize: '13px',
+						fontFamily: 'Verdana, sans-serif'
+					}
+				}
+			}]
+		};
+
+		// Create the chart
+		var chartPlayer = Highcharts.chart('container_player', chartOptionPlayer);
+
+		// Add event listener to the buttons
+		$('#last30DaysPlayer, #lastMonthPlayer, #yesterdayPlayer, #todayPlayer, #thisWeekPlayer, #thisMonthPlayer').on('click', function() {
+		var buttonId = $(this).attr('id');
+		var dataIndex;
+		switch (buttonId) {
+		case 'last30DaysPlayer':
+			dataIndex = 0;
+			break;
+		case 'lastMonthPlayer':
+			dataIndex = 1;
+			break;
+		case 'yesterdayPlayer':
+			dataIndex = 2;
+			break;
+		case 'todayPlayer':
+			dataIndex = 3;
+			break;
+		case 'thisWeekPlayer':
+			dataIndex = 4;
+			break;
+		case 'thisMonthPlayer':
+			dataIndex = 5;
+			break;
+		default:
+			break;
+		}
+
+		var data = <?php echo json_encode($player_statistics); ?>[dataIndex];
+		updateChartAndButtons(data, buttonId, chartPlayer);
+		});
+
+		//chart 2
+		var chartOption = {
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Statistics'
+			},
+			xAxis: {
+				categories: ['Deposits', 'Promotion', 'Bonus', 'Withdrawals', 'Profits']
+			},
+			credits: {
+				enabled: false
+			},
+			plotOptions: {
+				column: {
+					borderRadius: '25%'
+				}
+			},
+			series: <?php echo $today ?>
+		};
+
+		// Create the chart
+		var chart = Highcharts.chart('container', chartOption);
+
+		// Add event listener to the buttons
+		$('#last30Days, #lastMonth, #yesterday, #today, #thisWeek, #thisMonth').on('click', function() {
+		var buttonId = $(this).attr('id');
+		var data;
+		switch (buttonId) {
+		case 'last30Days':
+			data = <?php echo $last30Days ?>;
+			break;
+		case 'lastMonth':
+			data = <?php echo $lastMonth ?>;
+			break;
+		case 'yesterday':
+			data = <?php echo $yesterday ?>;
+			break;
+		case 'today':
+			data = <?php echo $today ?>;
+			break;
+		case 'thisWeek':
+			data = <?php echo $thisWeek ?>;
+			break;
+		case 'thisMonth':
+			data = <?php echo $thisMonth ?>;
+			break;
+		default:
+			break;
+		}
+		updateChartAndButtons(data, buttonId, chart, 'notPlayer');
+		});
+	});
+</script>
