@@ -5,6 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta name="csrf_token" content="<?php echo $this->security->get_csrf_hash(); ?>">
 	<?php $this->load->view('parts/head_meta');?>
+
+	<style>
+		.buttons{
+		background-color: #1d4a51;
+		color: white;
+		}
+	</style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 	<div class="wrapper">
@@ -29,8 +36,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div id="card-table-1" class="card">
 							<div class="card-header">
 								<form action="<?php echo site_url('report/winloss_sum_search');?>" id="report-form" name="report-form" class="form-horizontal" method="post" accept-charset="utf-8" novalidate="novalidate">
-									<div class="form-group row">
-										<div class="col-md-3">
+									<!-- <div class="form-group row">
+										<div class="col-md-4">
 											<div class="row mb-2">
 												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_from_date');?></label>
 												<div class="col-8 input-group date" id="from_date_click" data-target-input="nearest">
@@ -41,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</div>
 											</div>										
 										</div>
-										<div class="col-md-3">
+										<div class="col-md-4">
 											<div class="row mb-2">
 												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_to_date');?></label>
 												<div class="col-8 input-group date" id="to_date_click" data-target-input="nearest">
@@ -60,13 +67,112 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												</div>
 											</div>								
 										</div>
-										<div class="col-md-3">
+										<div class="col-md-4">
 											<div class="row mb-2">
 												<button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search nav-icon"></i> <?php echo $this->lang->line('button_search');?></button>
 											</div>										
 										</div>
-									</div>
+									</div> -->
+
 									<div class="form-group row">
+										<div class="col-md-3">
+											<div class="row mb-2">
+												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_from_date');?></label>
+												<div class="col-8 input-group date" id="from_date_click" data-target-input="nearest">
+													<input type="text" id="from_date" name="from_date" class="form-control form-control-sm col-12 datetimepicker-input" value="<?php echo date('Y-m-d');?>" data-target="#from_date_click"/>
+													<div class="input-group-append" data-target="#from_date_click" data-toggle="datetimepicker">
+														<div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row mb-2">
+												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_to_date');?></label>
+												<div class="col-8 input-group date" id="to_date_click" data-target-input="nearest">
+													<input type="text" id="to_date" name="to_date" class="form-control form-control-sm col-12 datetimepicker-input" value="<?php echo date('Y-m-d');?>" data-target="#to_date_click"/>
+													<div class="input-group-append" data-target="#to_date_click" data-toggle="datetimepicker">
+														<div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+													</div>
+												</div>
+
+											</div>
+
+											<div class="row mb-2">
+												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_agent_code');?></label>
+												<div class="col-8">
+													<input type="text" class="form-control form-control-sm" id="agent" name="agent">
+												</div>
+											</div>
+
+										</div>
+
+										<div class="col-md-3">
+											<div class="row mb-2">
+												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_product');?></label>
+												<div class="col-8">
+													<select class="form-control form-control-sm select2bs4 col-12" id="game_provider_code" name="game_provider_code">
+														<option value="0"><?php echo $this->lang->line('label_all');?></option>
+														<?php
+															foreach($game_list as $row)
+															{
+																echo '<option value="' . $row['game_code'] . '">' . $this->lang->line($row['game_name']) . '</option>';
+															}
+														?>
+													</select>
+												</div>
+											</div>
+
+											<div class="row mb-2">
+												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_product_type');?></label>
+												<div class="col-8">
+													<select class="form-control form-control-sm select2bs4 col-12" id="game_type_code" name="game_type_code">
+														<option value="0"><?php echo $this->lang->line('label_all');?></option>
+														<?php
+															foreach(get_game_type() as $k => $v)
+															{
+																echo '<option value="' . $k . '">' . $this->lang->line($v) . '</option>';
+															}
+														?>
+													</select>
+												</div>
+											</div>
+
+											<div class="row mb-2">
+												<button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search nav-icon"></i> <?php echo $this->lang->line('button_search');?></button>
+											</div>	
+										</div>
+
+										<div class="col-md-3">
+											<div class="row mb-2">
+												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_username');?></label>
+												<div class="col-8">
+													<input type="text" class="form-control form-control-sm" id="username" name="username" value="<?php echo (isset($data_search['username']) ? $data_search['username'] : '');?>">
+												</div>
+											</div>
+															
+											<!-- <div class="row mb-2">
+												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_agent');?></label>
+												<div class="col-8">
+													<select class="form-control select2bs4 col-12" id="agent" name="agent">
+													</select>
+												</div>
+											</div> -->
+											<div class="row mb-2">
+												<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_status');?></label>
+												<div class="col-8">
+													<select class="form-control form-control-sm select2bs4 col-12" id="result_status" name="result_status">
+														<option value="" selected><?php echo $this->lang->line('label_all');?></option>
+														<option value="<?php echo STATUS_PENDING;?>"><?php echo $this->lang->line('status_pending');?></option>
+														<option value="<?php echo STATUS_COMPLETE;?>"><?php echo $this->lang->line('status_completed');?></option>
+														<option value="<?php echo STATUS_CANCEL;?>"><?php echo $this->lang->line('status_cancelled');?></option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+									</div>
+									
+									<!-- <div class="form-group row">
 										<label class="col-1 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_more_filter');?></label>
 										<div class="form-group clearfix col-11">
 											<div class="custom-control custom-checkbox d-inline pr-2">
@@ -86,30 +192,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<label class="custom-control-label font-weight-normal" for="exclude_gametype_fh"><?php echo $this->lang->line('checkbox_label_exclude_all_fishing');?></label>
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<div class="form-group row">
-										<div class="col-md-12 col-12">
-											<label class="col-4 col-form-label col-form-label-sm font-weight-normal"><?php echo $this->lang->line('label_quick_search');?></label>
+										<div class="col-md-12 col-6">
+											<label class="col-4 col-form-label col-form-label-sm font-weight-normal"></label>
 										</div>
-										<div class="col-md-12 col-12">
+										<div class="col-md-6 col-6">
 											<div class="row mb-2">
 												<div class="col-md-2 col-2">
-													<button type="button" onclick="fastSetDateSearch('<?php echo $date_last_month_from_date;?>','<?php echo $date_last_month_to_date;?>')" class="btn btn-block btn-info"><?php echo $this->lang->line('label_quick_search_last_month');?></button>
+													<button type="button" id="btnMember" onclick="loadTablePlayer()" class="btn btn-block btn-info"><?php echo $this->lang->line('label_member');?></button>
 												</div>
 												<div class="col-md-2 col-2">
-													<button type="button" onclick="fastSetDateSearch('<?php echo $date_last_week_from_date;?>','<?php echo $date_last_week_to_date;?>')" class="btn btn-block btn-info"><?php echo $this->lang->line('label_quick_search_last_week');?></button>
+													<button type="button" id="btnAgent" onclick="getDownline('<?php echo $username;?>', 1, 'btnAgent')" class="btn btn-block btn-info"><?php echo $this->lang->line('label_agent');?></button>
 												</div>
 												<div class="col-md-2 col-2">
-													<button type="button" onclick="fastSetDateSearch('<?php echo $date_yesterday_from_date;?>','<?php echo $date_yesterday_to_date;?>')" class="btn btn-block btn-info"><?php echo $this->lang->line('label_quick_search_yesterday');?></button>
-												</div>
-												<div class="col-md-2 col-2">
-													<button type="button" onclick="fastSetDateSearch('<?php echo $date_today_from_date;?>','<?php echo $date_today_to_date;?>')" class="btn btn-block btn-info"><?php echo $this->lang->line('label_quick_search_today');?></button>
-												</div>
-												<div class="col-md-2 col-2">
-													<button type="button" onclick="fastSetDateSearch('<?php echo $date_current_week_from_date;?>','<?php echo $date_current_week_to_date;?>')" class="btn btn-block btn-info"><?php echo $this->lang->line('label_quick_search_this_week');?></button>
-												</div>
-												<div class="col-md-2 col-2">
-													<button type="button" onclick="fastSetDateSearch('<?php echo $date_current_month_from_date;?>','<?php echo $date_current_month_to_date;?>')" class="btn btn-block btn-info"><?php echo $this->lang->line('label_quick_search_this_month');?></button>
+													<button type="button" id="btnProduct" disabled onclick="getDownline('<?php echo $username;?>', 1, 'btnProduct')" class="btn btn-block btn-info"><?php echo $this->lang->line('label_product');?></button>
 												</div>
 											</div>
 										</div>
@@ -117,10 +214,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</form>
 							</div>
 							<!-- /.card-header -->
-							<?php if(permission_validation(PERMISSION_WIN_LOSS_REPORT_EXPORT_EXCEL) == TRUE):?>
+							<!-- <?php if(permission_validation(PERMISSION_WIN_LOSS_REPORT_EXPORT_EXCEL) == TRUE):?>
 							<div class="card-header">
 								<h3 class="card-title"><button onclick="exportData()" type="button" class="btn btn-block bg-gradient-success btn-sm"><i class="fas fa-plus nav-icon"></i> <?php echo $this->lang->line('button_export');?></button></h3>
-							</div>
+							</div> -->
 							<?php echo form_open('export/winloss_report_export', 'class="export" id="export_form_1"');?>
 							<?php echo form_close(); ?>
 							<?php endif;?>
@@ -175,6 +272,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									</thead>
 									<tbody></tbody>
 								</table>
+
+								<table id="report-table-3" class="table table-striped table-bordered table-hover">
+
+									<thead>
+										<tr>
+											<th width="60"><?php echo $this->lang->line('label_hashtag');?></th>
+											<th width="180"><?php echo $this->lang->line('label_username');?></th>
+											<th width="150"><?php echo $this->lang->line('label_tag_code');?></th>
+											<th width="220"><?php echo $this->lang->line('label_membership_level');?> (<?php echo $this->lang->line('label_membership_number');?>)</th>
+											<th width="100"><?php echo $this->lang->line('label_bank_account_name');?></th>
+											<th width="200"><?php echo $this->lang->line('label_bet_amount');?></th>
+											<th width="200"><?php echo $this->lang->line('label_rolling_amount');?></th>
+											<th width="200"><?php echo $this->lang->line('label_win_loss');?></th>
+											<th width="115"><?php echo $this->lang->line('label_rtp');?></th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+									<tfoot>
+										<tr>
+											<th colspan="5" class="text-right"><?php echo $this->lang->line('label_total');?>:</th>
+											<th><span id="player_total_bet_amount">0</span></th>
+											<th><span id="player_total_rolling_amount">0</span></th>
+											<th><span id="player_total_win_loss">0</span></th>
+											<th><span id="player_total_rtp">0</span></th>
+										</tr>
+									</tfoot>
+
+								</table>
 							</div>
 						</div>
 					</div>	
@@ -220,74 +345,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$(this).bootstrapSwitch('state', $(this).prop('checked'));
 			});
 			
-			form.submit(function(e) {
-				if(is_allowed == true) {
-					is_allowed = false;
-					
-					var excludeProviderCheckboxes = new Array();
-			        $('input[name="exclude_provider[]"]:checked').each(function() {
-			           excludeProviderCheckboxes.push($(this).val());
-			        });
-
-			        var excludeGametypeCheckboxes = new Array();
-			        $('input[name="exclude_gametype[]"]:checked').each(function() {
-			           excludeGametypeCheckboxes.push($(this).val());
-			        });
-			        
-					$.ajax({url: form.attr('action'),
-						data: { 
-							csrf_bctp_bo_token : $('meta[name=csrf_token]').attr('content'), 
-							from_date:  $('#from_date').val(),
-							to_date:  $('#to_date').val(),
-							username : $('#username').val(),
-							excludezero : $('#excludezero').prop("checked"),
-							excludeProviderCheckboxes : excludeProviderCheckboxes,
-							excludeGametypeCheckboxes : excludeGametypeCheckboxes,
-						},
-						type: 'post',                  
-						async: 'true',
-						beforeSend: function() {
-							layer.load(1);
-						},
-						complete: function() {
-							layer.closeAll('loading');
-							is_allowed = true;
-						},
-						success: function (data) {
-							var json = JSON.parse(JSON.stringify(data));
-							var message = json.msg;
-							var msg_icon = 2;
-							
-							$('meta[name=csrf_token]').attr('content', json.csrfHash);
-							
-							if(json.status == '<?php echo EXIT_SUCCESS;?>') {
-								var obj = $('.card-body');
-								
-								if (obj.is(':visible')) {
-									for(var i=2;i<=table_num;i++) {
-										$('#card-table-' + i).remove();
-										$('#p-card-table-1').remove();
-									}
-								
-									table_num = 1;
-									$('#report-table-1').DataTable().ajax.reload();
-								}
-								else {
-									obj.show();
-									loadTable();
-								}
-							}
-							else {
-								parent.layer.alert(message, {icon: msg_icon, title: '<?php echo $this->lang->line('label_info');?>', btn: '<?php echo $this->lang->line('button_close');?>'});
-							}
-						},
-						error: function (request,error) {
-						}
-					});  
-				}
-				
-				return false;
-			});
+			//getDownline('newgxwlpt', 1);
+			getDownline('<?php echo $username;?>', 1, 'btnAgent');
+			
 		});
 		
 		function loadTable(){
@@ -349,7 +409,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		var is_allowed_2 = true;
 		var table_num = 1;
 		
-		function getDownline(username, num) {
+		function getDownline(username, num, typeBtn = 'btnAgent') {
+			var obj = $('.card-body');
+			obj.hide();
+			
 			if(is_allowed_2 == true) {
 				is_allowed_2 = false;
 
@@ -363,8 +426,181 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				table_num = next_num;
 				layer.load(1);
 				load_table_downline(table_num, username);
-				$('html, body').animate({scrollTop:$(document).height()}, 800);
+				//loadTablePlayer();
+				//loadTotal();
+				
+				//$('html, body').animate({scrollTop:$(document).height()}, 800);
 			}
+
+			// Remove 'active' class from all buttons
+			$('#btnMember, #btnAgent, #btnProduct').removeClass('buttons');
+
+			// Add 'active' class to the clicked button
+			$('#' + typeBtn).addClass('buttons');
+		}
+
+		function loadTotal(){
+
+		$.ajax({url: '<?php echo base_url('report/winloss_player_total/');?>',
+
+			type: 'get',                  
+
+			async: 'true',
+
+			beforeSend: function() {
+
+			},
+
+			complete: function() {
+
+			},
+
+			success: function (data) {
+
+				var json = JSON.parse(JSON.stringify(data));
+
+				$('meta[name=csrf_token]').attr('content', json.csrfHash);
+
+				if(json.status == '<?php echo EXIT_SUCCESS;?>') {
+
+					if(json.total_data.total_downline > 0){
+
+						if(json.total_data.total_bet_amount>0){var deposit_class = "text-primary";}else{var deposit_class = "text-dark";}
+
+						$('span#player_total_bet_amount').removeClass().addClass(deposit_class);
+
+						if(json.total_data.total_rolling_amount>0){var deposit_class = "text-primary";}else{var deposit_class = "text-dark";}
+
+						$('span#player_total_rolling_amount').removeClass().addClass(deposit_class);
+
+						if(json.total_data.total_win_loss>=0){if(json.total_data.total_win_loss==0){var win_loss_class = "text-dark";}else{var win_loss_class = "text-primary";}}else{var win_loss_class = "text-danger";}
+
+						$('span#player_total_win_loss').removeClass().addClass(win_loss_class);
+
+						if(json.total_data.total_rtp>=0){if(json.total_data.total_rtp==0){var win_loss_class = "text-dark";}else{var win_loss_class = "text-primary";}}else{var win_loss_class = "text-danger";}
+
+						$('span#player_total_rtp').removeClass().addClass(win_loss_class);
+
+
+
+						$('span#player_total_bet_amount').html(parseFloat(json.total_data.total_bet_amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+						$('span#player_total_rolling_amount').html(parseFloat(json.total_data.total_rolling_amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+						$('span#player_total_win_loss').html(parseFloat(json.total_data.total_win_loss).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+
+						$('span#player_total_rtp').html(parseFloat(json.total_data.total_rtp).toFixed(2).toLocaleString('en')+"%");
+
+					}
+
+				}
+
+			},
+
+			error: function (request,error) {
+
+			}
+
+		}); 
+
+		}
+
+		function loadTablePlayer() {
+			var obj = $('.card-body');
+			obj.show();
+			$('#report-table-3').show();
+
+			$('#report-table-1').hide();
+			$('#card-table-2').hide();
+
+			loadDataTablePlayer();
+
+			// Remove 'active' class from all buttons
+			$('#btnMember, #btnAgent, #btnProduct').removeClass('buttons');
+			// Add 'active' class to the clicked button
+			$('#btnMember').addClass('buttons');
+		}
+
+		function loadDataTablePlayer() {
+		$('#report-table-3').DataTable().destroy();
+		$('#report-table-3').DataTable({
+			"processing": true,
+			"serverSide": true,
+			"scrollX": true,
+			"responsive": false,
+			"filter": false,
+			"deferRender": true,
+			"pageLength" : 10,
+			"lengthMenu": [[10, 25, 50, 100, 500, 1000], [10, 25, 50, 100, 500, 1000]],
+			"order": [[0, "desc"]],
+			"ajax": {
+				"url": "<?php echo site_url('report/winloss_player_listing');?>",
+				"dataType": "json",
+				"type": "POST",
+				"data": function (d) {
+					d.csrf_bctp_bo_token = $('meta[name=csrf_token]').attr('content');
+				},
+
+				"complete": function(response) {
+					var json = JSON.parse(JSON.stringify(response));
+					console.log('table 3');
+					console.log(json);
+					if(json.status == 200) {
+						$('meta[name=csrf_token]').attr('content', json.responseJSON.csrfHash);
+
+						/*
+
+						$('span#total_bet_amount').html(json.responseJSON.total_data.total_bet_amount);
+
+						$('span#total_payout_amount').html(json.responseJSON.total_data.total_payout_amount);
+
+						$('span#total_win_loss').html(json.responseJSON.total_data.total_win_loss);
+
+						$('span#total_rolling_amount').html(json.responseJSON.total_data.total_rolling_amount);
+
+						$('span#total_jackpot_win').html(json.responseJSON.total_data.total_jackpot_win);
+
+						$('span#total_promotion_amount').html(json.responseJSON.total_data.total_promotion_amount);
+
+						*/
+
+					}
+
+				},
+
+			},
+
+			"columnDefs": [
+				<?php if(permission_validation(PERMISSION_PLAYER_ACCOUNT_NAME) == TRUE){ ?>
+				{"targets": [0], "visible": false},
+				{"targets": [8], "orderable": false},					
+				<?php }else{ ?>
+				{"targets": [0], "visible": false},
+				{"targets": [8], "orderable": false},
+				{"targets": [4], "visible": false},
+				<?php } ?>
+
+			],
+
+			"language": {
+				"processing": "<?php echo $this->lang->line('js_processing');?>",
+				"lengthMenu": "<?php echo $this->lang->line('js_length_menu');?>",
+				"zeroRecords": "<?php echo $this->lang->line('js_zero_ecords');?>",
+				"info": "<?php echo $this->lang->line('js_info');?>",
+				"infoEmpty": "<?php echo $this->lang->line('js_info_empty');?>",
+				"infoFiltered": "<?php echo $this->lang->line('info_filtered');?>",
+				"search": "<?php echo $this->lang->line('js_search');?>",
+				"paginate": {
+					"first": "<?php echo $this->lang->line('js_paginate_first');?>",
+					"last": "<?php echo $this->lang->line('js_paginate_last');?>",
+					"previous": "<?php echo $this->lang->line('js_paginate_previous');?>",
+					"next": "<?php echo $this->lang->line('js_paginate_next');?>"
+				}	
+
+			}
+
+		});
+
 		}
 
 		function load_table_downline(table_num, username){
