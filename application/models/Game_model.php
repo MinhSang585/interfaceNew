@@ -76,6 +76,40 @@ class Game_model extends CI_Model {
 		return $result;
 	}
 
+	public function get_code_game_list($type = '1')
+	{	
+		$result = NULL;
+		if($type=='1')		
+			$query = $this
+					->db
+					->select('game_code')
+					->where('active', STATUS_ACTIVE)
+					->order_by('game_code', 'ASC')
+					->get($this->table);
+		elseif ($type=='0')		
+			$query = $this
+					->db
+					->select('game_code')
+					->where('active', STATUS_INACTIVE)
+					->order_by('game_code', 'ASC')
+					->get($this->table);
+		else $query = $this
+			->db
+			->select('game_code')
+			->order_by('game_code', 'ASC')
+			->get($this->table);
+		
+	   
+		if($query->num_rows() > 0)
+		{
+			$result = $query->result_array(); 
+		}
+		
+		$query->free_result();
+		
+		return $result;
+	}
+
 	public function get_game_list_name()
 	{	
 		$result = NULL;

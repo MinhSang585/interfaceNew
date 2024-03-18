@@ -33,10 +33,13 @@ class Report extends MY_Controller {
 			redirect('home');
 		}
 	}
-	public function transaction_search()
+	public function transaction_search($isBtn = true)
 	{
+		log_message('error', print_r('transaction_search1', true));
+		log_message('error', print_r($isBtn, true));
 		if(permission_validation(PERMISSION_TRANSACTION_REPORT) == TRUE)
 		{
+			log_message('error', print_r('PERMISSION_TRANSACTION_REPORT', true));
 			//Initial output data
 			$json = array(
 					'status' => EXIT_ERROR, 
@@ -68,8 +71,10 @@ class Report extends MY_Controller {
 			$this->form_validation->set_rules($config);
 			$this->form_validation->set_error_delimiters('', '');
 			//Form validation
+			log_message('error', print_r('valiedate', true));
 			if ($this->form_validation->run() == TRUE)
 			{
+				log_message('error', print_r('validateOK', true));
 				$from_date = strtotime(trim($this->input->post('from_date', TRUE)));
 				$to_date = strtotime(trim($this->input->post('to_date', TRUE)));
 				$days = cal_days_in_month(CAL_GREGORIAN, date('n', $from_date), date('Y', $from_date));
@@ -81,6 +86,7 @@ class Report extends MY_Controller {
 				}
 				else
 				{
+					log_message('error', print_r('ppp', true));
 					$data = array( 
 						'from_date' => trim($this->input->post('from_date', TRUE)),
 						'to_date' => trim($this->input->post('to_date', TRUE)),
@@ -111,13 +117,34 @@ class Report extends MY_Controller {
 					$json['msg'] = $error['to_date'];
 				}
 			}
-			//Output
-			$this->output
+			log_message('error', print_r('nnnngnghhg', true));
+			log_message('error', print_r($data, true));
+			if($isBtn)
+			{
+				//Output
+					$this->output
 					->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
 					->set_output(json_encode($json))
 					->_display();
-			exit();	
+				exit();	
+			}
+			
+			// else {
+			// 	log_message('error', print_r('end_transaction_search', true));
+			// 	// $data = array( 
+			// 	// 	'from_date' => trim($this->input->post('from_date', TRUE)),
+			// 	// 	'to_date' => trim($this->input->post('to_date', TRUE)),
+			// 	// 	'game_provider_code' => trim($this->input->post('game_provider_code', TRUE)),
+			// 	// 	'username' => trim($this->input->post('username', TRUE)),
+			// 	// 	'game_type_code' => trim($this->input->post('game_type_code', TRUE)),
+			// 	// 	'bet_id' => trim($this->input->post('bet_id', TRUE)),
+			// 	// 	'game_code' => trim($this->input->post('game_code', TRUE)),
+			// 	// 	'game_time_type' => trim($this->input->post('game_time_type', TRUE)),
+			// 	// 	'result_status' => trim($this->input->post('result_status', TRUE)),
+			// 	// );
+			// 	// $this->session->set_userdata('search_report_transactions', $data);
+			// }
 		}
 	}
 	public function testing_transaction_listing(){
@@ -338,6 +365,8 @@ class Report extends MY_Controller {
 			$query_string = "SELECT {$select} FROM {$dbprefix}transaction_report a, {$dbprefix}players b WHERE (a.player_id = b.player_id) AND b.upline_ids LIKE '%," . $this->session->userdata('root_user_id') . ",%' ESCAPE '!' $where";
 			$query_string_2 = " ORDER by {$order} {$dir} LIMIT {$start}, {$limit}";
 			$query = $this->db->query($query_string . $query_string_2);
+			log_message('error', print_r('transaction_listing', true));
+			log_message('error', print_r($this->db->last_query(), true));
 			if($query->num_rows() > 0)
 			{
 				$posts = $query->result();  
@@ -380,11 +409,324 @@ class Report extends MY_Controller {
 					$data[] = $row;
 				}
 			}
+			$row = array();
+			$row[] = '1';
+			$row[] = '2';
+			$row[] = '3';
+			$row[] = '4';
+			$row[] = '$post->transaction_id';
+			$row[] = '$post->transaction_id';
+			$row[] = '$post->transaction_id';
+			$row[] = '$post->transaction_id';
+
+			$data[] = $row;
+
+
 			//Output
 			$json_data = array(
 				"draw"            => intval($this->input->post('draw')), 
 				"recordsFiltered" => intval($totalFiltered), 
 				"data"            => $data,
+				"csrfHash" 		  => $this->security->get_csrf_hash()				
+			);
+			echo json_encode($json_data); 
+			exit();
+		}	
+    }
+
+	public function transaction_product()
+    {
+		log_message('error', print_r('transaction_product9', true));
+
+		if(permission_validation(PERMISSION_TRANSACTION_REPORT) == TRUE)
+		{
+			$limit = trim($this->input->post('length', TRUE));
+			$start = trim($this->input->post("start", TRUE));
+			$order = $this->input->post("order", TRUE);
+
+			//Table Columns
+			$columns = array( 
+				0 => 'a.transaction_id',
+				1 => 'a.bet_time',
+				//2 => 'b.username',
+				3 => 'a.game_provider_code',
+				//4 => 'a.game_type_code',
+				5 => 'a.game_code',
+				6 => 'a.bet_code',
+				7 => 'a.game_result',
+				8 => 'a.bet_amount',
+				9 => 'a.bet_amount_valid',
+				10 => 'a.win_loss',
+				11 => 'a.jackpot_win',
+				12 => 'a.status',
+				13 => 'a.game_real_code',
+				14 => 'a.bet_info',
+				15 => 'a.bet_update_info',
+			);		
+			$col = 0;
+			$dir = "";
+			if( ! empty($order))
+			{
+				foreach($order as $o)
+				{
+					$col = $o['column'];
+					$dir = $o['dir'];
+				}
+			}
+			if($dir != "asc" && $dir != "desc")
+			{
+				$dir = "desc";
+			}
+			if( ! isset($columns[$col]))
+			{
+				$order = $columns[0];
+			}
+			else
+			{
+				$order = $columns[$col];
+			}
+
+			$this->transaction_search(false);
+			$arr = $this->session->userdata('search_report_transactions');		
+			log_message('error', print_r('search_report_transactions4', true));
+			log_message('error', print_r($arr, true));		
+			$where = '';	
+			if( !empty($arr['from_date']))
+			{
+				// if( ! empty($arr['game_time_type'])){
+				// 	if($arr['game_time_type'] == TIME_TYPE_PAYOUT_TIME){
+				// 		$where .= ' AND a.payout_time >= ' . strtotime($arr['from_date']);
+				// 	}else if($arr['game_time_type'] == TIME_TYPE_BET_TIME){
+				// 		$where .= ' AND a.bet_time >= ' . strtotime($arr['from_date']);
+				// 	}else if($arr['game_time_type'] == TIME_TYPE_GAME_TIME){
+				// 	    $where .= ' AND a.game_time >= ' . strtotime($arr['from_date']);
+				// 	}else if($arr['game_time_type'] == TIME_TYPE_SATTLE_TIME){
+				// 	    $where .= ' AND a.sattle_time >= ' . strtotime($arr['from_date']);
+				// 	}else if($arr['game_time_type'] == TIME_TYPE_COMPARE_TIME){
+				// 	    $where .= ' AND a.compare_time >= ' . strtotime($arr['from_date']);
+				// 	}else if($arr['game_time_type'] == TIME_TYPE_INSERT_UPDATE_TIME){
+				// 	    $where .= ' AND a.created_date >= ' . strtotime($arr['from_date']);
+				// 	}else{
+				// 	    $where .= ' AND a.report_time >= ' . strtotime($arr['from_date']);
+				// 	}
+				// }else{
+				// 	$where .= ' AND a.payout_time >= ' . strtotime($arr['from_date']);
+				// }
+				$where .= ' AND a.bet_time >= ' . strtotime($arr['from_date']);
+			} else $where .= ' AND a.bet_time >= ' . strtotime(date('Y-m-d 00:00:00'));
+			if( ! empty($arr['to_date']))
+			{
+				$where .= ' AND a.bet_time <= ' . strtotime($arr['to_date']);
+			} else $where .= ' AND a.bet_time >= ' . strtotime(date('Y-m-d 21:59:59'));
+			// if( ! empty($arr['game_time_type'])){
+			// 	if($arr['game_time_type'] == TIME_TYPE_PAYOUT_TIME){
+			// 		$where .= ' AND a.status != ' . STATUS_CANCEL;
+			// 	}
+			// }
+			if( ! empty($arr['game_provider_code']))
+			{
+				$where .= " AND a.game_provider_code = '" . $arr['game_provider_code'] . "'";
+			}
+			// if( ! empty($arr['username']))
+			// {
+			// 	$where .= " AND b.username = '" . $arr['username'] . "'";
+			// }
+			// if( ! empty($arr['game_type_code']))
+			// {
+			// 	$where .= " AND a.game_type_code = '" . $arr['game_type_code'] . "'";
+			// }
+			// if( ! empty($arr['bet_id']))
+			// {
+			// 	$where .= " AND a.bet_id = '" . $arr['bet_id'] . "'";
+			// }
+			// if( ! empty($arr['game_code']))
+			// {
+			// 	$where .= " AND a.game_code = '" . $arr['game_code'] . "'";
+			// }
+			if(isset($arr['result_status']) && $arr['result_status']!==""){
+				$where .= " AND a.status = " . $arr['result_status'];
+			}
+			$select = implode(',', $columns);
+			$order = substr($order, 2);
+			$dbprefix = $this->db->dbprefix;
+			$posts = NULL;
+			// $query_string = "SELECT {$select} FROM {$dbprefix}transaction_report a, {$dbprefix}players b WHERE (a.player_id = b.player_id) $where";
+			// $query_string_2 = " ORDER by {$order} {$dir} LIMIT {$start}, {$limit}";
+
+			//get list Game active
+			$lstGameCodeActive = $this->game_model->get_code_game_list();
+			// log_message('error', print_r('9999', true));
+			// log_message('error', print_r($lstGameCodeActive, true));
+
+			$arrGameCodeActive = array();
+
+			// Duyệt qua mảng và lấy giá trị của key "game_code"
+			foreach ($lstGameCodeActive as $item) {
+				$arrGameCodeActive[] = "'".$item['game_code']."'"; // Thêm giá trị vào mảng $gameCodes
+			}
+			$strGameCodeActive = implode(', ', $arrGameCodeActive);
+
+			//log_message('error', print_r('ppo', true));
+			//log_message('error', print_r($arrGameCodeActive, true));
+
+			//get commission
+			$query_commission = "SELECT * FROM {$dbprefix}commissions";
+
+			$lstCommission = $this->db->query($query_commission)->row_array();
+			log_message('error', print_r('commixxion', true));
+			log_message('error', print_r($where, true));
+			//log_message('error', print_r($lstCommission, true));
+			//log_message('error', print_r($lstCommission['game_casino_comm'], true));
+
+
+			$query_string = "SELECT game_provider_code,	COUNT(transaction_id) AS total_records, SUM(bet_amount) AS bet_amount, SUM(bet_amount_valid) AS bet_amount_valid, SUM(win_loss) AS win_loss, SUM(jackpot_win) AS jackpot_win FROM {$dbprefix}transaction_report a, {$dbprefix}players b WHERE (a.player_id = b.player_id) AND game_provider_code  IN ($strGameCodeActive) $where";
+			$query_string_2 = " GROUP BY game_provider_code ORDER BY game_provider_code LIMIT {$start}, {$limit}";
+
+			$query = $this->db->query($query_string . $query_string_2);
+
+			log_message('error', print_r('transaction_listing', true));
+			log_message('error', print_r($this->db->last_query(), true));
+			if($query->num_rows() > 0)
+			{
+				$posts = $query->result();  
+			}
+			$query->free_result();
+			//Get total records
+			$query = $this->db->query($query_string);
+			$totalFiltered = $query->num_rows();
+			$query->free_result();
+
+			// //get list Game active
+			// $lstGameCodeActive = $this->game_model->get_code_game_list();
+			// log_message('error', print_r('9999', true));
+			// log_message('error', print_r($lstGameCodeActive, true));
+
+			// $arrGameCodeActive = array();
+
+			// // Duyệt qua mảng và lấy giá trị của key "game_code"
+			// foreach ($lstGameCodeActive as $item) {
+			// 	$arrGameCodeActive[] = $item['game_code']; // Thêm giá trị vào mảng $gameCodes
+			// }
+
+			// $strGameCodeActive = implode(', ', $arrGameCodeActive);
+			// log_message('error', print_r($strGameCodeActive, true));
+
+
+
+			//Prepare data
+			$data = array();
+			if(!empty($posts))
+			{
+				foreach ($posts as $key => $post)
+				{
+					if(!empty($post->bet_update_info)){
+						$result = $post->bet_update_info;
+					}else{
+						$result = $post->bet_info;
+					}
+					$row = array();
+					$row[] = $key + 1;
+					$percent = ($post->win_loss/$post->bet_amount_valid) * -1 * 100;
+					$commissionColunmName = commission_column_name(strtoupper($post->game_provider_code));
+					//log_message('error', print_r('commissionColunmName', true));
+					//log_message('error', print_r($commissionColunmName, true));
+					$commission = $commissionColunmName!= "-" ? $lstCommission[$commissionColunmName]:0;
+					//log_message('error', print_r($commission, true));
+					//$row[] = (($post->bet_time > 0) ? date('Y-m-d H:i:s', $post->bet_time) : '-');
+					//$row[] = $post->username;
+					$row[] = $this->lang->line('game_' . strtolower($post->game_provider_code));
+					$row[] = $post->total_records;
+					//$row[] = $this->lang->line(get_game_type($post->game_type_code));
+					//$row[] = game_code_decision($post->game_provider_code,$post->game_type_code,$result);
+					//$row[] = bet_code_decision($post->game_provider_code,$post->game_type_code,$result);
+					// $row[] = game_result_decision($post->game_provider_code,$post->game_type_code,$result); 
+					$row[] = '<span class="text-' . (($post->bet_amount_valid >= 0) ? ($post->bet_amount_valid == 0) ? 'dark' : 'dark' : 'danger') . '">' . number_format($post->bet_amount_valid, 2, '.', ',') . '</span>';$post->bet_amount_valid;
+					$row[] = '<span class="text-' . (($post->bet_amount >= 0) ? ($post->bet_amount == 0) ? 'dark' : 'dark' : 'danger') . '">' . number_format($post->bet_amount, 2, '.', ',') . '</span>';$post->bet_amount;
+					$row[] = '<span class="text-' . (($post->win_loss >= 0) ? ($post->win_loss == 0) ? 'dark' : 'primary' : 'danger') . '">' . number_format($post->win_loss, 2, '.', ',') . '</span>';
+					$row[] = '<span class="text-' . (($post->bet_amount + $post->win_loss >= 0) ? ($post->bet_amount + $post->win_loss == 0) ? 'dark' : 'primary' : 'danger') . '">' . number_format($post->bet_amount + $post->win_loss, 2, '.', ',') . '</span>'; //Payout Amount
+					$row[] = '<span class="text-' . (($commission * $post->bet_amount_valid /100 >= 0) ? ($commission * $post->bet_amount_valid /100 == 0) ? 'dark' : 'primary' : 'danger') . '">' . number_format($commission * $post->bet_amount_valid /100, 2, '.', ',') . '</span>'; //Commission
+					$row[] = '<span class="text-' . (($percent >= 0) ? ($percent == 0) ? 'dark' : 'primary' : 'danger') . '">' .number_format($percent, 2, '.', ',') . '</span>'; //%
+					// $row[] = '<span class="text-' . (($post->jackpot_win >= 0) ? ($post->jackpot_win == 0) ? 'dark' : 'dark' : 'danger') . '">' . number_format($post->jackpot_win, 2, '.', ',') . '</span>';
+					
+					$data[] = $row;
+				}
+			}
+			// $row = array();
+			// $row[] = '1';
+			// $row[] = '2';
+			// $row[] = '3';
+			// $row[] = '4';
+			// $row[] = '$post->transaction_id';
+			// $row[] = '$post->transaction_id';
+			// $row[] = '$post->transaction_id';
+			// $row[] = '$post->transaction_id';
+
+			// $data[] = $row;
+
+			#region total
+			$query_total = "SELECT SUM(bet_amount_valid) AS total_bet_amount_valid, SUM(bet_amount) AS total_bet_amount, SUM(win_loss) AS total_win_loss FROM {$dbprefix}transaction_report a, {$dbprefix}players b WHERE (a.player_id = b.player_id) AND game_provider_code  IN ($strGameCodeActive) $where";
+			$query_total_2 = " ORDER BY game_provider_code";
+
+			$result_total = $this->db->query($query_total.$query_total_2)->row_array();
+
+			//total commission
+			$totalCommission = 0;
+			$query_total_commission = "SELECT game_provider_code, SUM(bet_amount_valid) AS total_bet_amount_valid FROM {$dbprefix}transaction_report a, {$dbprefix}players b WHERE (a.player_id = b.player_id) AND game_provider_code  IN ($strGameCodeActive) $where";
+			$query_total_commission_2 = " GROUP BY game_provider_code";
+			
+			$query_total_commission = $this->db->query($query_total_commission.$query_total_commission_2);
+			log_message('error', print_r($this->db->last_query(), true));
+			if($query_total_commission->num_rows() > 0)
+			{
+				$posts_total_commission = $query_total_commission->result();  
+			}
+			if(!empty($posts_total_commission))
+			{
+				foreach ($posts_total_commission as $key => $post)
+				{
+					$commissionColunmName = commission_column_name(strtoupper($post->game_provider_code));
+					//log_message('error', print_r($commissionColunmName, true));
+					$commission = $commissionColunmName!= "-" ? $lstCommission[$commissionColunmName] : 0;
+
+					$totalCommission += ($commission * $post->total_bet_amount_valid/100);
+				}
+			}
+
+			//log_message('error', print_r('tatotalCommissionColunmName', true));
+			//log_message('error', print_r($totalCommission, true));
+			// log_message('error', print_r('result_total', true));
+			// log_message('error', print_r($this->db->last_query(), true));
+			// log_message('error', print_r($result_total, true));
+			// log_message('error', print_r($result_total['total_bet_amount'], true));
+
+
+			// $total_bet_amount = (($result_total['total_bet_amount'] > 0) ? $result_total['total_bet_amount'] : 0);
+			// $total_win_loss = (($result_total['total_win_loss'] > 0) ? $result_total['total_win_loss'] : 0);
+			// $total_rolling_amount = (($result_total['total_bet_amount_valid'] > 0) ? $result_total['total_bet_amount_valid'] : 0);
+			$totalPayoutAmount = $result_total['total_bet_amount'] + $result_total['total_win_loss'];
+			//$totalCommission *= $result_total['total_bet_amount_valid'] /100; 
+			$totalPercent = ($result_total['total_win_loss'] / $result_total['total_bet_amount_valid']) * -1 * 100;
+
+
+
+			$total_data = array(
+				'total_bet_amount' => '<span class="text-' . ($result_total['total_bet_amount'] >= 0 ? $result_total['total_bet_amount'] == 0 ? 'dark' : 'primary' : 'danger') . '">' . number_format($result_total['total_bet_amount'], 2, '.', ',') . '</span>',
+				'total_win_loss' => '<span class="text-' . ($result_total['total_win_loss'] >= 0 ? $result_total['total_win_loss'] == 0 ? 'dark' : 'primary' : 'danger') . '">' . number_format($result_total['total_win_loss'], 2, '.', ',') . '</span>',
+				'total_rolling_amount' => '<span class="text-' . ($result_total['total_bet_amount_valid'] >= 0 ? $result_total['total_bet_amount_valid'] == 0 ? 'dark' : 'primary' : 'danger') . '">' . number_format($result_total['total_bet_amount_valid'], 2, '.', ',') . '</span>',
+				//'total_jackpot_win' => (($row->total_jackpot_win > 0) ? $row->total_jackpot_win : 0),
+				'total_payout_amount' => '<span class="text-' . ($totalPayoutAmount >= 0 ? $totalPayoutAmount == 0 ? 'dark' : 'primary' : 'danger') . '">' . number_format($totalPayoutAmount, 2, '.', ',') . '</span>',
+				'total_commission' => '<span class="text-' . ($totalCommission >= 0 ? $totalCommission == 0 ? 'dark' : 'primary' : 'danger') . '">' . number_format($totalCommission, 2, '.', ',') . '</span>',
+				//'total_percent' => '<span class="text-' . ($totalPercent >= 0 ? $totalPercent == 0 ? 'dark' : 'primary' : 'danger') . '">' . number_format($totalPercent, 2, '.', ',') . '</span>'
+			);
+
+			#end region total		 
+
+			//Output
+			$json_data = array(
+				"draw"            => intval($this->input->post('draw')), 
+				"recordsFiltered" => intval($totalFiltered), 
+				"data"            => $data,
+				"totalData"       => $total_data,
 				"csrfHash" 		  => $this->security->get_csrf_hash()				
 			);
 			echo json_encode($json_data); 
@@ -2538,9 +2880,13 @@ class Report extends MY_Controller {
     public function winloss_sum(){
 		if(permission_validation(PERMISSION_WIN_LOSS_REPORT) == TRUE)
 		{
+			//log_message('error', print_r('winloss99', true));
 			$this->save_current_url('report/winloss_sum');
 			$data = quick_search();
 			$data['page_title'] = $this->lang->line('title_win_loss_report');
+			$data['username'] = $this->session->userdata('dataUserLogin')['username'];
+			$data['game_list'] = $this->game_model->get_game_list();
+			//log_message('error', print_r($data, true));
 			$this->session->unset_userdata('search_report_winloss_sum');
 			$this->load->view('winloss_sum_report_view', $data);
 		}
@@ -2637,6 +2983,8 @@ class Report extends MY_Controller {
 			exit();	
 		}
 	}
+
+
 	public function winloss_sum_listing($num = NULL, $username = NULL){
 		if(permission_validation(PERMISSION_WIN_LOSS_REPORT) == TRUE)
 		{
@@ -3093,6 +3441,7 @@ class Report extends MY_Controller {
 		}
 	}
 	public function winloss_sum_downline_total($num = NULL, $username = NULL){
+		log_message('error', print_r('winloss_sum_downline_total', true));
     	if(permission_validation(PERMISSION_WIN_LOSS_REPORT) == TRUE)
 		{
 			$arr = $this->session->userdata('search_report_winloss_sum');
@@ -3149,7 +3498,11 @@ class Report extends MY_Controller {
 			$total_bet = 0;
 			$total_bet_amount = 0;
 			$total_rolling_amount = 0;
-			if(!empty($arr) && !empty($userData)){
+			log_message('error', print_r('winloss_sum_downline_total', true));
+			log_message('error', print_r($arr, true));
+			log_message('error', print_r($userData, true));
+
+			if(!empty($userData)){
 				$json['status'] = EXIT_SUCCESS;
 				$upline_query_string = "SELECT * FROM {$dbprefix}users WHERE upline_ids LIKE '%," . $this->session->userdata('root_user_id') . ",%' AND upline = '{$username}' ORDER BY username ASC";
 				$upline_query = $this->db->query($upline_query_string);
@@ -3346,6 +3699,7 @@ class Report extends MY_Controller {
 						$json['total_data']['total_rolling_amount_live_casino'] += bcdiv($comm_arr[GAME_LIVE_CASINO]['total_rolling_amount'],1,2);
 						$json['total_data']['total_win_loss_live_casino'] += bcdiv($comm_arr[GAME_LIVE_CASINO]['total_win_loss'] * -1,1,2);
 						$json['total_data']['total_rolling_comission_live_casino'] += bcdiv($casino_comm,1,2);
+
 						$json['total_data']['total_rolling_amount_slot'] += bcdiv($comm_arr[GAME_SLOTS]['total_rolling_amount'],1,2);
 						$json['total_data']['total_win_loss_slot'] += bcdiv($comm_arr[GAME_SLOTS]['total_win_loss'] * -1,1,2);
 						$json['total_data']['total_rolling_comission_slot'] += bcdiv($slots_comm,1,2);
@@ -3800,6 +4154,109 @@ class Report extends MY_Controller {
 			exit();
 		}
 	}
+
+	public function report_winloss_game_type(){
+		if(permission_validation(PERMISSION_WIN_LOSS_REPORT_PLAYER) == TRUE)
+		{
+			$limit = trim($this->input->post('length', TRUE));
+			$start = trim($this->input->post("start", TRUE));
+			$order = $this->input->post("order", TRUE);
+
+			// log_message('error', print_r('$limit. $start.$order', true));
+			// log_message('error', print_r($limit, true));
+			// log_message('error', print_r($start, true));
+			// log_message('error', print_r($order, true));
+			
+			$dbprefix = $this->db->dbprefix;
+
+			$select = "game_type_code, SUM(total_bet) AS total_bet, SUM(bet_amount) AS total_bet_amount, SUM(win_loss) AS total_win_loss, SUM(bet_amount_valid) AS total_rolling_amount";			
+			$wl_query_string = "SELECT {$select} FROM {$dbprefix}win_loss_report GROUP BY game_type_code";
+			$wl_query = $this->db->query($wl_query_string);
+			//log_message('error', print_r('report_winloss_game_type', true));
+			//log_message('error', print_r($this->db->last_query(), true));
+
+			
+			$lstTotalGameType = $wl_query->result();
+			//log_message('error', print_r($lstTotalGameType, true));
+
+			
+			$lstGameType = get_game_type();
+			$totalFiltered = count($lstGameType);
+
+			//log_message('error', print_r($lstGameType, true));
+			$data = array();
+
+			$totalBet = 0;
+			$totalBetAmount = 0;
+			$totalWinLoss = 0;
+			$totalRollingAmount = 0;
+
+			$lstGameType = array_slice($lstGameType, $start, $limit);
+			if(!empty($lstGameType)){
+				foreach ($lstGameType as $key => $value) {
+
+					$row = array();
+					$row[] = $this->lang->line($value);
+
+					foreach($lstTotalGameType as $totalGameType)
+					{
+						//log_message('error', print_r($key, true));
+
+						//log_message('error', print_r($totalGameType->game_type_code, true));
+
+						if($key == $totalGameType->game_type_code){
+							$totalBet += $totalGameType->total_bet;
+							$totalBetAmount += $totalGameType->total_bet_amount;
+							$totalWinLoss += $totalGameType->total_win_loss;
+							$totalRollingAmount += $totalGameType->total_rolling_amount;
+
+							$row[] = '<span class="text-' . (($totalGameType->total_rolling_amount > 0) ? 'primary' : 'danger') . '">' . number_format($totalGameType->total_rolling_amount, 2, '.', ',') . '</span>';
+							$row[] = '<span class="text-' . (($totalGameType->total_win_loss > 0) ? 'primary' : 'danger') . '">' . number_format($totalGameType->total_win_loss, 2, '.', ',') . '</span>';
+							$row[] = 0;
+							$row[] = 0;
+							$data[] = $row;
+						}
+						else{
+							$row[] = 0;
+							$row[] = 0;
+							$row[] = 0;
+							$row[] = 0;
+							$data[] = $row;
+						}
+						
+						
+						break;
+					}
+
+					
+
+					//log_message('error', print_r($value, true));
+					//log_message('error', print_r($this->lang->line($value), true));
+				}
+			}
+
+			//Output
+			$row = array();
+			$row[] = '<span class="text-right">'. $this->lang->line('label_total').":" . '</span>' ;
+			$row[] = '<span class="text-' . (($totalRollingAmount > 0) ? 'primary' : 'danger') . '">' . number_format($totalRollingAmount, 2, '.', ',') . '</span>';
+			$row[] = '<span class="text-' . (($totalWinLoss > 0) ? 'primary' : 'danger') . '">' . number_format($totalWinLoss, 2, '.', ',') . '</span>';
+			$row[] = 0;
+			$row[] = 0;
+
+			$data[] = $row;
+
+
+
+			$json_data = array(
+				"draw"            => intval($this->input->post('draw')), 
+				"recordsFiltered" => intval($totalFiltered), 
+				"data"            => $data,
+				"csrfHash" 		  => $this->security->get_csrf_hash(),
+			);
+			echo json_encode($json_data); 
+			exit();
+		}
+	}
 	public function winloss_player_total(){
 		if(permission_validation(PERMISSION_WIN_LOSS_REPORT_PLAYER) == TRUE)
 		{
@@ -3820,7 +4277,7 @@ class Report extends MY_Controller {
 				'total_rtp' => 0,
 				'total_downline' => 0,
 			);
-			if(!empty($arr)){
+			//if(!empty($arr)){
 				$json['status'] = EXIT_SUCCESS;
 				$data = array();
 				//Get total
@@ -3888,7 +4345,7 @@ class Report extends MY_Controller {
 					}
 				}
 				$total_query->free_result();
-			}
+			//}
 			$this->output
 					->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -6964,6 +7421,7 @@ class Report extends MY_Controller {
 				$query_string = "SELECT {$select} FROM {$dbprefix}transaction_report a, {$dbprefix}players b WHERE (a.player_id = b.player_id) AND b.upline_ids LIKE '%," . $userdata['user_id'] . ",%' ESCAPE '!' $where";
 				$query_string_2 = " ORDER by {$order} {$dir} LIMIT {$start}, {$limit}";
 				$query = $this->db->query($query_string . $query_string_2);
+				//log_message('error', print_r($this->db->last_query(), true));
 				if($query->num_rows() > 0)
 				{
 					$posts = $query->result();  

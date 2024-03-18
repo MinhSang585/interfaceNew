@@ -2097,5 +2097,15 @@ $lang = array(
 	'title_add_marquee' => "Add Carousel",
 	'title_marquee_setting' => "Carousel Setting",
 	'title_optional_function' => "Optional Function",
+	'label_member' => "Member",
+	'label_product' => "Product",
+	'label_product_type' => "Product Type",
+	'label_agent_code' => "Agent Code",
+	'label_game_name' => "Game Name",
+	'label_total_record' => "Total Records",
+
+
+
+
 
 );
