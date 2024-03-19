@@ -190,7 +190,12 @@ function commission_column_name($code)
 		case "WM": $result = "provider_WMCasino_comm" ;break; //game_wm
 
 		//game
-
+		case "LC": $result = "game_casino_comm" ;break; //game_type_lc ("Live Casino")
+		case "SL": $result = "game_slots_comm" ;break; //game_type_sl (Slots)
+		case "SB": $result = "game_sport_comm" ;break; //game_type_sb (Sport)
+		case "CF": $result = "game_cf_comm" ;break; //game_type_sl (Slots)
+		case "OT": $result = "game_other_comm" ;break; //game_type_sl (OT)
+		
 		default:$result = "-";break;
 	}
 	//log_message('error', print_r($result, true));
