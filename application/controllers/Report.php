@@ -811,7 +811,7 @@ class Report extends MY_Controller {
 			$order = substr($order, 2);
 			$dbprefix = $this->db->dbprefix;
 			$posts = NULL;
-			
+
 			//get list Game active
 			$lstGameCodeActive = get_game_type();
 
@@ -843,7 +843,8 @@ class Report extends MY_Controller {
 			$query->free_result();
 			//Get total records
 			$query = $this->db->query($query_string);
-			$totalFiltered = count($lstGameCodeActive);
+			//$totalFiltered = count($lstGameCodeActive);
+			$totalFiltered = $query->num_rows();
 			$query->free_result();
 
 			//Prepare data
@@ -852,11 +853,12 @@ class Report extends MY_Controller {
 			if(!empty($posts))
 			{
 				$index = 0;
-				foreach($lstGameCodeActive as $k => $v){
-					$row = array();
-					$index +=1;
+				//foreach($lstGameCodeActive as $k => $v){
+					
 					foreach ($posts as $key => $post)
 					{
+						$row = array();
+						$index +=1;
 						$totalRecord = 0;
 						$bet_amount_valid = 0;
 						$bet_amount = 0;
@@ -865,32 +867,30 @@ class Report extends MY_Controller {
 						$commission = 0;
 						$percent = 0;
 						
-						if($k == $post->game_type_code){
-							$commissionColunmName = commission_column_name(strtoupper($post->game_type_code));
-							$commission = $commissionColunmName!= "-" ? $lstCommission[$commissionColunmName]:0;
-							$totalRecord = $post->total_records;
-							$bet_amount_valid = $post->bet_amount_valid;
-							$bet_amount = $post->bet_amount;
-							$win_loss = $post->win_loss;
-							$payout = $bet_amount + $win_loss;
-							$commission = $commission * $post->bet_amount_valid /100; //Commission
-							$percent = ($post->win_loss/$post->bet_amount_valid) * -1 * 100;
-							break;
-						}else {
-							
-						}
+						//if($k == $post->game_type_code){
+						$commissionColunmName = commission_column_name(strtoupper($post->game_type_code));
+						$commission = $commissionColunmName!= "-" ? $lstCommission[$commissionColunmName]:0;
+						$totalRecord = $post->total_records;
+						$bet_amount_valid = $post->bet_amount_valid;
+						$bet_amount = $post->bet_amount;
+						$win_loss = $post->win_loss;
+						$payout = $bet_amount + $win_loss;
+						$commission = $commission * $post->bet_amount_valid /100; //Commission
+						$percent = ($post->win_loss/$post->bet_amount_valid) * -1 * 100;
+						$row[] = $index;
+						$row[] = $this->lang->line(get_game_type($post->game_type_code));
+						$row[] = $totalRecord ??0;
+						$row[] = '<span class="text-' . (($bet_amount_valid >= 0) ? ($bet_amount_valid == 0) ? 'dark' : 'dark' : 'danger') . '">' . number_format($bet_amount_valid, 2, '.', ',') . '</span>';$bet_amount_valid;
+						$row[] = '<span class="text-' . (($bet_amount >= 0) ? ($bet_amount == 0) ? 'dark' : 'dark' : 'danger') . '">' . number_format($bet_amount, 2, '.', ',') . '</span>';$bet_amount;
+						$row[] = '<span class="text-' . (($win_loss >= 0) ? ($win_loss == 0) ? 'dark' : 'primary' : 'danger') . '">' . number_format($win_loss, 2, '.', ',') . '</span>';
+						$row[] = '<span class="text-' . (($payout >= 0) ? ($payout == 0) ? 'dark' : 'primary' : 'danger') . '">' . number_format($payout, 2, '.', ',') . '</span>'; //Payout Amount
+						$row[] = '<span class="text-' . (($commission >= 0) ? ($commission == 0) ? 'dark' : 'primary' : 'danger') . '">' . number_format($commission, 2, '.', ',') . '</span>'; //Commission
+						$row[] = '<span class="text-' . (($percent >= 0) ? ($percent == 0) ? 'dark' : 'primary' : 'danger') . '">' .number_format($percent, 2, '.', ',') . '</span>'; //%
+						
+						$data[] = $row;
+						
 					}
-					$row[] = $index;
-					$row[] = $this->lang->line(get_game_type($k));
-					$row[] = $totalRecord ??0;
-					$row[] = '<span class="text-' . (($bet_amount_valid >= 0) ? ($bet_amount_valid == 0) ? 'dark' : 'dark' : 'danger') . '">' . number_format($bet_amount_valid, 2, '.', ',') . '</span>';$bet_amount_valid;
-					$row[] = '<span class="text-' . (($bet_amount >= 0) ? ($bet_amount == 0) ? 'dark' : 'dark' : 'danger') . '">' . number_format($bet_amount, 2, '.', ',') . '</span>';$bet_amount;
-					$row[] = '<span class="text-' . (($win_loss >= 0) ? ($win_loss == 0) ? 'dark' : 'primary' : 'danger') . '">' . number_format($win_loss, 2, '.', ',') . '</span>';
-					$row[] = '<span class="text-' . (($payout >= 0) ? ($payout == 0) ? 'dark' : 'primary' : 'danger') . '">' . number_format($payout, 2, '.', ',') . '</span>'; //Payout Amount
-					$row[] = '<span class="text-' . (($commission >= 0) ? ($commission == 0) ? 'dark' : 'primary' : 'danger') . '">' . number_format($commission, 2, '.', ',') . '</span>'; //Commission
-					$row[] = '<span class="text-' . (($percent >= 0) ? ($percent == 0) ? 'dark' : 'primary' : 'danger') . '">' .number_format($percent, 2, '.', ',') . '</span>'; //%
-					$data[] = $row;
-				}
+				//}
 			}
 
 			#region total
