@@ -35,11 +35,8 @@ class Report extends MY_Controller {
 	}
 	public function transaction_search($isBtn = true)
 	{
-		log_message('error', print_r('transaction_search1', true));
-		log_message('error', print_r($isBtn, true));
 		if(permission_validation(PERMISSION_TRANSACTION_REPORT) == TRUE)
 		{
-			log_message('error', print_r('PERMISSION_TRANSACTION_REPORT', true));
 			//Initial output data
 			$json = array(
 					'status' => EXIT_ERROR, 
@@ -71,10 +68,8 @@ class Report extends MY_Controller {
 			$this->form_validation->set_rules($config);
 			$this->form_validation->set_error_delimiters('', '');
 			//Form validation
-			log_message('error', print_r('valiedate', true));
 			if ($this->form_validation->run() == TRUE)
 			{
-				log_message('error', print_r('validateOK', true));
 				$from_date = strtotime(trim($this->input->post('from_date', TRUE)));
 				$to_date = strtotime(trim($this->input->post('to_date', TRUE)));
 				$days = cal_days_in_month(CAL_GREGORIAN, date('n', $from_date), date('Y', $from_date));
@@ -86,7 +81,6 @@ class Report extends MY_Controller {
 				}
 				else
 				{
-					log_message('error', print_r('ppp', true));
 					$data = array( 
 						'from_date' => trim($this->input->post('from_date', TRUE)),
 						'to_date' => trim($this->input->post('to_date', TRUE)),
@@ -117,8 +111,7 @@ class Report extends MY_Controller {
 					$json['msg'] = $error['to_date'];
 				}
 			}
-			log_message('error', print_r('nnnngnghhg', true));
-			log_message('error', print_r($data, true));
+
 			if($isBtn)
 			{
 				//Output
@@ -128,23 +121,7 @@ class Report extends MY_Controller {
 					->set_output(json_encode($json))
 					->_display();
 				exit();	
-			}
-
-			// else {
-			// 	log_message('error', print_r('end_transaction_search', true));
-			// 	// $data = array( 
-			// 	// 	'from_date' => trim($this->input->post('from_date', TRUE)),
-			// 	// 	'to_date' => trim($this->input->post('to_date', TRUE)),
-			// 	// 	'game_provider_code' => trim($this->input->post('game_provider_code', TRUE)),
-			// 	// 	'username' => trim($this->input->post('username', TRUE)),
-			// 	// 	'game_type_code' => trim($this->input->post('game_type_code', TRUE)),
-			// 	// 	'bet_id' => trim($this->input->post('bet_id', TRUE)),
-			// 	// 	'game_code' => trim($this->input->post('game_code', TRUE)),
-			// 	// 	'game_time_type' => trim($this->input->post('game_time_type', TRUE)),
-			// 	// 	'result_status' => trim($this->input->post('result_status', TRUE)),
-			// 	// );
-			// 	// $this->session->set_userdata('search_report_transactions', $data);
-			// }
+			}	
 		}
 	}
 	public function testing_transaction_listing(){
@@ -365,8 +342,6 @@ class Report extends MY_Controller {
 			$query_string = "SELECT {$select} FROM {$dbprefix}transaction_report a, {$dbprefix}players b WHERE (a.player_id = b.player_id) AND b.upline_ids LIKE '%," . $this->session->userdata('root_user_id') . ",%' ESCAPE '!' $where";
 			$query_string_2 = " ORDER by {$order} {$dir} LIMIT {$start}, {$limit}";
 			$query = $this->db->query($query_string . $query_string_2);
-			log_message('error', print_r('transaction_listing', true));
-			log_message('error', print_r($this->db->last_query(), true));
 			if($query->num_rows() > 0)
 			{
 				$posts = $query->result();  
@@ -409,19 +384,6 @@ class Report extends MY_Controller {
 					$data[] = $row;
 				}
 			}
-			// $row = array();
-			// $row[] = '1';
-			// $row[] = '2';
-			// $row[] = '3';
-			// $row[] = '4';
-			// $row[] = '$post->transaction_id';
-			// $row[] = '$post->transaction_id';
-			// $row[] = '$post->transaction_id';
-			// $row[] = '$post->transaction_id';
-
-			// $data[] = $row;
-
-
 			//Output
 			$json_data = array(
 				"draw"            => intval($this->input->post('draw')), 
@@ -436,7 +398,6 @@ class Report extends MY_Controller {
 
 	public function transaction_product()
     {
-		log_message('error', print_r('transaction_product9', true));
 
 		if(permission_validation(PERMISSION_TRANSACTION_REPORT) == TRUE)
 		{
@@ -488,8 +449,6 @@ class Report extends MY_Controller {
 
 			$this->transaction_search(false);
 			$arr = $this->session->userdata('search_report_transactions');		
-			log_message('error', print_r('search_report_transactions4', true));
-			log_message('error', print_r($arr, true));		
 			$where = '';	
 			if( !empty($arr['from_date']))
 			{
@@ -573,8 +532,6 @@ class Report extends MY_Controller {
 			$query_commission = "SELECT * FROM {$dbprefix}commissions";
 
 			$lstCommission = $this->db->query($query_commission)->row_array();
-			log_message('error', print_r('commixxion', true));
-			log_message('error', print_r($where, true));
 			//log_message('error', print_r($lstCommission, true));
 			//log_message('error', print_r($lstCommission['game_casino_comm'], true));
 
@@ -584,8 +541,6 @@ class Report extends MY_Controller {
 
 			$query = $this->db->query($query_string . $query_string_2);
 
-			log_message('error', print_r('transaction_listing', true));
-			log_message('error', print_r($this->db->last_query(), true));
 			if($query->num_rows() > 0)
 			{
 				$posts = $query->result();  
@@ -675,7 +630,6 @@ class Report extends MY_Controller {
 			$query_total_commission_2 = " GROUP BY game_provider_code";
 			
 			$query_total_commission = $this->db->query($query_total_commission.$query_total_commission_2);
-			log_message('error', print_r($this->db->last_query(), true));
 			if($query_total_commission->num_rows() > 0)
 			{
 				$posts_total_commission = $query_total_commission->result();  
@@ -736,7 +690,6 @@ class Report extends MY_Controller {
 
 	public function transaction_type()
     {
-		log_message('error', print_r('transaction_type', true));
 
 		if(permission_validation(PERMISSION_TRANSACTION_REPORT) == TRUE)
 		{
@@ -788,8 +741,6 @@ class Report extends MY_Controller {
 
 			$this->transaction_search(false);
 			$arr = $this->session->userdata('search_report_transactions');		
-			log_message('error', print_r('search_report_transactions5', true));
-			log_message('error', print_r($arr, true));		
 			$where = '';	
 			if( !empty($arr['from_date']))
 			{
@@ -898,8 +849,6 @@ class Report extends MY_Controller {
 			$query_total_2 = " ORDER BY game_type_code";
 
 			$result_total = $this->db->query($query_total.$query_total_2)->row_array();
-			log_message('error', print_r('uyrtt', true));
-			log_message('error', print_r($this->db->last_query(), true));
 
 
 			//total commission
@@ -908,8 +857,6 @@ class Report extends MY_Controller {
 			$query_total_commission_2 = " GROUP BY game_type_code";
 			
 			$query_total_commission = $this->db->query($query_total_commission.$query_total_commission_2);
-			log_message('error', print_r('total99', true));
-			log_message('error', print_r($this->db->last_query(), true));
 			if($query_total_commission->num_rows() > 0)
 			{
 				$posts_total_commission = $query_total_commission->result();  
@@ -960,7 +907,7 @@ class Report extends MY_Controller {
 			exit();
 		}	
     }
-	
+
     public function transaction_total(){
     	if(permission_validation(PERMISSION_TRANSACTION_REPORT) == TRUE)
 		{
@@ -3108,14 +3055,13 @@ class Report extends MY_Controller {
     public function winloss_sum(){
 		if(permission_validation(PERMISSION_WIN_LOSS_REPORT) == TRUE)
 		{
-			//log_message('error', print_r('winloss99', true));
 			$this->save_current_url('report/winloss_sum');
 			$data = quick_search();
 			$data['page_title'] = $this->lang->line('title_win_loss_report');
 			$data['username'] = $this->session->userdata('dataUserLogin')['username'];
 			$data['game_list'] = $this->game_model->get_game_list();
-			//log_message('error', print_r($data, true));
 			$this->session->unset_userdata('search_report_winloss_sum');
+			//log_message('error', print_r($data, true));
 			$this->load->view('winloss_sum_report_view', $data);
 		}
 		else
@@ -3211,8 +3157,6 @@ class Report extends MY_Controller {
 			exit();	
 		}
 	}
-
-
 	public function winloss_sum_listing($num = NULL, $username = NULL){
 		if(permission_validation(PERMISSION_WIN_LOSS_REPORT) == TRUE)
 		{
@@ -3669,7 +3613,6 @@ class Report extends MY_Controller {
 		}
 	}
 	public function winloss_sum_downline_total($num = NULL, $username = NULL){
-		log_message('error', print_r('winloss_sum_downline_total', true));
     	if(permission_validation(PERMISSION_WIN_LOSS_REPORT) == TRUE)
 		{
 			$arr = $this->session->userdata('search_report_winloss_sum');
@@ -3726,10 +3669,6 @@ class Report extends MY_Controller {
 			$total_bet = 0;
 			$total_bet_amount = 0;
 			$total_rolling_amount = 0;
-			log_message('error', print_r('winloss_sum_downline_total', true));
-			log_message('error', print_r($arr, true));
-			log_message('error', print_r($userData, true));
-
 			if(!empty($userData)){
 				$json['status'] = EXIT_SUCCESS;
 				$upline_query_string = "SELECT * FROM {$dbprefix}users WHERE upline_ids LIKE '%," . $this->session->userdata('root_user_id') . ",%' AND upline = '{$username}' ORDER BY username ASC";
@@ -3927,7 +3866,6 @@ class Report extends MY_Controller {
 						$json['total_data']['total_rolling_amount_live_casino'] += bcdiv($comm_arr[GAME_LIVE_CASINO]['total_rolling_amount'],1,2);
 						$json['total_data']['total_win_loss_live_casino'] += bcdiv($comm_arr[GAME_LIVE_CASINO]['total_win_loss'] * -1,1,2);
 						$json['total_data']['total_rolling_comission_live_casino'] += bcdiv($casino_comm,1,2);
-
 						$json['total_data']['total_rolling_amount_slot'] += bcdiv($comm_arr[GAME_SLOTS]['total_rolling_amount'],1,2);
 						$json['total_data']['total_win_loss_slot'] += bcdiv($comm_arr[GAME_SLOTS]['total_win_loss'] * -1,1,2);
 						$json['total_data']['total_rolling_comission_slot'] += bcdiv($slots_comm,1,2);
@@ -4133,7 +4071,7 @@ class Report extends MY_Controller {
 			redirect('home');
 		}
     }
-    public function winloss_player_search(){
+    public function winloss_player_search($isBtn = true){
 		if(permission_validation(PERMISSION_WIN_LOSS_REPORT_PLAYER) == TRUE)
 		{
 			//Initial output data
@@ -4220,12 +4158,14 @@ class Report extends MY_Controller {
 				}
 			}
 			//Output
-			$this->output
+			if($isBtn){
+				$this->output
 					->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
 					->set_output(json_encode($json))
 					->_display();
 			exit();	
+			}
 		}
 	}
 	public function winloss_player_listing(){
@@ -4239,6 +4179,8 @@ class Report extends MY_Controller {
 			$limit = trim($this->input->post('length', TRUE));
 			$start = trim($this->input->post("start", TRUE));
 			$order = $this->input->post("order", TRUE);
+
+			$this->winloss_player_search(false);
 			$arr = $this->session->userdata('search_report_winloss_player');
 			$dbprefix = $this->db->dbprefix;
 			$data = array();
@@ -4355,7 +4297,8 @@ class Report extends MY_Controller {
 					}
 					$row = array();
 					$row[] = $upline_row->player_id;
-					$row[] = '<a href="javascript:void(0);" onclick="showGameProvider(\'' . $upline_row->username . '\')">' . $upline_row->username . '</a>';
+					//$row[] = '<a href="javascript:void(0);" onclick="showGameProvider(\'' . $upline_row->username . '\')">' . $upline_row->username . '</a>';
+					$row[] = $upline_row->username;
 					$row[] = $tag;
 					$row[] = $level;
 					$row[] = (( ! empty($upline_row->bank_account_name)) ? $upline_row->bank_account_name : '-');
@@ -4367,22 +4310,29 @@ class Report extends MY_Controller {
 				}
 			}
 			$total_query->free_result();
-			$upline_total_query_string = "SELECT {$select} FROM {$dbprefix}win_loss_report a, {$dbprefix}players b WHERE a.player_id = b.player_id $where GROUP BY a.player_id";
+			$upline_total_query_string = "SELECT Count(a.player_id) AS total_record, SUM(a.bet_amount) AS total_bet_amount,	SUM(a.bet_amount_valid) AS total_rolling_amount, SUM(a.win_loss) AS total_win_loss FROM {$dbprefix}win_loss_report a, {$dbprefix}players b WHERE a.player_id = b.player_id $where";
 			$upline_total_query = $this->db->query($upline_total_query_string);
-			$totalFiltered = $upline_total_query->num_rows();
+			$resultTotal = $upline_total_query->row();
+			$totalFiltered = $resultTotal->total_record;
+			//$totalFiltered = $upline_total_query->num_rows();
 			$upline_total_query->free_result();
 			//Output
+			$total_data = array(
+				'total_bet_amount' => '<span class="text-' . ($resultTotal->total_bet_amount >= 0 ? $resultTotal->total_bet_amount == 0 ? 'dark' : 'primary' : 'danger') . '">' . number_format($resultTotal->total_bet_amount, 2, '.', ',') . '</span>',
+				'total_win_loss' => '<span class="text-' . ($resultTotal->total_win_loss >= 0 ? $resultTotal->total_win_loss == 0 ? 'dark' : 'primary' : 'danger') . '">' . number_format($resultTotal->total_win_loss, 2, '.', ',') . '</span>',
+				'total_rolling_amount' => '<span class="text-' . ($resultTotal->total_rolling_amount >= 0 ? $resultTotal->total_rolling_amount == 0 ? 'dark' : 'primary' : 'danger') . '">' . number_format($resultTotal->total_rolling_amount, 2, '.', ',') . '</span>',
+			);
 			$json_data = array(
 				"draw"            => intval($this->input->post('draw')), 
 				"recordsFiltered" => intval($totalFiltered), 
 				"data"            => $data,
+				"total_data"       => $total_data,
 				"csrfHash" 		  => $this->security->get_csrf_hash(),
 			);
 			echo json_encode($json_data); 
 			exit();
 		}
 	}
-
 	public function report_winloss_game_type(){
 		if(permission_validation(PERMISSION_WIN_LOSS_REPORT_PLAYER) == TRUE)
 		{
@@ -4400,18 +4350,18 @@ class Report extends MY_Controller {
 			$select = "game_type_code, SUM(total_bet) AS total_bet, SUM(bet_amount) AS total_bet_amount, SUM(win_loss) AS total_win_loss, SUM(bet_amount_valid) AS total_rolling_amount";			
 			$wl_query_string = "SELECT {$select} FROM {$dbprefix}win_loss_report GROUP BY game_type_code";
 			$wl_query = $this->db->query($wl_query_string);
-			//log_message('error', print_r('report_winloss_game_type', true));
-			//log_message('error', print_r($this->db->last_query(), true));
+			// log_message('error', print_r('report_winloss_game_type', true));
+			// log_message('error', print_r($this->db->last_query(), true));
 
 			
 			$lstTotalGameType = $wl_query->result();
-			//log_message('error', print_r($lstTotalGameType, true));
+			// log_message('error', print_r($lstTotalGameType, true));
 
 			
 			$lstGameType = get_game_type();
 			$totalFiltered = count($lstGameType);
 
-			//log_message('error', print_r($lstGameType, true));
+			// log_message('error', print_r($lstGameType, true));
 			$data = array();
 
 			$totalBet = 0;
@@ -4430,7 +4380,7 @@ class Report extends MY_Controller {
 					{
 						//log_message('error', print_r($key, true));
 
-						//log_message('error', print_r($totalGameType->game_type_code, true));
+						// log_message('error', print_r($totalGameType->game_type_code, true));
 
 						if($key == $totalGameType->game_type_code){
 							$totalBet += $totalGameType->total_bet;
@@ -4458,14 +4408,14 @@ class Report extends MY_Controller {
 
 					
 
-					//log_message('error', print_r($value, true));
-					//log_message('error', print_r($this->lang->line($value), true));
+					// log_message('error', print_r($value, true));
+					// log_message('error', print_r($this->lang->line($value), true));
 				}
 			}
 
 			//Output
 			$row = array();
-			$row[] = '<span class="text-right">'. $this->lang->line('label_total').":" . '</span>' ;
+			$row[] = '<span style="font-weight: 700; text-align: right;".">'. $this->lang->line('label_total').":" . '</span>' ;
 			$row[] = '<span class="text-' . (($totalRollingAmount > 0) ? 'primary' : 'danger') . '">' . number_format($totalRollingAmount, 2, '.', ',') . '</span>';
 			$row[] = '<span class="text-' . (($totalWinLoss > 0) ? 'primary' : 'danger') . '">' . number_format($totalWinLoss, 2, '.', ',') . '</span>';
 			$row[] = 0;
@@ -7649,7 +7599,6 @@ class Report extends MY_Controller {
 				$query_string = "SELECT {$select} FROM {$dbprefix}transaction_report a, {$dbprefix}players b WHERE (a.player_id = b.player_id) AND b.upline_ids LIKE '%," . $userdata['user_id'] . ",%' ESCAPE '!' $where";
 				$query_string_2 = " ORDER by {$order} {$dir} LIMIT {$start}, {$limit}";
 				$query = $this->db->query($query_string . $query_string_2);
-				//log_message('error', print_r($this->db->last_query(), true));
 				if($query->num_rows() > 0)
 				{
 					$posts = $query->result();  

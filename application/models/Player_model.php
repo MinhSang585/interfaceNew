@@ -353,6 +353,27 @@ class Player_model extends CI_Model {
 		$wl_query->free_result();
 		return $result;
 	}
+
+	public function player_win_loss($date = null){
+		$timestamp = strtotime($date);
+		$result = NULL;
+		$start_date = strtotime(date('Y-m-d H:i:s', $timestamp));
+		$end_date = strtotime(date('Y-m-d 23:59:59', $timestamp));
+		$dbprefix = $this->db->dbprefix;
+		$where = "";
+		$where .= ' AND a.status = ' . STATUS_COMPLETE;
+		$where .= ' AND a.payout_time >= ' . $start_date;
+		$where .= ' AND a.payout_time <= ' . $end_date;
+		$select = "COUNT(a.transaction_id) AS total_bet, COALESCE(SUM(a.bet_amount),0) AS total_bet_amount, COALESCE(SUM(a.win_loss),0) AS total_win_loss, COALESCE(SUM(a.bet_amount_valid),0) AS total_rolling_amount";			
+		$wl_query_string = "SELECT {$select} FROM {$dbprefix}transaction_report a, {$dbprefix}players b WHERE (a.player_id = b.player_id) AND b.upline_ids LIKE '%," . $this->session->userdata('root_user_id') . ",%' ESCAPE '!' $where";
+		$wl_query = $this->db->query($wl_query_string);
+		if($wl_query->num_rows() > 0)
+		{
+			$result =  $wl_query->row_array();  
+		}
+		$wl_query->free_result();
+		return $result;
+	}
 	public function player_all_win_loss($player_id = NULL){
 		$result = NULL;
 		$dbprefix = $this->db->dbprefix;

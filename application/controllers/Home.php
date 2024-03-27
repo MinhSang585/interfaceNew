@@ -4,7 +4,7 @@ class Home extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('deposit_model', 'player_model', 'withdrawal_model','bonus_model','promotion_model','miscellaneous_model'));
+		$this->load->model(array('deposit_model', 'player_model', 'withdrawal_model','bonus_model','promotion_model','miscellaneous_model','user_model','transaction_model','player_promotion_model'));
 	}
 	public function index()
 	{
@@ -26,79 +26,72 @@ class Home extends MY_Controller {
 			$last30Days = 
 			[
 				[
-				  'name' => 'Last',
 				  'data' => [5, -33, 4, 7, 2],
-				],
-				[
-				  'name' => 'Current',
-				  'data' => [2, -2, -3, 2, 1],
-				],
+				]
 			];
 
 			$lastMonth = 
 			[
 				[
-				  'name' => 'Last',
 				  'data' => [56, -33, 4, 7, 2],
-				],
-				[
-				  'name' => 'Current',
-				  'data' => [28, -2, -3, 2, 1],
-				],
+				]
 			];
 
 			$yesterday = 
 			[
 				[
-				  'name' => 'Last',
-				  'data' => [7, -3, 3, -7, 2],
-				],
-				[
-				  'name' => 'Current',
-				  'data' => [18, -2, -13, 2, 1],
-				],
+				  'data' => [171, -3, 3, -7, 2],
+				]
 			];
 
 			$today = 
 			[
 				[
-				  'name' => 'Last',
-				  'data' => [2, -3, 5, -7, 2],
+				  'name' => 'today',
+				  'data' => [2, -2.6, 1.3, -3, 6],
 				],
 				[
-				  'name' => 'Current',
-				  'data' => [10, -2, -3, 2, 1],
+				  'name' => 'yesterday',
+				  'data' => [1, -3.6, 1.3, -2, 3],
 				],
 			];
 
 			$thisWeek = 
 			[
 				[
-				  'name' => 'Last',
 				  'data' => [12, -5, 5, -8, 2],
-				],
-				[
-				  'name' => 'Current',
-				  'data' => [4, -6, -3, 11, 1],
-				],
+				]
 			];
 
 			$thisMonth = 
 			[
 				[
-				  'name' => 'Last',
 				  'data' => [15, -5, 15, -8, 2],
-				],
-				[
-				  'name' => 'Current',
-				  'data' => [14, -16, -3, 10, 1],
-				],
+				]
 			];
-			  
+
 			$data['last30Days'] = json_encode($last30Days);
 			$data['lastMonth'] = json_encode($lastMonth);
 			$data['yesterday'] = json_encode($yesterday);
 			$data['today'] = json_encode($today);
+			$data['arrToday'] = $today;
+			
+			$data['depositDate'] = $this->depositDate();
+			$data['promotionDate'] = $this->promotionDate();
+			$data['profitDate'] = $this->profitDate();
+			$data['withdrawlDate'] = $this->withdrawlDate();
+			$data['bonusDate'] = $this->bonusDate();
+
+			$data['depositMonth'] = $this->depositMonth();
+			$data['promotionMonth'] = $this->promotionMonth();
+			$data['profitMonth'] = $this->profitMonth();
+			$data['withdrawlMonth'] = $this->withdrawlMonth();
+			$data['bonusMonth'] = $this->bonusMonth();
+
+			$data['arrDayProfit'] =
+			[
+				[['20-Mar-24' , 1], ['20-Mar-24',-2.1], ['21-Mar-24', 3], ['22-Mar-24',-5], ['23-Mar-24',-7]]		
+			];
 			$data['thisWeek'] = json_encode($thisWeek);
 			$data['thisMonth'] = json_encode($thisMonth);
 			
@@ -135,6 +128,15 @@ class Home extends MY_Controller {
 			];
 			$this->load->view('home_page', $data);
 		}	
+	}
+
+	public function profit() {
+		$data['day'] = 
+				[['19-Mar-24' , 1], ['20-Mar-24',-2.1], ['21-Mar-24', 3], ['22-Mar-24',-5], ['23-Mar-24',-7]]		
+			;
+		json_output($data);
+		free_array($data);	
+		exit();	
 	}
 	public function verify_session()
 	{
@@ -1091,5 +1093,175 @@ class Home extends MY_Controller {
 		}
 		echo json_encode($json); 
 		exit();
+	}
+
+	public function getCurrentWeekDates() {
+		$monday_of_current_week = date('Y-m-d', strtotime('monday this week'));
+		$days_of_week[] = $monday_of_current_week;
+
+		for ($i = 1; $i <= 6; $i++) {
+			$days_of_week[] = date('Y-m-d', strtotime("+$i day", strtotime($monday_of_current_week)));
+		}
+
+		return $days_of_week;
+	}
+
+	function getFirstAndLastDayOfMonth() {
+		$currentYear = date('Y');
+		$monthDates = array();
+		for ($month = 1; $month <= 12; $month++) {
+			$firstDayOfMonth = date('Y-m-01', strtotime("$currentYear-$month-01"));
+			$lastDayOfMonth = date('Y-m-t', strtotime("$currentYear-$month-01"));
+	
+			$monthDates[] = array(
+				'month' => date('M', strtotime($firstDayOfMonth)).'-'.substr(date('Y'), -2),
+				'first_day' => $firstDayOfMonth,
+				'last_day' => $lastDayOfMonth
+			);
+		}
+	
+		return $monthDates;
+	}
+
+	public function depositDate() {
+		$depositDate = [];
+		$totalDepositDate = 0;
+		foreach ($this->getCurrentWeekDates() as $key => $date) {
+			$deposit 	= $this->deposit_model->total_only_agent_deposit($date, $date);
+			$depositDate[] = [$date, $deposit['total']];
+			$totalDepositDate +=  $deposit['total'];
+		}
+
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'depositDate' => $depositDate, 'totalDepositDate' => $totalDepositDate);
+		return $json;
+	}
+
+	public function depositMonth() {
+		$depositMonth = [];
+		$totalDepositMonth = 0;
+		foreach ($this->getFirstAndLastDayOfMonth() as $key => $month) {
+			$deposit 	= $this->deposit_model->total_only_agent_deposit($month['first_day'], $month['last_day']);
+			$depositMonth[] = [$month['month'], $deposit['total']];
+			$totalDepositMonth +=  $deposit['total'];
+		}
+
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'depositMonth' => $depositMonth, 'totalDepositMonth' => $totalDepositMonth);
+		return $json;
+	}
+
+	public function promotionDate() {
+		$promotionDate = [];
+		$totalPromotionDate = 0;
+		foreach ($this->getCurrentWeekDates() as $key => $date) {
+			$promotion 	= null; //$this->promotion_model->today_total_promotion($date, $date);
+			$promotionDate[] = [$date, $promotion['total']];
+			$totalPromotionDate += $promotion['total'];
+		}
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'promotionDate' => $promotionDate, 'totalPromotionDate' => $totalPromotionDate);
+		return $json;
+	}
+
+	public function promotionMonth() {
+		$promotionMonth = [];
+		$totalPromotionMonth = 0;
+		foreach ($this->getFirstAndLastDayOfMonth() as $key => $month) {
+			$promotion 	= null; //$this->promotion_model->today_total_promotion($month['first_day'], $month['last_day']);
+			$promotionMonth[] = [$month['month'], $promotion['total']];
+			$totalPromotionMonth += $promotion['total'];
+		}
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'promotionMonth' => $promotionMonth, 'totalPromotionMonth' => $totalPromotionMonth);
+		return $json;
+	}
+
+	public function profitDate() {
+		$userData 	= $this->user_model->get_user_data($this->session->userdata('root_user_id'));
+		$profitDate = [];
+		$totalProfitDate = 0;
+		foreach ($this->getCurrentWeekDates() as $key => $date) {
+
+			$getTotalWinLoss = $this->transaction_model->getTotalWinLoss($userData['user_id'], $date, $date);	
+			$getRewardAmount 	= $this->player_promotion_model->getRewardAmount($this->session->userdata('root_user_id'), $date, $date);
+
+			$possess_win_loss = (($getTotalWinLoss['total_win_loss'] * $userData['possess']) / 100);
+			$possess_promotion = (($getRewardAmount['total_reward_amount'] * $userData['possess']) / 100);
+
+			$value = $possess_win_loss*-1 + $possess_promotion*-1;
+			$profitDate[] = [$date, $value];
+			$totalProfitDate += $value;
+		}
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'profitDate' => $profitDate, 'totalProfitDate' => $totalProfitDate);
+		return $json;
+	}
+
+	public function profitMonth() {
+		$userData 	= $this->user_model->get_user_data($this->session->userdata('root_user_id'));
+		$profitMonth = [];
+		$totalProfitMonth = 0;
+		foreach ($this->getFirstAndLastDayOfMonth() as $key => $month) {
+
+			$getTotalWinLoss = $this->transaction_model->getTotalWinLoss($userData['user_id'], $month['first_day'], $month['last_day']);	
+			$getRewardAmount 	= $this->player_promotion_model->getRewardAmount($this->session->userdata('root_user_id'), $month['first_day'], $month['last_day']);
+
+			$possess_win_loss = (($getTotalWinLoss['total_win_loss'] * $userData['possess']) / 100);
+			$possess_promotion = (($getRewardAmount['total_reward_amount'] * $userData['possess']) / 100);
+
+			$value = $possess_win_loss*-1 + $possess_promotion*-1;
+			$profitMonth[] = [$month['month'], $value];
+			$totalProfitMonth += $value;
+		}
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'profitMonth' => $profitMonth, 'totalProfitMonth' => $totalProfitMonth);
+		return $json;
+	}
+
+	public function withdrawlDate() {
+		$withdrawlDate = [];
+		$totalWithdrawlDate = 0;
+		foreach ($this->getCurrentWeekDates() as $key => $date) {
+			$withdrawal 	= $this->withdrawal_model->today_total_only_agent_withdrawal($date, $date);
+			$withdrawlDate[] = [$date, $withdrawal['total']];
+			$totalWithdrawlDate += $withdrawal['total'];
+		}
+		
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'withdrawlDate' => $withdrawlDate, 'totalWithdrawlDate' => $totalWithdrawlDate);
+		return $json;
+	}
+
+	public function withdrawlMonth() {
+		$withdrawlMonth = [];
+		$totalWithdrawlMonth = 0;
+		foreach ($this->getFirstAndLastDayOfMonth() as $key => $month) {
+			$withdrawal 	= $this->withdrawal_model->today_total_only_agent_withdrawal($month['first_day'], $month['last_day']);
+			$withdrawlMonth[] = [$month['month'], $withdrawal['total']];
+			$totalWithdrawlMonth += $withdrawal['total'];
+		}
+		
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'withdrawlMonth' => $withdrawlMonth, 'totalWithdrawlMonth' => $totalWithdrawlMonth);
+		return $json;
+	}
+
+	public function bonusDate() {
+		$bonusDate = [];
+		$totalBonusDate = 0;
+		foreach ($this->getCurrentWeekDates() as $key => $date) {
+			$bonus 	= $this->bonus_model->today_total_bonus($date, $date);
+			$bonusDate[] = [$date, (float)$bonus['total']];
+			$totalBonusDate += $bonus['total'];
+		}
+		
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'bonusDate' => $bonusDate, 'totalBonusDate' => $totalBonusDate);
+		return $json;
+	}
+
+	public function bonusMonth() {
+		$bonusMonth = [];
+		$totalBonusMonth = 0;
+		foreach ($this->getFirstAndLastDayOfMonth() as $key => $month) {
+			$bonus 	= $this->bonus_model->today_total_bonus($month['first_day'], $month['last_day']);
+			$bonusMonth[] = [$month['month'], (float)$bonus['total']];
+			$totalBonusMonth += $bonus['total'];
+		}
+		
+		$json = array('status' => EXIT_SUCCESS,'msg' => $this->lang->line('label_successful'),'bonusMonth' => $bonusMonth, 'totalBonusMonth' => $totalBonusMonth);
+		return $json;
 	}
 }

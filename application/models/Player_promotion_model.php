@@ -187,4 +187,30 @@ class Player_promotion_model extends CI_Model {
 		$query->free_result();
 		return $result;
 	}
+
+	public function getRewardAmount($id, $start_date = null, $end_date = null){
+		$result = NULL;
+		$start_date = !isset($start_date) ? strtotime(date('Y-m-d 00:00:00')) : strtotime(date('Y-m-d 00:00:00', strtotime($start_date)));
+		$end_date 	= !isset($end_date) ? strtotime(date('Y-m-d 23:59:59')) : strtotime(date('Y-m-d 23:59:59', strtotime($end_date)));
+		
+		$upline = ',' . $id . ',';
+
+		$this->db->select_sum('reward_amount','total_reward_amount');
+		$this->db->from('player_promotion GTR');
+		$this->db->join('players GP', 'GTR.player_id = GP.player_id');
+		$this->db->like('GP.upline_ids', $upline, 'both');
+		$this->db->where('GTR.created_date >=', $start_date);
+		$this->db->where('GTR.created_date <=', $end_date);
+		$this->db->where('GTR.is_reward', 1);
+
+		$query = $this->db->get();
+
+		if($query->num_rows() > 0)
+		{
+			$result = $query->row_array(); 
+		}
+
+		$query->free_result();
+		return $result;
+	}
 }

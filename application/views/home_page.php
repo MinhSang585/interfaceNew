@@ -9,6 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
 	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+	<script src="https://code.highcharts.com/modules/data.js"></script>
+	<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
 	<style>
 		#container_player {
 		height: 500px;
@@ -58,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		background: #f1f7ff;
 	}
 
-	/* chart 2 */
+	/* chart Statistics */
 	#container {
     min-width: 310px;
     max-width: 800px;
@@ -127,30 +130,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			?>
 			<section class="content">
 			<div class="row">
+				<!-- chart Statistics -->
 				<div class="clearfix col-md-6">
 				<figure class="highcharts-figure">
 					<div id="container"></div>
 					<div class="highcharts-description">
 						<div class='buttons'>
-							<button id='last30Days'>
-								Last 30days
+							<button id='days' class='active' style="display:none;">
+								Day
 							</button>
-							<button id='lastMonth'>
-								Last Month
-							</button>
-							<button id='yesterday'>
-								Yesterday
-							</button>
-							<button id='today' class='active'>
-								Today
-							</button>
-							<button id='thisWeek'>
-								This Week
-							</button>
-							<button id='thisMonth'>
-								This Month
+							<button id='months' style="display:none;">
+								Month
 							</button>
 						</div>
+						<input type="text" style="display:none;" id="drillDownName" name="drillDownName" value=""/>
 					</div>
 				</figure>
 				</div>
@@ -218,6 +211,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 		});
 	}
+
+	function getNewSeriesData(seriesName) {
+		let value;
+		$.ajax({url: "<?php echo site_url('home/profit'); ?>",
+			type: 'GET',
+			dataType: 'json',
+			cache: false,
+			async: false,
+			success: function(json){				
+				value =  json.day;
+			}
+		});
+		return (value);
+
+	}
+
 	function today_promotion(){
 		$.ajax({url: "<?php echo site_url('home/today_promotion'); ?>",
 			type: 'GET',
@@ -366,8 +375,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		});
 	}
 	function updateChartAndButtons(data, buttonId, chart, type = 'player') {
-		console.log(buttonId);
-		console.log(data);
+		//console.log(buttonId);
+		//console.log(data);
 		//chart.series[0].setData(data);
 
 		if(type =='player'){
@@ -379,11 +388,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			// Add 'active' class to the clicked button
 			$('#' + buttonId).addClass('active');
 		}else {
-			chart.series[0].setData(data[0].data);
-  			chart.series[1].setData(data[1].data);
+			// buttonId == 'days'? chart.series[0].setData(data): chart.series[0].setData(data[1].data);
+			chart.series[0].setData(data)
+  			//chart.series[1].setData(data[1].data);
 			
 			// Remove 'active' class from all buttons
-			$('#last30Days, #lastMonth, #yesterday, #today, #thisWeek, #thisMonth').removeClass('active');
+			$('#days, #months, #yesterday, #today, #thisWeek, #thisMonth').removeClass('active');
 
 			// Add 'active' class to the clicked button
 			$('#' + buttonId).addClass('active');
@@ -407,8 +417,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
-		//alert(<?php echo json_encode($test01); ?>);
-		//alert($test01);
 		var chartOptionPlayer =	{
 			chart: {
 				type: 'pie'
@@ -431,9 +439,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				title: {
 					text: 'Players'
 				}
-			},
-			legend: {
-				enabled: false
 			},
 			series: [{
 				name: 'Players',
@@ -492,54 +497,234 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		updateChartAndButtons(data, buttonId, chartPlayer);
 		});
 
-		//chart 2
+		//chart Statistics
 		var chartOption = {
 			chart: {
 				type: 'column'
 			},
 			title: {
-				text: 'Statistics'
+				align: 'left',
+				text: ''
 			},
-			xAxis: {
-				categories: ['Deposits', 'Promotion', 'Bonus', 'Withdrawals', 'Profits']
+			subtitle: {
+				align: 'left',
+				text: 'Click the columns to view versions.'
 			},
-			credits: {
-				enabled: false
-			},
-			plotOptions: {
-				column: {
-					borderRadius: '25%'
+			accessibility: {
+				announceNewData: {
+					enabled: true
 				}
 			},
-			series: <?php echo $today ?>
+			xAxis: {
+				//categories: ['Depos99999its', 'Promotion', 'Bonus', 'Withdrawals', 'Profits']
+				type: 'category'
+			},
+			yAxis: {
+				title: {
+					text: 'MYR'
+				}
+			},
+			// credits: {
+			// 	enabled: false
+			// },
+			// plotOptions: {
+			// 	column: {
+			// 		borderRadius: '25%',
+			// 		dataLabels: {
+			// 			enabled: true,
+			// 			rotation: 0,
+			// 			color: '#FFFFFF',
+			// 			align: 'right',
+			// 			format: '{point.y:,.1f}', // Sử dụng hàm định dạng số ở đây
+			// 		}
+			// 	}
+			// },
+			legend: {
+        		enabled: false
+			},
+			plotOptions: {
+				series: {
+					borderWidth: 0,
+					dataLabels: {
+						enabled: true,
+						format: '{point.y:.1f} MYR'
+					}
+				}
+			},
+			tooltip: {
+				headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+				pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> MYR<br/>'
+			},
+			series: [
+				{
+					name: 'Statistics',
+					// colorByPoint: true,
+					data: [
+						{
+							name: 'Deposit',
+							y: <?php echo $depositDate['totalDepositDate'] ?>,
+							drilldown: 'Deposit'
+						},
+						{
+							name: 'Promotion',
+							y: <?php echo $promotionDate['totalPromotionDate'] ?>,
+							drilldown: 'Promotion'
+						},
+						{
+							name: 'Profit',
+							y: <?php echo $profitDate['totalProfitDate'] ?>,
+							drilldown: 'Profit'
+						},
+						{
+							name: 'Withdrawal',
+							y: <?php echo $withdrawlDate['totalWithdrawlDate'] ?>,
+							drilldown: 'Withdrawal'
+						},
+						{
+							name: 'Bonus',
+							y: <?php echo $bonusDate['totalBonusDate'] ?>,
+							drilldown: 'Bonus'
+						}
+					]
+				}
+			],
+			drilldown: {
+				breadcrumbs: {
+					position: {
+						align: 'right'
+					}
+				},
+				series: [
+					{
+						name: 'Deposit',
+						id: 'Deposit',
+						data: <?php echo json_encode($depositDate['depositDate']) ?>
+						// data: [['18-Mar-24' , 10], ['20-Mar-24',20.1], ['21-Mar-24', 5], ['22-Mar-24',50], ['23-Mar-24',70]]
+					},
+					{
+						name: 'Promotion',
+						id: 'Promotion',
+						data: <?php echo json_encode($promotionDate['promotionDate']) ?>
+						//data: [['19-Mar-24' , 10], ['20-Mar-24',20.1], ['21-Mar-24', 3.36], ['22-Mar-24',5], ['23-Mar-24',79]]
+					},
+					{
+						name: 'Profit',
+						id: 'Profit',
+						data: <?php echo json_encode($profitDate['profitDate']) ?>
+						//data: [['19-Mar-24' , 1000], ['20-Mar-24',-200.1], ['21-Mar-24', 3000], ['22-Mar-24',-500], ['23-Mar-24',-700]]
+					},
+					{
+						name: 'Withdrawal',
+						id: 'Withdrawal',
+						data: <?php echo json_encode($withdrawlDate['withdrawlDate']) ?>
+						//data: [['19-Mar-24' , 1000], ['20-Mar-24',200.1], ['21-Mar-24', 3000], ['22-Mar-24',500], ['23-Mar-24',10]]
+					},
+					{
+						name: 'Bonus',
+						id: 'Bonus',
+						data: <?php echo json_encode($withdrawlDate['withdrawlDate']) ?>
+						//data: [['19-Mar-24' , 100], ['20-Mar-24',20.161], ['21-Mar-24', 300.143], ['22-Mar-24',500], ['23-Mar-24',700]]
+					}
+				]
+			}
+		};
+
+		chartOption.chart.events = {
+			//drilldown: handleDrilldown, // Gán hàm xử lý sự kiện vào sự kiện drilldown
+			drilldown: function (e) {
+				$('#days, #months').removeClass('active');
+				$('#days').addClass('active');
+				$('#days, #months').show();
+				$('#drillDownName').val(e.point.drilldown);
+				// Xác định dữ liệu mới dựa trên sự kiện drilldown
+				var newSeriesData = getNewSeriesData(e.point.name);
+			},
+			drillup: function (e) {
+				$('#days, #months').hide();
+
+            //console.log('Drillup event triggered:', e);
+			this.update({
+					series: [{
+						data: [
+						{
+							name: 'Deposit',
+							y: 2,
+							drilldown: 'Deposit'
+						},
+						{
+							name: 'Promotion',
+							y: -2.6,
+							drilldown: 'Promotion'
+						},
+						{
+							name: 'Profit',
+							y: 1.3,
+							drilldown: 'Profit'
+						},
+						{
+							name: 'Withdrawal',
+							y: -3,
+							drilldown: 'Withdrawal'
+						},
+						{
+							name: 'Bonus',
+							y: 6,
+							drilldown: 'Bonus'
+						}
+					]
+					}]
+				});
+        	}
 		};
 
 		// Create the chart
 		var chart = Highcharts.chart('container', chartOption);
 
 		// Add event listener to the buttons
-		$('#last30Days, #lastMonth, #yesterday, #today, #thisWeek, #thisMonth').on('click', function() {
+		$('#days, #months, #yesterday, #today, #thisWeek, #thisMonth').on('click', function() {
 		var buttonId = $(this).attr('id');
 		var data;
+		
 		switch (buttonId) {
-		case 'last30Days':
-			data = <?php echo $last30Days ?>;
+		case 'days':
+			switch ($('#drillDownName').val().toUpperCase()) {
+				case 'Deposit'.toUpperCase():
+					data = <?php echo json_encode($depositDate['depositDate']) ?>;
+					break;
+				case 'Promotion'.toUpperCase():
+					data = <?php echo json_encode($promotionDate['promotionDate']) ?>;
+					break;
+				case 'Profit'.toUpperCase():
+					data = <?php echo json_encode($profitDate['profitDate']) ?>;
+					break;
+				case 'Withdrawal'.toUpperCase():
+					data = <?php echo json_encode($withdrawlDate['withdrawlDate']) ?>;
+					break;
+				case 'Bonus'.toUpperCase():
+					data = <?php echo json_encode($bonusDate['bonusDate']) ?>;
+					break;
+				};
 			break;
-		case 'lastMonth':
-			data = <?php echo $lastMonth ?>;
+		case 'months':
+			switch ($('#drillDownName').val().toUpperCase()) {
+				case 'Deposit'.toUpperCase():
+					data = <?php echo json_encode($depositMonth['depositMonth']) ?>;
+					break;
+				case 'Promotion'.toUpperCase():
+					data = <?php echo json_encode($promotionMonth['promotionMonth']) ?>;
+					break;
+				case 'Profit'.toUpperCase():
+					data = <?php echo json_encode($profitMonth['profitMonth']) ?>;
+					break;
+				case 'Withdrawal'.toUpperCase():
+					data = <?php echo json_encode($withdrawlMonth['withdrawlMonth']) ?>;
+					break;
+				case 'Bonus'.toUpperCase():
+					data = <?php echo json_encode($bonusMonth['bonusMonth']) ?>;
+					break;
+				};
 			break;
-		case 'yesterday':
-			data = <?php echo $yesterday ?>;
-			break;
-		case 'today':
-			data = <?php echo $today ?>;
-			break;
-		case 'thisWeek':
-			data = <?php echo $thisWeek ?>;
-			break;
-		case 'thisMonth':
-			data = <?php echo $thisMonth ?>;
-			break;
+
 		default:
 			break;
 		}
